@@ -5,7 +5,7 @@
         </div>
 
         <div class="navbar-brand">
-            <a href="index.php"><img src="<?= $site_url ?>/assets/img/logo_PLN.png"
+            <a href="<?= $site_url ?>"><img src="<?= $site_url ?>/assets/img/logo_PLN.png"
                     alt="PLN Logo" class="img-responsive logo"></a>
         </div>
 
