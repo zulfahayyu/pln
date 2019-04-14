@@ -1,34 +1,4 @@
-<!doctype html>
-<html lang="en">
 
-
-<!-- Mirrored from thememakker.com/templates/lucid/hr/html/light/taskboard.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 01 Dec 2018 05:19:35 GMT -->
-
-<head>
-    <title>:: PLN :: Task Board</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta name="description" content="Lucid Bootstrap 4.1.1 Admin Template">
-    <meta name="author" content="WrapTheme, design by: ThemeMakker.com">
-
-    <link rel="icon" href="logo_single.ico" type="image/x-icon">
-    <!-- VENDOR CSS -->
-    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.min.css">
-    <!-- TASK BOARD & PERCENTAGE -->
-    <link rel="stylesheet" href="../assets/vendor/nestable/jquery-nestable.css" />
-    <link rel="stylesheet" href="../assets/vendor/sweetalert/sweetalert.css" />
-    <link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
-
-    <!-- MAIN CSS -->
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/color_skins.css">
-</head>
-
-<body class="theme-orange">
-
-    <?php  require_once 'page_loader.php' ?>
     <!-- Overlay For Sidebars -->
     <div id="wrapper">
 
@@ -85,9 +55,9 @@
                                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting
                                                     industry.</p>
                                                 <ul class="list-unstyled team-info m-t-20">
-                                                    <li><img src="../assets/images/xs/avatar1.jpg" title="Avatar" alt="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar2.jpg" title="Avatar" alt="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar5.jpg" title="Avatar" alt="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar1.jpg" title="Avatar" alt="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar2.jpg" title="Avatar" alt="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar5.jpg" title="Avatar" alt="Avatar"></li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -136,8 +106,8 @@
                                                     below for those interested. Sections 1.10.32 and 1.10.33 from "de
                                                     Finibus Bonorum et Malorum" by Cicero</p>
                                                 <ul class="list-unstyled team-info m-t-20">
-                                                    <li><img src="../assets/images/xs/avatar7.jpg" title="Avatar" alt="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar9.jpg" title="Avatar" alt="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar7.jpg" title="Avatar" alt="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar9.jpg" title="Avatar" alt="Avatar"></li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -166,10 +136,10 @@
                                                     sure there isn't anything embarrassing hidden in the middle of
                                                     text.</p>
                                                 <ul class="list-unstyled team-info m-t-20">
-                                                    <li><img src="../assets/images/xs/avatar4.jpg" title="Avatar" alt="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar5.jpg" title="Avatar" alt="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar6.jpg" title="Avatar" alt="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar8.jpg" title="Avatar" alt="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar4.jpg" title="Avatar" alt="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar5.jpg" title="Avatar" alt="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar6.jpg" title="Avatar" alt="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar8.jpg" title="Avatar" alt="Avatar"></li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -217,12 +187,12 @@
                                                 </div>
                                                 <small>Completion with: 48%</small>
                                             </td>
-                                            <td><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                                            <td><img src="<?= $site_url ?>/assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
                                             <td>
                                                 <ul class="list-unstyled team-info">
-                                                    <li><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Avatar" alt="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Avatar" alt="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
                                                 </ul>
                                             </td>
                                             <td><span class="badge badge-success">Active</span></td>
@@ -244,13 +214,13 @@
                                                 </div>
                                                 <small>Completion with: 78%</small>
                                             </td>
-                                            <td><img src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                                            <td><img src="<?= $site_url ?>/assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
                                             <td>
                                                 <ul class="list-unstyled team-info">
-                                                    <li><img src="../assets/images/xs/avatar10.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar7.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar5.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar10.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar7.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar5.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
                                                 </ul>
                                             </td>
                                             <td><span class="badge badge-success">Active</span></td>
@@ -272,11 +242,11 @@
                                                 </div>
                                                 <small>Completion with: 29%</small>
                                             </td>
-                                            <td><img src="../assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                                            <td><img src="<?= $site_url ?>/assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
                                             <td>
                                                 <ul class="list-unstyled team-info">
-                                                    <li><img src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
                                                 </ul>
                                             </td>
                                             <td><span class="badge badge-default">InActive</span></td>
@@ -298,13 +268,13 @@
                                                 </div>
                                                 <small>Completion with: 100%</small>
                                             </td>
-                                            <td><img src="../assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                                            <td><img src="<?= $site_url ?>/assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
                                             <td>
                                                 <ul class="list-unstyled team-info">
-                                                    <li><img src="../assets/images/xs/avatar10.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar7.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar5.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar10.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar7.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar5.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
                                                 </ul>
                                             </td>
                                             <td><span class="badge badge-danger">Closed</span></td>
@@ -326,12 +296,12 @@
                                                 </div>
                                                 <small>Completion with: 13%</small>
                                             </td>
-                                            <td><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                                            <td><img src="<?= $site_url ?>/assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
                                             <td>
                                                 <ul class="list-unstyled team-info">
-                                                    <li><img src="../assets/images/xs/avatar7.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar7.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
                                                 </ul>
                                             </td>
                                             <td><span class="badge badge-success">Active</span></td>
@@ -353,12 +323,12 @@
                                                 </div>
                                                 <small>Completion with: 48%</small>
                                             </td>
-                                            <td><img src="../assets/images/xs/avatar5.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                                            <td><img src="<?= $site_url ?>/assets/images/xs/avatar5.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
                                             <td>
                                                 <ul class="list-unstyled team-info">
-                                                    <li><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
                                                 </ul>
                                             </td>
                                             <td><span class="badge badge-success">Active</span></td>
@@ -380,13 +350,13 @@
                                                 </div>
                                                 <small>Completion with: 78%</small>
                                             </td>
-                                            <td><img src="../assets/images/xs/avatar6.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                                            <td><img src="<?= $site_url ?>/assets/images/xs/avatar6.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
                                             <td>
                                                 <ul class="list-unstyled team-info">
-                                                    <li><img src="../assets/images/xs/avatar10.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar7.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar5.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar10.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar7.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar5.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
                                                 </ul>
                                             </td>
                                             <td><span class="badge badge-success">Active</span></td>
@@ -408,12 +378,12 @@
                                                 </div>
                                                 <small>Completion with: 48%</small>
                                             </td>
-                                            <td><img src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                                            <td><img src="<?= $site_url ?>/assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
                                             <td>
                                                 <ul class="list-unstyled team-info">
-                                                    <li><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
                                                 </ul>
                                             </td>
                                             <td><span class="badge badge-warning">Pending</span></td>
@@ -435,13 +405,13 @@
                                                 </div>
                                                 <small>Completion with: 56%</small>
                                             </td>
-                                            <td><img src="../assets/images/xs/avatar8.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
+                                            <td><img src="<?= $site_url ?>/assets/images/xs/avatar8.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
                                             <td>
                                                 <ul class="list-unstyled team-info">
-                                                    <li><img src="../assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar5.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar9.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar5.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="<?= $site_url ?>/assets/images/xs/avatar9.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
                                                 </ul>
                                             </td>
                                             <td><span class="badge badge-warning">Pending</span></td>
@@ -471,9 +441,9 @@
 
     <script src="assets/bundles/mainscripts.bundle.js"></script>
     <!-- TASK BOARD -->
-    <script src="../assets/vendor/nestable/jquery.nestable.js"></script> <!-- Jquery Nestable -->
-    <script src="../assets/vendor/sweetalert/sweetalert.min.js"></script> <!-- SweetAlert Plugin Js -->
-    <script src="../assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script><!-- bootstrap datepicker Plugin Js -->
+    <script src="<?= $site_url ?>/assets/vendor/nestable/jquery.nestable.js"></script> <!-- Jquery Nestable -->
+    <script src="<?= $site_url ?>/assets/vendor/sweetalert/sweetalert.min.js"></script> <!-- SweetAlert Plugin Js -->
+    <script src="<?= $site_url ?>/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script><!-- bootstrap datepicker Plugin Js -->
     <script src="assets/js/pages/ui/sortable-nestable.js"></script>
     <script src="assets/js/pages/ui/dialogs.js"></script>
     <!-- PERCENTAGE -->
@@ -563,8 +533,3 @@
             spotRadius: 0
         });
     </script>
-</body>
-
-<!-- Mirrored from thememakker.com/templates/lucid/hr/html/light/taskboard.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 01 Dec 2018 05:19:35 GMT -->
-
-</html>

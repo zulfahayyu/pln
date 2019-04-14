@@ -1,39 +1,4 @@
-<!doctype html>
-<html lang="en">
 
-
-<!-- Mirrored from thememakker.com/templates/lucid/hr/html/light/page-profile2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 01 Dec 2018 05:19:14 GMT -->
-<head>
-<title>:: PLN :: Profile</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<meta name="description" content="Lucid Bootstrap 4.1.1 Admin Template">
-<meta name="author" content="WrapTheme, design by: ThemeMakker.com">
-
-<link rel="icon" href="logo_single.ico" type="image/x-icon">
-<!-- VENDOR CSS -->
-<link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.min.css">
-
-<link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
-
-<!-- MAIN CSS -->
-<link rel="stylesheet" href="assets/css/main.css">
-<link rel="stylesheet" href="assets/css/blog.css">
-<link rel="stylesheet" href="assets/css/color_skins.css">
-</head>
-<body class="theme-orange">
-
-<?php  require_once 'page_loader.php' ?>
-
-<!-- Overlay For Sidebars -->
-
-<div id="wrapper">
-
-    <?php require_once 'navbar.php' ?>
-    <?php require_once 'sidebar.php' ?>
-    
     <!-- TAB MAIN -->
     <div id="main-content" class="profilepage_2 blog-page">
         <div class="container-fluid">
@@ -55,7 +20,7 @@
                 <div class="col-lg-12 col-md-12">
                     <div class="card profile-header">
                         <div class="body">
-                            <div class="profile-image"> <img src="../assets/images/user.png" class="rounded-circle" alt=""> </div>
+                            <div class="profile-image"> <img src="<?= $site_url ?>/assets/images/user.png" class="rounded-circle" alt=""> </div>
                             <div>
                                 <h4 class="m-b-0"><strong>Jessica</strong> Doe</h4>
                                 <span>Washington, d.c.</span>
@@ -200,15 +165,6 @@
     </div>
 </div>
 
-<!-- Javascript -->
-<script src="assets/bundles/libscripts.bundle.js"></script>
-<script src="assets/bundles/vendorscripts.bundle.js"></script>
-
-<script src="assets/bundles/knob.bundle.js"></script> <!-- Jquery Knob-->
-<script src="../assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-
-<script src="assets/bundles/mainscripts.bundle.js"></script>
-
 <script>
 $(function () {
     $('.knob').knob({
@@ -256,8 +212,3 @@ $(function () {
         }
     });
 });
-</script>
-</body>
-
-<!-- Mirrored from thememakker.com/templates/lucid/hr/html/light/page-profile2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 01 Dec 2018 05:19:15 GMT -->
-</html>

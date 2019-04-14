@@ -1,5 +1,5 @@
 <?php
-    $conn = mysqli_connect("localhost","root","","db_pln");
+    $conn = mysqli_connect($db_server,$db_user,$db_pass,$db_name);
 
     function query($query){
         global $conn;
