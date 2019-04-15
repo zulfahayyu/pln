@@ -11,10 +11,12 @@
         if($row['status']=='admin'){
             echo "<script>window.location.href = '$site_url'</script>";
             $_SESSION['nip']=$row['nip']; 
+            $_SESSION['nama']=$row['nama']; 
         }
         elseif($row['status']=='user'){
             echo "<script>window.location.href = '$site_url'</script>";
             $_SESSION['nip']=$row['nip']; 
+            $_SESSION['nama']=$row['nama']; 
         }
         else{
             echo "<script>window.location.href = '$site_url/login.php'</script>";

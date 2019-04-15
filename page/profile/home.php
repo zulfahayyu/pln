@@ -22,11 +22,8 @@
                         <div class="body">
                             <div class="profile-image"> <img src="<?= $site_url ?>/assets/images/user.png" class="rounded-circle" alt=""> </div>
                             <div>
-                                <h4 class="m-b-0"><strong>Jessica</strong> Doe</h4>
-                                <span>Washington, d.c.</span>
-                            </div>
-                            <div class="m-t-15">
-                                <p>-bio-</p>
+                                <h4 class="m-b-0"><strong><?= $user['nama'] ?></strong></h4>
+                                <span><?= $user['status'] ?></span>
                             </div>
                         </div>
                     </div>
