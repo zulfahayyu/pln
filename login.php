@@ -14,8 +14,8 @@
 
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- VENDOR CSS -->
-    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="assets/css/main.css">
