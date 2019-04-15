@@ -1,6 +1,6 @@
 <?php 
-include_once 'proses/config.php'; // include site configurasi
 include_once 'proses/connection.php'; // include database configurasi
+include_once 'proses/ceklogin.php'; //cek login
 include_once 'header.php'; // include header website
 
 // ==== Routing Page Website ======

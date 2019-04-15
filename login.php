@@ -38,17 +38,17 @@
                             <div id="box"></div>
                         </div>
                         <div class="body">
-                            <form class="form-auth-small" method="POST">
+                            <form class="form-auth-small" method="POST" action="proses/login.php">
                                 <div class="form-group">
                                     <label for="signin-email" class="control-label sr-only">Email</label>
-                                    <input type="email" id="nip" class="form-control" id="signin-email" placeholder="masukkan NIP"                                        placeholder="Email">
+                                    <input type="number" id="nip" name="nip" class="form-control" id="signin-email" placeholder="masukkan NIP"                                        placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                     <label for="signin-password" class="control-label sr-only">Password</label>
-                                    <input type="password" id="pass" class="form-control" id="signin-password" placeholder="masukkan password"
+                                    <input type="password" id="pass" name="password" class="form-control" id="signin-password" placeholder="masukkan password"
                                         placeholder="Password">
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="login()">LOGIN</button>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
                                 <div class="bottom">
                                     <span>Don't have an account? Contact HRD</span>
                                 </div>
