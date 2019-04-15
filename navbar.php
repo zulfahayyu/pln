@@ -78,7 +78,7 @@
                         </ul>
                     </li>
                     
-                    <li><a href="login.php" class="icon-menu"><i class="icon-login"></i></a></li>
+                    <li><a href="<?= $site_url ?>/proses/logout.php" class="icon-menu"><i class="icon-login"></i></a></li>
                 </ul>
             </div>
         </div>

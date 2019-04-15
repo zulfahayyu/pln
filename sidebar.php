@@ -8,7 +8,7 @@
                 <ul class="dropdown-menu dropdown-menu-right account animated flipInY">
                     <li><a href="<?= $site_url ?>/profile"><i class="icon-user"></i>My Profile</a></li>
                     <li class="divider"></li>
-                    <li><a href="login.php"><i class="icon-power"></i>Logout</a></li>
+                    <li><a href="<?= $site_url ?>/proses/logout.php"><i class="icon-power"></i>Logout</a></li>
                 </ul>
             </div>
             <hr>

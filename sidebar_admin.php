@@ -6,7 +6,7 @@
                 <span>Welcome,</span>
                 <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong><?= $user['nama'] ?></strong></a>
                 <ul class="dropdown-menu dropdown-menu-right account animated flipInY">
-                    <li><a href="login.php"><i class="icon-power"></i>Logout</a></li>
+                    <li><a href="<?= $site_url ?>/proses/logout.php"><i class="icon-power"></i>Logout</a></li>
                 </ul>
             </div>
             <br><hr>
