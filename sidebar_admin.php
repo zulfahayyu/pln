@@ -9,19 +9,28 @@
                     <li><a href="<?= $site_url ?>/proses/logout.php"><i class="icon-power"></i>Logout</a></li>
                 </ul>
             </div>
-            <br><hr>
-            
+            <br>
+            <hr>
+
         </div>
 
-            <!-- TAB SUPER ADMIN -->
-            <div class="tab-pane animated fadeIn active" id="super_admin">
-                `<nav class="sidebar-nav">
+        <!-- TAB SUPER ADMIN -->
+        <div class="tab-pane animated fadeIn active" id="super_admin">
+            `<nav class="sidebar-nav">
                 <ul class="main-menu metismenu">
-                        <li><a href="<?= $site_url ?>/user"><i class="icon-user-follow"></i><span>Manage User</span></a></li>
-                        <li><a href="<?= $site_url ?>/manage"><i class="icon-note"></i>Manage Task</a></li>
-                    </ul>
-                </nav>`
-            </div>
+                    <li><a href="<?= $site_url ?>"><i class="icon-speedometer"></i><span>Home</a></li>
+                    <li><a href="<?= $site_url ?>/task/manage"><i class="icon-note"></i>Manage Task</a></li>
+                    <li><a href="<?= $site_url ?>/user"><i class="icon-user-follow"></i><span>Manage User</span></a></li>
+                    <li class="">
+                        <a href="#Employees" class="has-arrow" aria-expanded="false"><i class="icon-docs"></i><span>Master Data</span></a>
+                        <ul aria-expanded="false" class="collapse" style="height: 0px;">
+                            <li><a href="<?= $site_url ?>/unit">Data Unit</a></li>
+                            <li><a href="<?= $site_url ?>/jabatan">Data Jabatan</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>`
         </div>
     </div>
+</div>
 </div>

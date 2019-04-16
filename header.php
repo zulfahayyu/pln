@@ -1,7 +1,5 @@
 <!doctype html>
 <html lang="en">
-
-
 <head>
     <title>:: PLN :: Home</title>
     <meta charset="utf-8">
@@ -10,7 +8,7 @@
     <meta name="description" content="Lucid Bootstrap 4.1.1 Admin Template">
     <meta name="author" content="WrapTheme, design by: ThemeMakker.com">
 
-    <link rel="icon" href="logo_single.ico" type="image/x-icon">
+    <link rel="icon" href="<?= $site_url ?>/logo_single.ico" type="image/x-icon">
     <!-- VENDOR CSS -->
     <link rel="stylesheet" href="<?= $site_url ?>/assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= $site_url ?>/assets/vendor/font-awesome/css/font-awesome.min.css">
@@ -34,6 +32,7 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="<?= $site_url ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?= $site_url ?>/assets/css/color_skins.css">
+    
 </head>
 
 <body class="theme-orange">
@@ -42,6 +41,11 @@
 
     <!-- Overlay For Sidebars -->
     <div id="wrapper">
-
-        <?php require_once 'navbar.php' ?>
-        <?php require_once 'sidebar.php' ?>
+        <?php
+        require_once 'navbar.php';
+        if ($user['status'] == 'admin')
+            require_once 'sidebar_admin.php';
+        else
+            require_once 'sidebar.php';
+        
+        ?>

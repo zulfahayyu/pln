@@ -70,3 +70,14 @@ function login (){
     });
 }
 
+
+function editJabatan(id){
+    $.ajax({
+        url:'page/jabatan/update.php?id='+id,
+        type:'GET',
+        success:function(result){
+            $('#contentUpdate').html(result);
+            $('#updateJabatan').modal('show');
+        }
+    });
+}
