@@ -81,3 +81,14 @@ function editJabatan(id){
         }
     });
 }
+
+function editUnit(id){
+    $.ajax({
+        url:'page/unit/update.php?id='+id,
+        type:'GET',
+        success:function(result){
+            $('#contentUpdate').html(result);
+            $('#updateUnit').modal('show');
+        }
+    });
+}

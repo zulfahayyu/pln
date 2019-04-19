@@ -1,6 +1,6 @@
 <?php
     include_once('connection.php');
-    session_start();
+    // session_start();
     $nip  = $_POST['nip'];
     $pass = $_POST['password'];
 

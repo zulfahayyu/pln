@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 14, 2019 at 08:02 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Waktu pembuatan: 19 Apr 2019 pada 21.40
+-- Versi server: 10.1.38-MariaDB
+-- Versi PHP: 7.1.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,49 +25,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `anggota_tim`
---
-
-CREATE TABLE `anggota_tim` (
-  `id_tim` char(4) NOT NULL,
-  `nip` char(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `jabatan`
+-- Struktur dari tabel `jabatan`
 --
 
 CREATE TABLE `jabatan` (
-  `id_jabatan` char(2) NOT NULL,
+  `id` int(11) NOT NULL,
+  `kode_jabatan` char(2) NOT NULL,
   `nama_jabatan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `jabatan`
+-- Dumping data untuk tabel `jabatan`
 --
 
-INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
-('EX', 'Executive'),
-('MG', 'Magang');
+INSERT INTO `jabatan` (`id`, `kode_jabatan`, `nama_jabatan`) VALUES
+(1, 'EX', 'Executive'),
+(2, 'MG', 'Magang'),
+(7, 'M', 'Manager');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login`
---
-
-CREATE TABLE `login` (
-  `nip` char(8) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pegawai`
+-- Struktur dari tabel `pegawai`
 --
 
 CREATE TABLE `pegawai` (
@@ -88,97 +67,67 @@ CREATE TABLE `pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pegawai`
+-- Dumping data untuk tabel `pegawai`
 --
 
 INSERT INTO `pegawai` (`nip`, `nama_p`, `no_sap`, `t_lahir`, `tgl_lahir`, `jkelamin`, `agama`, `status_kawin`, `jml_kel`, `alamat`, `password`, `gambar`, `id_unit`, `id_jabatan`) VALUES
-('20153117', 'zulfa hayyu', '12345678', 'semarang', '2019-04-16', 'P', 'Islam', 'Belum Kawin', 6, 'bczndc', 'zulfa', '', 'AU', 'MG');
+('', '', '', '', '0000-00-00', '', '', '', 0, '', '', '', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tim`
---
-
-CREATE TABLE `tim` (
-  `id_tim` char(4) NOT NULL,
-  `nama_tim` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tugas`
---
-
-CREATE TABLE `tugas` (
-  `id_tugas` int(10) NOT NULL,
-  `nama_tugas` varchar(100) NOT NULL,
-  `deskripsi` text NOT NULL,
-  `id_tim` char(4) NOT NULL,
-  `tgl_up` date NOT NULL,
-  `dateline` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `unit_kerja`
+-- Struktur dari tabel `unit_kerja`
 --
 
 CREATE TABLE `unit_kerja` (
-  `id_unit` char(2) NOT NULL,
+  `id` int(11) NOT NULL,
+  `kode_unit` char(2) NOT NULL,
   `nama_unit` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `unit_kerja`
+-- Dumping data untuk tabel `unit_kerja`
 --
 
-INSERT INTO `unit_kerja` (`id_unit`, `nama_unit`) VALUES
-('AU', 'Audit');
+INSERT INTO `unit_kerja` (`id`, `kode_unit`, `nama_unit`) VALUES
+(1, 'AU', 'Audit'),
+(5, 'AU', 'Ampas Lu'),
+(6, 'CC', 'cacad lu');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `up_tugas`
+-- Struktur dari tabel `user`
 --
 
-CREATE TABLE `up_tugas` (
-  `id_submit` int(10) NOT NULL,
-  `tgl_up` date NOT NULL,
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(255) DEFAULT NULL,
   `nip` char(8) NOT NULL,
-  `judul_tugas` varchar(50) NOT NULL,
-  `id_unit` char(2) NOT NULL,
-  `file` varchar(50) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `user`
+--
+
+INSERT INTO `user` (`id`, `nama`, `nip`, `password`, `status`) VALUES
+(1, 'Admin', '0000', '0000', 'admin'),
+(2, 'User', '1111', '1111', 'user');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `anggota_tim`
---
-ALTER TABLE `anggota_tim`
-  ADD PRIMARY KEY (`id_tim`,`nip`),
-  ADD KEY `nip` (`nip`),
-  ADD KEY `id_tim` (`id_tim`);
-
---
--- Indexes for table `jabatan`
+-- Indeks untuk tabel `jabatan`
 --
 ALTER TABLE `jabatan`
-  ADD PRIMARY KEY (`id_jabatan`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indexes for table `login`
---
-ALTER TABLE `login`
-  ADD PRIMARY KEY (`nip`);
-
---
--- Indexes for table `pegawai`
+-- Indeks untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`nip`),
@@ -187,77 +136,38 @@ ALTER TABLE `pegawai`
   ADD KEY `id_jabatan` (`id_jabatan`);
 
 --
--- Indexes for table `tim`
---
-ALTER TABLE `tim`
-  ADD PRIMARY KEY (`id_tim`),
-  ADD KEY `id_tim` (`id_tim`);
-
---
--- Indexes for table `tugas`
---
-ALTER TABLE `tugas`
-  ADD PRIMARY KEY (`id_tugas`),
-  ADD KEY `id_tim` (`id_tim`);
-
---
--- Indexes for table `unit_kerja`
+-- Indeks untuk tabel `unit_kerja`
 --
 ALTER TABLE `unit_kerja`
-  ADD PRIMARY KEY (`id_unit`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indexes for table `up_tugas`
+-- Indeks untuk tabel `user`
 --
-ALTER TABLE `up_tugas`
-  ADD PRIMARY KEY (`id_submit`),
-  ADD KEY `nip` (`nip`);
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `tugas`
---
-ALTER TABLE `tugas`
-  MODIFY `id_tugas` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- Constraints for table `anggota_tim`
+-- AUTO_INCREMENT untuk tabel `jabatan`
 --
-ALTER TABLE `anggota_tim`
-  ADD CONSTRAINT `anggota_tim_ibfk_1` FOREIGN KEY (`id_tim`) REFERENCES `tim` (`id_tim`),
-  ADD CONSTRAINT `anggota_tim_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `pegawai` (`nip`);
+ALTER TABLE `jabatan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- Constraints for table `login`
+-- AUTO_INCREMENT untuk tabel `unit_kerja`
 --
-ALTER TABLE `login`
-  ADD CONSTRAINT `login_ibfk_1` FOREIGN KEY (`nip`) REFERENCES `pegawai` (`nip`) ON DELETE CASCADE;
+ALTER TABLE `unit_kerja`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- Constraints for table `pegawai`
+-- AUTO_INCREMENT untuk tabel `user`
 --
-ALTER TABLE `pegawai`
-  ADD CONSTRAINT `pegawai_ibfk_1` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan` (`id_jabatan`),
-  ADD CONSTRAINT `pegawai_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `unit_kerja` (`id_unit`);
-
---
--- Constraints for table `tugas`
---
-ALTER TABLE `tugas`
-  ADD CONSTRAINT `tugas_ibfk_1` FOREIGN KEY (`id_tim`) REFERENCES `tim` (`id_tim`);
-
---
--- Constraints for table `up_tugas`
---
-ALTER TABLE `up_tugas`
-  ADD CONSTRAINT `up_tugas_ibfk_1` FOREIGN KEY (`nip`) REFERENCES `pegawai` (`nip`);
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
