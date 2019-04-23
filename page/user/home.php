@@ -1,5 +1,8 @@
 <?php
 $pegawai = query("SELECT * FROM pegawai");
+$jabatan = query("SELECT * FROM jabatan");
+$unit = query("SELECT * FROM unit_kerja");
+
 ?>
 
 
@@ -79,106 +82,115 @@ $pegawai = query("SELECT * FROM pegawai");
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="row clearfix">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <input type="text" id="nip" class="form-control" placeholder="NIP *">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <input type="text" id="nama" class="form-control" placeholder="Nama Pegawai *">
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <input type="text" id="sap" class="form-control" placeholder="No SAP *">
-                        </div>
-                    </div>
-                    <div class="col-sm-7">
-                        <div class="form-group">
-                            <input type="text" id="t_lahir" class="form-control" placeholder="Tempat Lahir *">
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-5">
-                        <div class="form-group mr">
-                            <input type="text" id="tgl_lahir" data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Tanggal Lahir *">
-                            <!-- bikin default hari ini -->
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="fancy-radio">
-                                <input type="radio" name="jkelamin" value="Perempuan" required data-parsley-errors-container="#error-radio">
-                                <span><i></i>Perempuan</span>
-                            </label>
-                            <label class="fancy-radio">
-                                <input type="radio" name="jkelamin" value="Laki-laki">
-                                <span><i></i>Laki - Laki</span>
-                            </label>
-                            <p id="error-radio"></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <input type="text" id="agama" class="form-control" placeholder="Agama">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="fancy-radio">
-                                <input type="radio" name="status" value="Kawin" required data-parsley-errors-container="#error-radio">
-                                <span><i></i>Kawin</span>
-                            </label>
-                            <label class="fancy-radio">
-                                <input type="radio" name="status" value="Belum Kawin">
-                                <span><i></i>Belum Kawin</span>
-                            </label>
-                            <p id="error-radio"></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <input type="text" id="jml_kel" class="form-control" placeholder="Jumlah Keluarga">
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <textarea class="form-control" id="alamat" rows="2" placeholder="Alamat"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <input type="text" id="pass" class="form-control" placeholder="Password *">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <!-- <form action="uploadphoto.php" method="post" enctype="multipart/form-data">
-                        <div class="input-group mb-3">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="uploadPhoto" name="uploadPhoto" aria-describedby="inputGroupFileAddon01">
-                                <label class="custom-file-label" for="uploadPhoto">upload photos</label>
+            <form action="<?= $site_url ?>/proses/model_pegawai.php" method="POST" >
+                <div class="modal-body">
+                    <div class="row clearfix">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" id="nip" class="form-control" placeholder="NIP *">
                             </div>
                         </div>
-                    </form> -->
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <input type="text" id="unit" class="form-control" placeholder="id_unit">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" id="sap" class="form-control" placeholder="No SAP *">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <input type="text" id="jabatan" class="form-control" placeholder="id_jabatan">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="text" id="nama" class="form-control" placeholder="Nama Pegawai *">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <input type="text" id="t_lahir" class="form-control" placeholder="Tempat Lahir *">
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-5">
+                            <div class="form-group mr">
+                                <input type="text" id="tgl_lahir" data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Tanggal Lahir *">
+                                <!-- bikin default hari ini -->
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="fancy-radio">
+                                    <input type="radio" name="jkelamin" value="Perempuan" required data-parsley-errors-container="#error-radio">
+                                    <span><i></i>Perempuan</span>
+                                </label>
+                                <label class="fancy-radio">
+                                    <input type="radio" name="jkelamin" value="Laki-laki">
+                                    <span><i></i>Laki - Laki</span>
+                                </label>
+                                <p id="error-radio"></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" id="agama" class="form-control" placeholder="Agama">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="fancy-radio">
+                                    <input type="radio" name="status" value="Kawin" required data-parsley-errors-container="#error-radio">
+                                    <span><i></i>Kawin</span>
+                                </label>
+                                <label class="fancy-radio">
+                                    <input type="radio" name="status" value="Belum Kawin">
+                                    <span><i></i>Belum Kawin</span>
+                                </label>
+                                <p id="error-radio"></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" id="jml_kel" class="form-control" placeholder="Jumlah Keluarga">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <textarea class="form-control" id="alamat" rows="2" placeholder="Alamat"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" id="pass" class="form-control" placeholder="Password *">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <!-- <form action="uploadphoto.php" method="post" enctype="multipart/form-data">
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="uploadPhoto" name="uploadPhoto" aria-describedby="inputGroupFileAddon01">
+                                    <label class="custom-file-label" for="uploadPhoto">upload photos</label>
+                                </div>
+                            </div>
+                        </form> -->
+                        </div>
+                        <div class="col-sm-6">
+                            <select class="form-control show-tick ms select2" name="id_jabatan" data-placeholder="Select">
+                                <option selected disabled>Pilih Jabatan</option>
+                                <?php foreach ($jabatan as $row) : ?>
+                                <option value="<?= $row['id'] ?>" ><?= $row['nama_jabatan'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <select class="form-control show-tick ms select2" name="id_unit" data-placeholder="Select">
+                                <option selected disabled>Pilih Unit Kerja</option>
+                                <?php foreach ($unit as $row) : ?>
+                                    <option value="<?= $row['id'] ?>" ><?= $row['nama_unit'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="addpgw()" name="add_user">Add</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" name="submit" value="save">Add</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -205,107 +217,3 @@ $pegawai = query("SELECT * FROM pegawai");
     </div>
 </div>
 
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#editUser').on('show.bs.modal', function(e) {
-            var getDetail = $(e.relatedTarget).data('nip');
-            /* fungsi AJAX untuk melakukan fetch data */
-            $.ajax({
-                type: 'post',
-                url: 'proses/update.php',
-                /* detail per identifier ditampung pada berkas detail.php yang berada di folder application/view */
-                data: 'getDetail=' + getDetail,
-                /* memanggil fungsi getDetail dan mengirimkannya */
-                success: function(data) {
-                    $('.modal-data').html(data);
-                    /* menampilkan data dalam bentuk dokumen HTML */
-                }
-            });
-        });
-    });
-</script>
-<script>
-    $('.knob').knob({
-        draw: function() {
-            // "tron" case
-            if (this.$.data('skin') == 'tron') {
-
-                var a = this.angle(this.cv) // Angle
-                    ,
-                    sa = this.startAngle // Previous start angle
-                    ,
-                    sat = this.startAngle // Start angle
-                    ,
-                    ea // Previous end angle
-                    , eat = sat + a // End angle
-                    ,
-                    r = true;
-
-                this.g.lineWidth = this.lineWidth;
-
-                this.o.cursor &&
-                    (sat = eat - 0.3) &&
-                    (eat = eat + 0.3);
-
-                if (this.o.displayPrevious) {
-                    ea = this.startAngle + this.angle(this.value);
-                    this.o.cursor &&
-                        (sa = ea - 0.3) &&
-                        (ea = ea + 0.3);
-                    this.g.beginPath();
-                    this.g.strokeStyle = this.previousColor;
-                    this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false);
-                    this.g.stroke();
-                }
-
-                this.g.beginPath();
-                this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
-                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false);
-                this.g.stroke();
-
-                this.g.lineWidth = 2;
-                this.g.beginPath();
-                this.g.strokeStyle = this.o.fgColor;
-                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3,
-                    0, 2 * Math.PI, false);
-                this.g.stroke();
-
-                return false;
-            }
-        }
-    });
-
-    $('#linecustom1').sparkline('html', {
-        height: '55px',
-        width: '100%',
-        lineColor: '#a095e5',
-        fillColor: '#a095e5',
-        minSpotColor: true,
-        maxSpotColor: true,
-        spotColor: '#e2a8df',
-        spotRadius: 0
-    });
-
-    $('#linecustom2').sparkline('html', {
-        height: '55px',
-        width: '100%',
-        lineColor: '#75c3f2',
-        fillColor: '#75c3f2',
-        minSpotColor: true,
-        maxSpotColor: true,
-        spotColor: '#8dbfe0',
-        spotRadius: 0
-    });
-
-    $('#linecustom3').sparkline('html', {
-        height: '55px',
-        width: '100%',
-        lineColor: '#fc7b92',
-        fillColor: '#fc7b92',
-        minSpotColor: true,
-        maxSpotColor: true,
-        spotColor: '#e0b89d',
-        spotRadius: 0
-    });
-</script>
