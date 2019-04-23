@@ -1,7 +1,11 @@
 <?php
-$pegawai = query("SELECT * FROM pegawai");
-$jabatan = query("SELECT * FROM jabatan");
-$unit = query("SELECT * FROM unit_kerja");
+$jabatan = query("SELECT * FROM jabatan"); // query get all jabatan kerja data
+$unit = query("SELECT * FROM unit_kerja"); // query get all unit kerja data
+
+//query select data pegawai
+$pegawai = query("SELECT p.*, uk.nama_unit, j.nama_jabatan  FROM pegawai p 
+join jabatan j on p.id_jabatan=j.id 
+join unit_kerja uk on p.id_unit=uk.id ");
 
 ?>
 
@@ -36,11 +40,12 @@ $unit = query("SELECT * FROM unit_kerja");
                             <table class="table table-hover js-basic-example dataTable table-custom table-striped m-b-0 c_list">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th>Pegawai</th>
-                                        <th>SAP</th>
+                                        <th width="10%">NIP</th>
+                                        <th width="10%">SAP</th>
+                                        <th width="30%">Nama</th>
                                         <th>Unit</th>
                                         <th>Jabatan</th>
-                                        <th>Action</th>
+                                        <th width="10%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -48,14 +53,14 @@ $unit = query("SELECT * FROM unit_kerja");
                                         <tr>
                                             <td>
                                                 <h6 class="mb-0"><?php echo $pgw["nip"]; ?></h6>
-                                                <span><?php echo $pgw["nama_p"]; ?></span>
                                             </td>
                                             <td><span><?php echo $pgw["no_sap"]; ?></span></td>
-                                            <td><?php echo $pgw["id_unit"]; ?></td>
-                                            <td><?php echo $pgw["id_jabatan"]; ?></td>
+                                            <td><span><?php echo $pgw["nama_p"]; ?></span></td>
+                                            <td><?php echo $pgw["nama_unit"]; ?></td>
+                                            <td><?php echo $pgw["nama_jabatan"]; ?></td>
                                             <td>
-                                                <a href="proses/update.php?nip=<?php echo $pgw["nip"]; ?>" class="btn btn-sm btn-outline-secondary" data-toggle='modal' data-target='#editUser' data-id=".$row['nip'].">edit</a>
-                                                <a href="proses/delete.php?nip=<?php echo $pgw["nip"]; ?>" class="btn btn-sm btn-outline-danger">del</a>
+                                                <a href="#" class="btn btn-sm btn-outline-secondary" data-toggle='modal' data-target='#editUser' data-id="">edit</a>
+                                                <a href="<?= $site_url ?>/proses/model_pegawai.php?id=<?php echo $pgw["id"]; ?>&delete=true" onclick='return confirm("Yakin ingin menghapus data?")' class="btn btn-sm btn-outline-danger">del</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -82,33 +87,33 @@ $unit = query("SELECT * FROM unit_kerja");
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= $site_url ?>/proses/model_pegawai.php" method="POST" >
+            <form action="<?= $site_url ?>/proses/model_pegawai.php" method="POST">
                 <div class="modal-body">
                     <div class="row clearfix">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="text" id="nip" class="form-control" placeholder="NIP *">
+                                <input type="text" name="nip" class="form-control" placeholder="NIP *" required>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="text" id="sap" class="form-control" placeholder="No SAP *">
+                                <input type="text" name="sap" class="form-control" placeholder="No SAP *" required>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <input type="text" id="nama" class="form-control" placeholder="Nama Pegawai *">
+                                <input type="text" name="nama" class="form-control" placeholder="Nama Pegawai *" required>
                             </div>
                         </div>
 
                         <div class="col-sm-7">
                             <div class="form-group">
-                                <input type="text" id="t_lahir" class="form-control" placeholder="Tempat Lahir *">
+                                <input type="text" name="t_lahir" class="form-control" placeholder="Tempat Lahir *" required>
                             </div>
                         </div>
                         <div class="col-md-5 col-sm-5">
                             <div class="form-group mr">
-                                <input type="text" id="tgl_lahir" data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Tanggal Lahir *">
+                                <input type="text" name="tgl_lahir" data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Tanggal Lahir *" required>
                                 <!-- bikin default hari ini -->
                             </div>
                         </div>
@@ -127,7 +132,7 @@ $unit = query("SELECT * FROM unit_kerja");
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="text" id="agama" class="form-control" placeholder="Agama">
+                                <input type="text" name="agama" class="form-control" placeholder="Agama">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -145,42 +150,46 @@ $unit = query("SELECT * FROM unit_kerja");
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="text" id="jml_kel" class="form-control" placeholder="Jumlah Keluarga">
+                                <input type="text" name="jml_kel" class="form-control" placeholder="Jumlah Keluarga">
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <textarea class="form-control" id="alamat" rows="2" placeholder="Alamat"></textarea>
+                                <textarea class="form-control" name="alamat" rows="2" placeholder="Alamat"></textarea>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="text" id="pass" class="form-control" placeholder="Password *">
+                                <select class="form-control show-tick ms select2" name="id_unit" data-placeholder="Select" required>
+                                    <option selected disabled>Pilih Unit Kerja</option>
+                                    <?php foreach ($unit as $row) : ?>
+                                        <option value="<?= $row['id'] ?>"><?= $row['nama_unit'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <!-- <form action="uploadphoto.php" method="post" enctype="multipart/form-data">
-                            <div class="input-group mb-3">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="uploadPhoto" name="uploadPhoto" aria-describedby="inputGroupFileAddon01">
-                                    <label class="custom-file-label" for="uploadPhoto">upload photos</label>
-                                </div>
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" name="id_atasan" data-placeholder="Select" required>
+                                    <option selected disabled>Pilih Atasan Karyawan</option>
+                                    <?php foreach ($unit as $row) : ?>
+                                        <option value="<?= $row['id'] ?>"><?= $row['nama_unit'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
-                        </form> -->
                         </div>
                         <div class="col-sm-6">
-                            <select class="form-control show-tick ms select2" name="id_jabatan" data-placeholder="Select">
+
+                            <div class="form-group">
+                                <input type="password" name="pass" class="form-control" placeholder="Password *" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <select class="form-control show-tick ms select2" name="id_jabatan" data-placeholder="Select" required>
                                 <option selected disabled>Pilih Jabatan</option>
                                 <?php foreach ($jabatan as $row) : ?>
-                                <option value="<?= $row['id'] ?>" ><?= $row['nama_jabatan'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <select class="form-control show-tick ms select2" name="id_unit" data-placeholder="Select">
-                                <option selected disabled>Pilih Unit Kerja</option>
-                                <?php foreach ($unit as $row) : ?>
-                                    <option value="<?= $row['id'] ?>" ><?= $row['nama_unit'] ?></option>
+                                    <option value="<?= $row['id'] ?>"><?= $row['nama_jabatan'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -205,15 +214,120 @@ $unit = query("SELECT * FROM unit_kerja");
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="modal-data"></div>
+            <form action="<?= $site_url ?>/proses/model_pegawai.php" method="POST">
+                <div class="modal-body">
+                    <div class="row clearfix">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" name="nip" class="form-control" placeholder="NIP *" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" name="sap" class="form-control" placeholder="No SAP *" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="text" name="nama" class="form-control" placeholder="Nama Pegawai *" required>
+                            </div>
+                        </div>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="addpgw()" name="add_user">Add</button>
-            </div>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <input type="text" name="t_lahir" class="form-control" placeholder="Tempat Lahir *" required>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-5">
+                            <div class="form-group mr">
+                                <input type="text" name="tgl_lahir" data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Tanggal Lahir *" required>
+                                <!-- bikin default hari ini -->
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="fancy-radio">
+                                    <input type="radio" name="jkelamin" value="Perempuan" required data-parsley-errors-container="#error-radio">
+                                    <span><i></i>Perempuan</span>
+                                </label>
+                                <label class="fancy-radio">
+                                    <input type="radio" name="jkelamin" value="Laki-laki">
+                                    <span><i></i>Laki - Laki</span>
+                                </label>
+                                <p id="error-radio"></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" name="agama" class="form-control" placeholder="Agama">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="fancy-radio">
+                                    <input type="radio" name="status" value="Kawin" required data-parsley-errors-container="#error-radio">
+                                    <span><i></i>Kawin</span>
+                                </label>
+                                <label class="fancy-radio">
+                                    <input type="radio" name="status" value="Belum Kawin">
+                                    <span><i></i>Belum Kawin</span>
+                                </label>
+                                <p id="error-radio"></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" name="jml_kel" class="form-control" placeholder="Jumlah Keluarga">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <textarea class="form-control" name="alamat" rows="2" placeholder="Alamat"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" name="id_unit" data-placeholder="Select" required>
+                                    <option selected disabled>Pilih Unit Kerja</option>
+                                    <?php foreach ($unit as $row) : ?>
+                                        <option value="<?= $row['id'] ?>"><?= $row['nama_unit'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <select class="form-control show-tick ms select2" name="id_atasan" data-placeholder="Select" required>
+                                    <option selected disabled>Pilih Atasan Karyawan</option>
+                                    <?php foreach ($unit as $row) : ?>
+                                        <option value="<?= $row['id'] ?>"><?= $row['nama_unit'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <input type="password" name="pass" class="form-control" placeholder="Password *" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <select class="form-control show-tick ms select2" name="id_jabatan" data-placeholder="Select" required>
+                                <option selected disabled>Pilih Jabatan</option>
+                                <?php foreach ($jabatan as $row) : ?>
+                                    <option value="<?= $row['id'] ?>"><?= $row['nama_jabatan'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" name="submit" value="save">Add</button>
+                </div>
+            </form>
+           
         </div>
     </div>
 </div>
-

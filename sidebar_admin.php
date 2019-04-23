@@ -4,7 +4,7 @@
             <img src="<?= $site_url ?>/assets/images/user.png" class="rounded-circle user-photo" alt="User Profile Picture">
             <div class="dropdown">
                 <span>Welcome,</span>
-                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong><?= $user['nama'] ?></strong></a>
+                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong><?= $user['nama_p'] ?></strong></a>
                 <ul class="dropdown-menu dropdown-menu-right account animated flipInY">
                     <li><a href="<?= $site_url ?>/proses/logout.php"><i class="icon-power"></i>Logout</a></li>
                 </ul>

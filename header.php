@@ -46,6 +46,6 @@
         if ($user['status'] == 'admin')
             require_once 'sidebar_admin.php';
         else
-            require_once 'sidebar.php';
+          
         
         ?>
