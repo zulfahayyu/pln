@@ -1,18 +1,18 @@
-function inserttmb(){
+function inserttmb() {
     var nama = $("#nama").val();
     $.ajax({
-        url:'proses/insert.php',
-        type:'POST',
-        data:{
-            nama:nama,
+        url: 'proses/insert.php',
+        type: 'POST',
+        data: {
+            nama: nama,
         },
-        success:function(result){
+        success: function (result) {
             alert(result);
         }
     });
 }
 
-function addpgw(){
+function addpgw() {
     var nip = $("#nip").val();
     var nama = $("#nama").val();
     var sap = $("#sap").val();
@@ -28,45 +28,50 @@ function addpgw(){
     var id_unit = $("#unit").val();
     var id_jabatan = $("#jabatan").val();
     $.ajax({
-        url:'proses/adduser.php',
-        type:'POST',
-        data:{
-            nip:nip,
-            nama_p:nama,
-            no_sap:sap,
-            t_lahir:t_lahir,
-            tgl_lahir:tgl_lahir,
-            jkelamin:kelamin,
-            agama:agama,
-            status:status,
-            kel:keluarga,
-            alamat:alamat,
-            password:password,
+        url: 'proses/adduser.php',
+        type: 'POST',
+        data: {
+            nip: nip,
+            nama_p: nama,
+            no_sap: sap,
+            t_lahir: t_lahir,
+            tgl_lahir: tgl_lahir,
+            jkelamin: kelamin,
+            agama: agama,
+            status: status,
+            kel: keluarga,
+            alamat: alamat,
+            password: password,
             // gambar:gambar,
-            id_unit:id_unit,
-            id_jabatan:id_jabatan,
+            id_unit: id_unit,
+            id_jabatan: id_jabatan,
         },
-        success:function(result){
-        $('#addUser').modal('hide');
-        location.reload();
+        success: function (result) {
+            $('#addUser').modal('hide');
+            location.reload();
         }
     });
 }
 
-function login (){
+function login() {
     var nip1 = $('#nip').val();
     var pass1 = $('#pass').val();
     $.ajax({
-        url:'proses/login.php',
-        type:'POST',
-        data:{
-            nip:nip1,
-            password:pass1,
+        url: 'proses/login.php',
+        type: 'POST',
+        data: {
+            nip: nip1,
+            password: pass1,
         },
-        success:function(result){
+        success: function (result) {
             $('#box').html(result);
             console.log(result);
         }
     });
 }
 
+$(document).ready(function () {
+    $('#unit_kerja').change(function(){
+        alert('ganti');
+    })
+});
