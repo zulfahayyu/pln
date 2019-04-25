@@ -28,6 +28,7 @@
                             <li><a href="<?= $site_url ?>/jabatan">Data Jabatan</a></li>
                         </ul>
                     </li>
+                    <li><a href="<?= $site_url ?>/event"><i class="icon-calendar"></i><span>Event</span></a></li>
                 </ul>
             </nav>`
         </div>

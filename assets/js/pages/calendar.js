@@ -18,8 +18,8 @@ $.ajax({
                 right: 'month,agendaWeek,agendaDay,listWeek'
             },
             defaultDate: jktTime,
-            editable: true,
-            droppable: true, // this allows things to be dropped onto the calendar
+            editable: false,
+            droppable: false, // this allows things to be dropped onto the calendar
             drop: function () {
                 // is the "remove after drop" checkbox checked?
                 if ($('#drop-remove').is(':checked')) {

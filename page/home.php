@@ -1,3 +1,9 @@
+<?php
+date_default_timezone_set('Asia/Jakarta');
+$current_date=(date('Y-m-d'));
+$unit = query("SELECT * FROM unit_kerja");
+$event = query("SELECT * FROM event left join unit_kerja on event.id_unit = unit_kerja.id where date_start>=$current_date order by date_start ASC");
+?>
 <!-- MAIN CONTENT -->
 <div id="main-content">
     <div class="container-fluid">
@@ -130,65 +136,22 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="body">
-                        <div class="event-name row">
-                            <div class="col-2 text-center">
-                                <h4>11<span>Dec</span><span>2018</span></h4>
+                        <?php foreach ($event as $value) : 
+                            $date=date('Y-F-d',strtotime($value['date_start']));
+                            // echo $date;
+                            $date=explode('-',$value['date_start']);
+                            ?>
+                            <div class="event-name row">
+                                <div class="col-2 text-center">
+                                    <h4><?= $date[2] ?><span><?= $date[1] ?></span><span><?= $date[0] ?></span></h4>
+                                </div>
+                                <div class="col-10">
+                                    <h6><?= $value['event_name'] ?></h6>
+                                    <p><?= $value['description'] ?></p>
+                                    <address><i class="fa fa-map-marker"></i> <?= $value['location'] ?>&nbsp;&nbsp;&nbsp;<i class="fa fa-user"></i> <?= ($value['nama_unit']) ? $value['nama_unit'] : 'All Unit'  ?></address>
+                                </div>
                             </div>
-                            <div class="col-10">
-                                <h6>Conference</h6>
-                                <p>Mobile World Congress 2018</p>
-                                <address><i class="fa fa-map-marker"></i> 4 Goldfield Rd. Honolulu, HI
-                                    96815</address>
-                            </div>
-                        </div>
-                        <div class="event-name row">
-                            <div class="col-2 text-center">
-                                <h4>13<span>Dec</span><span>2018</span></h4>
-                            </div>
-                            <div class="col-10">
-                                <h6>Birthday</h6>
-                                <p>Today, guests are getting in on the action</p>
-                                <address><i class="fa fa-map-marker"></i> 4 Goldfield Rd. Honolulu, HI
-                                    96815</address>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="event-name row">
-                            <div class="col-2 text-center">
-                                <h4>09<span>Dec</span><span>2018</span></h4>
-                            </div>
-                            <div class="col-10">
-                                <h6>Repeating Event</h6>
-                                <p>Before there were tech conferences, there was Disrupt.</p>
-                                <address><i class="fa fa-map-marker"></i> 44 Shirley Ave. West Chicago,
-                                    IL
-                                    60185</address>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="event-name row">
-                            <div class="col-2 text-center">
-                                <h4>16<span>Dec</span><span>2018</span></h4>
-                            </div>
-                            <div class="col-10">
-                                <h6>Repeating Event</h6>
-                                <p>It is a long established fact that a reader will be distracted</p>
-                                <address><i class="fa fa-map-marker"></i> 123 6th St. Melbourne, FL
-                                    32904</address>
-                            </div>
-                        </div>
-                        <div class="event-name row">
-                            <div class="col-2 text-center">
-                                <h4>28<span>Dec</span><span>2018</span></h4>
-                            </div>
-                            <div class="col-10">
-                                <h6>Google</h6>
-                                <p>Google Hardware and Pixel 2 Launch</p>
-                                <address><i class="fa fa-map-marker"></i> 514 S. Magnolia St. Orlando,
-                                    FL
-                                    32806</address>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
@@ -229,7 +192,14 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <select class="form-control show-tick" name="unit">
+                            <option selected>All Unit</option>
+                            <?php foreach ($unit as $row) : ?>
+                                <option value="<?= $row['id'] ?>"><?= $row['nama_unit'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <div class="form-line">
                             <input type="text" class="form-control" name="location" placeholder="Location" required>

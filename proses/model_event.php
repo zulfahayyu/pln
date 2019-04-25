@@ -44,10 +44,11 @@ if ($_GET['id']) {
         $priority = $_POST['priority'];
         $start_date = ($_POST['start']);
         $end_date = ($_POST['end']);
+        $id_unit = $_POST['unit'];
         $location = $_POST['location'];
         $description = $_POST['description'];
 
-        $result = mysqli_query($conn, "INSERT INTO event VALUES('','$nama','$priority','$start_date','$end_date','$location','$description')");
+        $result = mysqli_query($conn, "INSERT INTO event VALUES('','$nama','$priority','$start_date','$end_date','$id_unit','$location','$description')");
         if ($result) {
             $_SESSION['message'] = 'Data Event berhasil ditambahkan';
             $_SESSION['type'] = 'success';
