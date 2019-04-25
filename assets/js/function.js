@@ -103,6 +103,17 @@ function editPegawai(id) {
     });
 }
 
+function editEvent(id) {
+    $.ajax({
+        url: 'page/event/update.php?id=' + id,
+        type: 'GET',
+        success: function (result) {
+            $('#contentUpdate').html(result);
+            $('#updateEvent').modal('show');
+        }
+    });
+}
+
 $(document).ready(function () {
     $('.modal-content').on('change','#unit_kerja', function () {
         // alert($(this).find(":selected").val());

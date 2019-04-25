@@ -1,8 +1,10 @@
 <?php
 include_once 'connection.php';
-date_default_timezone_set('Asia/Jakarta');
-$current_date=(date('Y-m-d'));
-if($_GET['method']=='get_all_event'){
+
+if ($_GET['method'] == 'get_all_event') {
+    date_default_timezone_set('Asia/Jakarta');
+    $current_date = (date('Y-m-d'));
+
     $event = query("SELECT id, event_name as title, date_start as start, date_end as end, priority as className
     FROM event where date_start>='$current_date'");
     echo json_encode($event);
@@ -19,12 +21,18 @@ if ($_GET['id']) {
             $_SESSION['message'] = 'Data Event gagal dihapus';
             $_SESSION['type'] = 'error';
         }
-        header('Location: ../');
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     } else { // Update data event
         if ($_POST['submit']) {
-            $kode = $_POST['kode'];
-            $nama = $_POST['nama'];
-            $result = mysqli_query($conn, "UPDATE event SET kode_jabatan='$kode', nama_jabatan='$nama' where id='$_GET[id]'");
+            $nama = $_POST['name'];
+            $priority = $_POST['priority'];
+            $start_date = ($_POST['start']);
+            $end_date = ($_POST['end']);
+            $id_unit = $_POST['unit'];
+            $location = $_POST['location'];
+            $description = $_POST['description'];
+            $result = mysqli_query($conn, "UPDATE event SET event_name='$nama',priority='$priority',date_start='$start_date',
+            date_end='$end_date',id_unit='$id_unit',location='$location',description='$description' where id='$_GET[id]'");
             if ($result) {
                 $_SESSION['message'] = 'Data Event berhasil diupdate';
                 $_SESSION['type'] = 'success';
@@ -36,7 +44,7 @@ if ($_GET['id']) {
             $_SESSION['message'] = 'Data tidak valid';
             $_SESSION['type'] = 'warning';
         }
-        header('Location: ../');
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 } else { // tambah data event baru
     if ($_POST['submit']) {
@@ -60,5 +68,5 @@ if ($_GET['id']) {
         $_SESSION['message'] = 'Data tidak valid';
         $_SESSION['type'] = 'warning';
     }
-    header('Location: ../');
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 }

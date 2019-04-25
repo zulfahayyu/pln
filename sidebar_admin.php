@@ -21,6 +21,7 @@
                     <li><a href="<?= $site_url ?>"><i class="icon-speedometer"></i><span>Home</a></li>
                     <li><a href="<?= $site_url ?>/task/manage"><i class="icon-note"></i>Manage Task</a></li>
                     <li><a href="<?= $site_url ?>/user"><i class="icon-user-follow"></i><span>Manage User</span></a></li>
+                    <li><a href="<?= $site_url ?>/event"><i class="icon-calendar"></i><span>Event</span></a></li>
                     <li class="">
                         <a href="#Employees" class="has-arrow" aria-expanded="false"><i class="icon-docs"></i><span>Master Data</span></a>
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
@@ -28,7 +29,7 @@
                             <li><a href="<?= $site_url ?>/jabatan">Data Jabatan</a></li>
                         </ul>
                     </li>
-                    <li><a href="<?= $site_url ?>/event"><i class="icon-calendar"></i><span>Event</span></a></li>
+                    
                 </ul>
             </nav>`
         </div>

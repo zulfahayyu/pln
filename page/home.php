@@ -186,9 +186,9 @@ $event = query("SELECT * FROM event left join unit_kerja on event.id_unit = unit
                     <div class="form-group">
                         <div class="form-line">
                             <div class="input-daterange input-group" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-                                <input type="text" class="input-sm form-control" name="start" placeholder="start date" required>
+                                <input autocomplete="off" type="text" class="input-sm form-control" name="start" placeholder="start date" required>
                                 <span class="input-group-addon text-center" style="width: 40px;">to</span>
-                                <input type="text" class="input-sm form-control" name="end" placeholder="end date" required>
+                                <input autocomplete="off" type="text" class="input-sm form-control" name="end" placeholder="end date" required>
                             </div>
                         </div>
                     </div>
