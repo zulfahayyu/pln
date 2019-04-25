@@ -139,7 +139,7 @@ $event = query("SELECT * FROM event left join unit_kerja on event.id_unit = unit
                         <?php foreach ($event as $value) : 
                             $date=date('Y-F-d',strtotime($value['date_start']));
                             // echo $date;
-                            $date=explode('-',$value['date_start']);
+                            $date=explode('-',$date);
                             ?>
                             <div class="event-name row">
                                 <div class="col-2 text-center">
