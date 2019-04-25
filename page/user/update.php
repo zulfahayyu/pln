@@ -5,7 +5,7 @@ $jabatan = query("SELECT * FROM jabatan"); // query get all jabatan kerja data
 $unit = query("SELECT * FROM unit_kerja"); // query get all unit kerja data
 
 $pegawai = get_where("SELECT *,pegawai.id as id FROM pegawai join user on user.id_pegawai=pegawai.id WHERE pegawai.id='$_GET[id]'");
-$atasan= get_where("SELECT * FROM pegawai where id='$pegawai[id_atasan]'");
+$atasan = get_where("SELECT * FROM pegawai where id='$pegawai[id_atasan]'");
 ?>
 <form action="<?= $site_url ?>/proses/model_pegawai.php?id=<?= $pegawai['id'] ?>" method="POST">
     <div class="modal-body">
@@ -33,18 +33,18 @@ $atasan= get_where("SELECT * FROM pegawai where id='$pegawai[id_atasan]'");
             </div>
             <div class="col-md-5 col-sm-5">
                 <div class="form-group mr">
-                    <input type="text" name="tgl_lahir"  value="<?= $pegawai['tgl_lahir'] ?>" data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Tanggal Lahir *" required>
+                    <input type="text" name="tgl_lahir" value="<?= $pegawai['tgl_lahir'] ?>" data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Tanggal Lahir *" required>
                     <!-- bikin default hari ini -->
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="fancy-radio">
-                        <input type="radio" name="jkelamin" value="Perempuan" required data-parsley-errors-container="#error-radio" <?= ($pegawai['jkelamin']=='P') ? 'checked' : '' ?>>
+                        <input type="radio" name="jkelamin" value="Perempuan" required data-parsley-errors-container="#error-radio" <?= ($pegawai['jkelamin'] == 'P') ? 'checked' : '' ?>>
                         <span><i></i>Perempuan</span>
                     </label>
                     <label class="fancy-radio">
-                        <input type="radio" name="jkelamin" value="Laki-laki" <?= ($pegawai['jkelamin']=='L') ? 'checked' : '' ?>>
+                        <input type="radio" name="jkelamin" value="Laki-laki" <?= ($pegawai['jkelamin'] == 'L') ? 'checked' : '' ?>>
                         <span><i></i>Laki - Laki</span>
                     </label>
                     <p id="error-radio"></p>
@@ -58,11 +58,11 @@ $atasan= get_where("SELECT * FROM pegawai where id='$pegawai[id_atasan]'");
             <div class="col-sm-6">
                 <div class="form-group">
                     <label class="fancy-radio">
-                        <input type="radio" name="status" value="Kawin" required data-parsley-errors-container="#error-radio" <?= ($pegawai['status_kawin']=='Kawin') ? 'checked' : '' ?>>
+                        <input type="radio" name="status" value="Kawin" required data-parsley-errors-container="#error-radio" <?= ($pegawai['status_kawin'] == 'Kawin') ? 'checked' : '' ?>>
                         <span><i></i>Kawin</span>
                     </label>
                     <label class="fancy-radio">
-                        <input type="radio" name="status" value="Belum Kawin" <?= ($pegawai['status_kawin']=='Belum Kawin') ? 'checked' : '' ?>>
+                        <input type="radio" name="status" value="Belum Kawin" <?= ($pegawai['status_kawin'] == 'Belum Kawin') ? 'checked' : '' ?>>
                         <span><i></i>Belum Kawin</span>
                     </label>
                     <p id="error-radio"></p>
@@ -81,16 +81,16 @@ $atasan= get_where("SELECT * FROM pegawai where id='$pegawai[id_atasan]'");
             <div class="col-sm-6">
                 <div class="form-group">
                     <select class="form-control show-tick ms select2" name="id_unit" id="unit_kerja" data-placeholder="Select" required>
-                        <option  disabled>Pilih Unit Kerja</option>
+                        <option disabled>Pilih Unit Kerja</option>
                         <?php foreach ($unit as $row) : ?>
-                            <option value="<?= $row['id'] ?>" <?= ($row['id']==$pegawai['id_unit'])?'selected' : '' ?>><?= $row['nama_unit'] ?></option>
+                            <option value="<?= $row['id'] ?>" <?= ($row['id'] == $pegawai['id_unit']) ? 'selected' : '' ?>><?= $row['nama_unit'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <select class="form-control show-tick ms select2" name="id_atasan" id="data-atasan"  data-placeholder="Select" required>
+                    <select class="form-control show-tick ms select2" name="id_atasan" id="data-atasan" data-placeholder="Select" required>
                         <option disabled>Pilih Atasan Karyawan</option>
                         <option value="<?= $atasan['id'] ?>"><?= $atasan['nama_p'] ?>
                     </select>
@@ -105,9 +105,9 @@ $atasan= get_where("SELECT * FROM pegawai where id='$pegawai[id_atasan]'");
             <div class="col-sm-6">
 
                 <select class="form-control show-tick ms select2" name="id_jabatan" data-placeholder="Select" required>
-                    <option  disabled>Pilih Jabatan</option>
+                    <option disabled>Pilih Jabatan</option>
                     <?php foreach ($jabatan as $row) : ?>
-                        <option value="<?= $row['id'] ?>" <?= ($row['id']==$pegawai['id_jabatan'])?'selected' : '' ?>><?= $row['nama_jabatan'] ?></option>
+                        <option value="<?= $row['id'] ?>" <?= ($row['id'] == $pegawai['id_jabatan']) ? 'selected' : '' ?>><?= $row['nama_jabatan'] ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

@@ -71,6 +71,11 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="body">
+                        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addevent">Add New Event</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="body">
                         <div id="calendar"></div>
                     </div>
                 </div>
@@ -191,6 +196,56 @@
 
     </div>
 </div>
-</div>
 
+
+<!-- Default Size -->
+<div class="modal animated jello" id="addevent" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title" id="defaultModalLabel">Add Event</h4>
+            </div>
+            <form action="<?= $site_url ?>/proses/model_event.php" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="name" placeholder="Event Title" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control show-tick" name="priority">
+                            <option selected disabled>Priority</option>
+                            <option value="bg-danger">High</option>
+                            <option value="bg-warning">Medium</option>
+                            <option value="bg-success">Low</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <div class="input-daterange input-group" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                                <input type="text" class="input-sm form-control" name="start" placeholder="start date" required>
+                                <span class="input-group-addon text-center" style="width: 40px;">to</span>
+                                <input type="text" class="input-sm form-control" name="end" placeholder="end date" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="location" placeholder="Location" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <textarea class="form-control no-resize" rows="4" name="description" placeholder="Event Description..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Add</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">CLOSE</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
