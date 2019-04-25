@@ -8,64 +8,62 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-6 col-md-8 col-sm-12">
-                    <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="icon-list"></i></a>
-                        Admin</h2>
+                    <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Task List</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.php"><i class="icon-home"></i></a></li>
-                        <li class="breadcrumb-item">Manage Task</li>
+                        <li class="breadcrumb-item"><a href="index-2.html"><i class="icon-home"></i></a></li>
+                        <li class="breadcrumb-item">Task</li>
+                        <li class="breadcrumb-item active">Task List</li>
                     </ul>
+                </div>
+                <div class="col-lg-6 col-md-4 col-sm-12 text-right">
+                    <a href="<?= $site_url ?>/task/add" class="btn btn-primary" >Add New Task</a>
                 </div>
             </div>
         </div>
-        <!-- LIST TUGAS -->
+
         <div class="row clearfix">
-            <div class="col-lg-12">
+            <div class="col-lg-12 col-md-12">
                 <div class="card">
-                    <div class="header">
-                        <h2>Task List</h2>
-                        <ul class="header-dropdown">
-                            <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTask">Add New</button></li>
-                        </ul>
-                    </div>
-                    <div class="body">
+                    <div class="body project_report">
                         <div class="table-responsive">
-                            <table class="table table-hover js-basic-example dataTable table-custom table-striped m-b-0 c_list">
-                                <thead class="thead-dark">
+                            <table class="table table-hover js-basic-example dataTable table-custom m-b-0">
+                                <thead>
                                     <tr>
-                                        <th>
-                                            <label class="fancy-checkbox">
-                                                <input class="select-all" type="checkbox" name="checkbox">
-                                                <span></span>
-                                            </label>
-                                        </th>
-                                        <th>Name</th>
-                                        <th>Employee ID</th>
-                                        <th>Phone</th>
-                                        <th>Join Date</th>
-                                        <th>Role</th>
+                                        <th>Task Name</th>
+                                        <th>Deadline</th>
+                                        <th>Prograss</th>
+                                        <th>Lead</th>
+                                        <th>Team</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="width45">
-                                            <label class="fancy-checkbox">
-                                                <input class="checkbox-tick" type="checkbox" name="checkbox">
-                                                <span></span>
-                                            </label>
-                                            <img src="<?= $site_url ?>/assets/images/xs/avatar1.jpg" class="rounded-circle avatar" alt="">
+                                        <td class="project-title">
+                                            <h6>InfiniO 4.1</h6>
+                                            <small>Created 14 July, 2018</small>
                                         </td>
+                                        <td>8 Aug, 2018</td>
                                         <td>
-                                            <h6 class="mb-0">Marshall Nichols</h6>
-                                            <span>marshall-n@gmail.com</span>
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100" style="width: 48%;"></div>
+                                            </div>
+                                            <small>Completion with: 48%</small>
                                         </td>
-                                        <td><span>LA-0215</span></td>
-                                        <td><span>+ 264-625-2583</span></td>
-                                        <td>24 Jun, 2015</td>
-                                        <td>Web Designer</td>
+                                        <td><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></button>
-                                            <button type="button" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o"></i></button>
+                                            <ul class="list-unstyled team-info">
+                                                <li><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Avatar" alt="Avatar"></li>
+                                                <li><img src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                <li><img src="../assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                            </ul>
+                                        </td>
+                                        <td><span class="badge badge-success">Active</span></td>
+                                        <td class="project-actions">
+                                            <a href="project-detail.html" class="btn btn-sm btn-outline-primary"><i class="icon-eye"></i></a>
+                                            <a href="javascript:void(0);" class="btn btn-sm btn-outline-success"><i class="icon-pencil"></i></a>
+                                            <a href="javascript:void(0);" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="icon-trash"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -75,10 +73,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-</div>
 
+    </div>
 </div>
 
 <!-- Modal -->

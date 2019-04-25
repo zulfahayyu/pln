@@ -27,6 +27,7 @@
                         <ul aria-expanded="false" class="collapse" style="height: 0px;">
                             <li><a href="<?= $site_url ?>/unit">Data Unit</a></li>
                             <li><a href="<?= $site_url ?>/jabatan">Data Jabatan</a></li>
+                            <li><a href="<?= $site_url ?>/file">Data Document</a></li>
                         </ul>
                     </li>
                     

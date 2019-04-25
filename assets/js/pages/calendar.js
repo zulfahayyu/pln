@@ -6,7 +6,7 @@ var eventList = null;
 var testjson = null;
 jktTime = new Date(jktTime);
 $.ajax({
-    url: 'proses/model_event.php?method=get_all_event',
+    url: base_url+'/proses/model_event.php?method=get_all_event',
     type: 'GET',
     success: function (result) {
         eventList = JSON.parse(result);
