@@ -1,7 +1,9 @@
-<!doctype html>
-<html lang="en">
-
-
+<?php
+date_default_timezone_set('Asia/Jakarta');
+$current_date = (date('Y-m-d'));
+// $unit = query("SELECT * FROM unit_kerja");
+$event = query("SELECT * from task WHERE due_date>='$current_date' ORDER BY due_date ASC");
+?>
 <!-- MAIN CONTENT -->
 <div id="main-content">
     <div class="container-fluid">
@@ -16,7 +18,7 @@
                     </ul>
                 </div>
                 <div class="col-lg-6 col-md-4 col-sm-12 text-right">
-                    <a href="<?= $site_url ?>/task/add" class="btn btn-primary" >Add New Task</a>
+                    <a href="<?= $site_url ?>/task/add" class="btn btn-primary">Add New Task</a>
                 </div>
             </div>
         </div>
@@ -39,33 +41,50 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="project-title">
-                                            <h6>InfiniO 4.1</h6>
-                                            <small>Created 14 July, 2018</small>
-                                        </td>
-                                        <td>8 Aug, 2018</td>
-                                        <td>
-                                            <div class="progress progress-xs">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100" style="width: 48%;"></div>
-                                            </div>
-                                            <small>Completion with: 48%</small>
-                                        </td>
-                                        <td><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width35 rounded"></td>
-                                        <td>
-                                            <ul class="list-unstyled team-info">
-                                                <li><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Avatar" alt="Avatar"></li>
-                                                <li><img src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                <li><img src="../assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                            </ul>
-                                        </td>
-                                        <td><span class="badge badge-success">Active</span></td>
-                                        <td class="project-actions">
-                                            <a href="project-detail.html" class="btn btn-sm btn-outline-primary"><i class="icon-eye"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-sm btn-outline-success"><i class="icon-pencil"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="icon-trash"></i></a>
-                                        </td>
-                                    </tr>
+                                    <?php foreach ($event as $value) : 
+                                        $due_date=date('d F Y',strtotime($value['due_date']));
+                                        $date_create=date('d F Y',strtotime($value['date_create']));
+                                        if($value['status']=='To Do')
+                                            $status_color='info';
+                                        elseif($value['status']=='In Progress')
+                                            $status_color='primary';
+                                        elseif($value['status']=='Pending')
+                                            $status_color='warning';
+                                        elseif($value['status']=='Done')
+                                            $status_color='success';
+                                        else
+                                            $status_color='default';
+                                        $team_lead=get_where("SELECT * FROM pegawai WHERE id='$value[id_leader]'");
+
+                                        ?>
+                                        <tr>
+                                            <td class="project-title">
+                                                <h6><?= $value['task_name'] ?></h6>
+                                                <small><?= $date_create ?></small>
+                                            </td>
+                                            <td><?= $due_date ?></td>
+                                            <td>
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="<?= $value['progress'] ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= $value['progress'] ?>%;"></div>
+                                                </div>
+                                                <small>Completion with: <?= $value['progress'] ?>%</small>
+                                            </td>
+                                            <td><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="<?= $team_lead['nama_p'] ?>" alt="Avatar" class="width35 rounded"></td>
+                                            <td>
+                                                <ul class="list-unstyled team-info">
+                                                    <li><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Avatar" alt="Avatar"></li>
+                                                    <li><img src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <li><img src="../assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                </ul>
+                                            </td>
+                                            <td><span class="badge badge-<?= $status_color ?>"><?= $value['status'] ?></span></td>
+                                            <td class="project-actions">
+                                                <a href="project-detail.html" class="btn btn-sm btn-outline-primary"><i class="icon-eye"></i></a>
+                                                <a href="javascript:void(0);" class="btn btn-sm btn-outline-success"><i class="icon-pencil"></i></a>
+                                                <a href="javascript:void(0);" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="icon-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -115,88 +134,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    $('.knob').knob({
-        draw: function() {
-            // "tron" case
-            if (this.$.data('skin') == 'tron') {
-
-                var a = this.angle(this.cv) // Angle
-                    ,
-                    sa = this.startAngle // Previous start angle
-                    ,
-                    sat = this.startAngle // Start angle
-                    ,
-                    ea // Previous end angle
-                    , eat = sat + a // End angle
-                    ,
-                    r = true;
-
-                this.g.lineWidth = this.lineWidth;
-
-                this.o.cursor &&
-                    (sat = eat - 0.3) &&
-                    (eat = eat + 0.3);
-
-                if (this.o.displayPrevious) {
-                    ea = this.startAngle + this.angle(this.value);
-                    this.o.cursor &&
-                        (sa = ea - 0.3) &&
-                        (ea = ea + 0.3);
-                    this.g.beginPath();
-                    this.g.strokeStyle = this.previousColor;
-                    this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false);
-                    this.g.stroke();
-                }
-
-                this.g.beginPath();
-                this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
-                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false);
-                this.g.stroke();
-
-                this.g.lineWidth = 2;
-                this.g.beginPath();
-                this.g.strokeStyle = this.o.fgColor;
-                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3,
-                    0, 2 * Math.PI, false);
-                this.g.stroke();
-
-                return false;
-            }
-        }
-    });
-
-    $('#linecustom1').sparkline('html', {
-        height: '55px',
-        width: '100%',
-        lineColor: '#a095e5',
-        fillColor: '#a095e5',
-        minSpotColor: true,
-        maxSpotColor: true,
-        spotColor: '#e2a8df',
-        spotRadius: 0
-    });
-
-    $('#linecustom2').sparkline('html', {
-        height: '55px',
-        width: '100%',
-        lineColor: '#75c3f2',
-        fillColor: '#75c3f2',
-        minSpotColor: true,
-        maxSpotColor: true,
-        spotColor: '#8dbfe0',
-        spotRadius: 0
-    });
-
-    $('#linecustom3').sparkline('html', {
-        height: '55px',
-        width: '100%',
-        lineColor: '#fc7b92',
-        fillColor: '#fc7b92',
-        minSpotColor: true,
-        maxSpotColor: true,
-        spotColor: '#e0b89d',
-        spotRadius: 0
-    });
-</script>

@@ -30,6 +30,8 @@
     <link rel="stylesheet" href="<?= $site_url ?>/assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css">
 
     <link rel="stylesheet" href="<?= $site_url ?>/assets/vendor/summernote/dist/summernote.css"/>
+    <link rel="stylesheet" href="<?= $site_url ?>/assets/css/inbox.css">
+
 
 
     <!-- MAIN CSS -->

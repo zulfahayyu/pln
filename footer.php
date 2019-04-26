@@ -15,6 +15,9 @@ var base_url='<?= $site_url ?>';
 
 <script src="<?= $site_url ?>/assets/vendor/summernote/dist/summernote.js"></script>
 
+<script src="<?= $site_url ?>/assets/vendor/jquery-knob/jquery.knob.min.js"></script> <!-- Jquery Knob Plugin Js --> 
+
+<script src="<?= $site_url ?>/assets/js/pages/charts/jquery-knob.js"></script>
 
 
 <script src="<?= $site_url ?>/assets/bundles/mainscripts.bundle.js"></script>
