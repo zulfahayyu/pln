@@ -1,3 +1,49 @@
+<?php
+if (empty($id)) {
+    echo "<script>window.location.href = '" . $site_url . "/task'</script>";
+}
+date_default_timezone_set('Asia/Jakarta'); //set time server
+$current_date = (date('Y-m-d')); // get current date
+
+$task = get_where("SELECT *,task.id AS id FROM task JOIN unit_kerja ON task.id_unit=unit_kerja.id 
+WHERE task.id='$id'"); // get task detail
+
+$staff = query("SELECT * FROM pegawai WHERE id_unit='$task[id_unit]' 
+AND id NOT IN(SELECT id_pegawai FROM task_team WHERE id_task='$task[id]')"); // get data pegawai berdasarkan id_unit
+
+$listStaff = query("SELECT *,task_team.id AS id FROM task_team JOIN pegawai ON task_team.id_pegawai=pegawai.id
+ where id_task='$task[id]'"); // get list assigned staff
+
+
+$due_status = ($current_date > $task['due_date']) ? '<span class="badge badge-danger">Due</span>' : ''; //cek due status
+
+$due_date = date('d F Y', strtotime($task['due_date'])); // formating due date
+
+// status label
+if ($task['status'] == 'To Do')
+    $status_color = 'info';
+elseif ($task['status'] == 'In Progress')
+    $status_color = 'primary';
+elseif ($task['status'] == 'Pending')
+    $status_color = 'warning';
+elseif ($task['status'] == 'Done')
+    $status_color = 'success';
+else
+    $status_color = 'default';
+
+//priority table
+if ($task['priority'] == 'High')
+    $priority_color = 'danger';
+elseif ($task['priority'] == 'Medium')
+    $priority_color = 'warning';
+elseif ($task['priority'] == 'Low')
+    $priority_color = 'success';
+else
+    $priority_color = 'default';
+
+
+print_r($testquery);
+?>
 <div id="main-content">
     <div class="container-fluid">
         <div class="block-header">
@@ -31,25 +77,25 @@
                                         <div class="btn-group">
                                             <a href="javascript:void(0);" class="btn btn-default btn-sm hidden-sm"><i class="fa fa-comment"></i> New Comment</a>
                                             <a href="javascript:void(0);" class="btn btn-default btn-sm hidden-sm"><i class="fa fa-upload"></i> Upload File</a>
-                                            <a href="javascript:void(0);" class="btn btn-default btn-sm"><i class="fa fa-user"></i> Assign Staff</a>
+                                            <a href="javascript:void(0);" class="btn btn-default btn-sm" data-toggle="modal" data-target="#assignStaff"><i class="fa fa-user"></i> Assign Staff</a>
                                         </div>
-                                        
+
 
                                     </div>
                                 </ul>
 
                             </div>
                             <div class="row" style="margin-right:0px">
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <div class="">
                                         <div class="body text-center">
-                                            <input type="text" class="knob" value="86" data-width="150" data-height="150" data-thickness="0.25" data-fgColor="#64c8c0">
+                                            <input type="text" class="knob" value="<?= $task['progress'] ?>" data-width="150" data-height="150" data-thickness="0.25" data-fgColor="#64c8c0">
                                             <p class="text-muted m-b-0">PROGRESS</p>
                                         </div>
                                     </div>
 
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-8">
                                     <table id="projectTable" class="table table-striped table-bordered">
                                         <tbody>
                                             <tr>
@@ -60,17 +106,18 @@
                                                 <td><b>Due Date</b></td>
                                             </tr>
                                             <tr>
-                                                <td>MITC-7</td>
-                                                <td>Aplikasi Prediksi Penjualan</td>
-                                                <td><a href="?route=clients/manage&amp;id=8">Novianto (PLN)</a></td>
-                                                <td>2019-03-01</td>
-                                                <td>2019-07-01</td>
+                                                <td>T-<?= $task['id'] ?></td>
+                                                <td><span class="badge badge-<?= $priority_color ?>"><?= $task['priority'] ?></span></td>
+                                                <td><span class="badge badge-<?= $status_color ?>"><?= $task['status'] ?></span><?= $due_status ?></td>
+                                                <td><?= $task['kode_unit'] ?> - <?= $task['nama_unit'] ?></td>
+                                                <td><?= $due_date ?></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <div class="box box-default">
                                         <div class="box-header with-border">
                                             <h5 class="box-title">Task Description</h5>
+                                            <?= $task['description'] ?>
                                         </div>
                                         <!-- /.box-header -->
                                         <div class="box-body ">
@@ -92,54 +139,58 @@
                     <div class="body">
 
                         <ul class="right_chat list-unstyled mb-0">
-                            <li class="online">
-                                <a href="javascript:void(0);">
-                                    <div class="media">
-                                        <img class="media-object " src="../assets/images/xs/avatar4.jpg" alt="">
-                                        <div class="media-body">
-                                            <span class="name">Chris Fox</span>
-                                            <span class="message">Sales Lead</span>
+                            <?php foreach ($listStaff as $value) : ?>
+                                <li class="online">
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <img class="media-object " src="<?= $site_url ?>/assets/images/xs/avatar4.jpg" alt="">
+                                            <div class="media-body">
+                                                <span class="name"><?= $value['nama_p'] ?></span>
+                                                <span class="message"><?= $value['keterangan'] ?></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="online">
-                                <a href="javascript:void(0);">
-                                    <div class="media">
-                                        <img class="media-object " src="../assets/images/xs/avatar5.jpg" alt="">
-                                        <div class="media-body">
-                                            <span class="name">Joge Lucky</span>
-                                            <span class="message">Java Developer</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="offline">
-                                <a href="javascript:void(0);">
-                                    <div class="media">
-                                        <img class="media-object " src="../assets/images/xs/avatar2.jpg" alt="">
-                                        <div class="media-body">
-                                            <span class="name">Isabella</span>
-                                            <span class="message">UI UX Designer</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="offline">
-                                <a href="javascript:void(0);">
-                                    <div class="media mb-0">
-                                        <img class="media-object " src="../assets/images/xs/avatar1.jpg" alt="">
-                                        <div class="media-body">
-                                            <span class="name">Folisise Chosielie</span>
-                                            <span class="message">FrontEnd Developer</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="assignStaff" tabindex="-1" role="dialog" aria-labelledby="assignStaffLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addTaskLabel">Assign Staff</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= $site_url ?>/proses/model_task.php?method=assign_staff" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="id_task" value="<?= $task['id'] ?>">
+                    <div class="form-group">
+                        <label>Pegawai</label>
+                        <select class="form-control show-tick" name="id_pegawai" required>
+                            <option selected disabled>Select Staff</option>
+                            <?php foreach ($staff as $value) : ?>
+                                <option value="<?= $value['id'] ?>"><?= $value['nama_p'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Jabatan</label>
+                        <input type="text" class="form-control" name="jabatan" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Add</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">CLOSE</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
