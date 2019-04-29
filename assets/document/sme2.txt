@@ -1,0 +1,1910 @@
+<?php 
+    $json_plan = json_encode($this->Plans, JSON_PARTIAL_OUTPUT_ON_ERROR);
+    $json_plan = addslashes(preg_replace('/[\t\r\n\v\f]/', '', $json_plan));
+?>
+
+<?php $this->extend('AppBundle::Layouts/layout.html.php'); ?>
+
+<?php include_once "include/step-header.php"; ?>
+
+<!-- CONTENT -->
+<div class="wrap-new-body">
+    <div class="container home fade-in">
+        <div class="row spacer-all">
+
+            <div class="form-step clearfix" data-sticky_parent>
+                
+                <?php include_once "include/summary-smehealth-mobile.php"; ?>
+
+                <div class="col-xs-12 col-md-8" data-sticky_column> 
+                    <form class="data-form" onsubmit="return false;">
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="title-form">
+                                    <div class="header-back">
+                                        <a href="/e-health/quote/step1">
+                                            <i class="fa fa-arrow-left fa-lg"></i>
+                                        </a>
+                                    </div>
+                                    <h3>SME Health</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form main shadow">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="text-field form-group">
+                                        <div>
+                                            <label class="control-label mandatory">Personalisasi Kebutuhan Anda <span tabindex="0" class="tooltip-info" data-toggle="popover" data-trigger="focus" data-placement="right"><i class="fa fa-info-circle"></i></span></label>
+                                            <div class="tooltip-text">
+                                                <p>Negara yang tidak diperbolehkan</p>
+                                            </div>     
+                                            <div class="form-row-controls">
+                                                <input type="file" name="excel" class="required form-control upload-member">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="text-field form-group">
+                                        <div class="form-text">
+                                            <ul class="list-group">
+                                                <li class="list-group-item">
+                                                    <label class="control-label">Download Template</label>
+                                                    <div class="form-row-controls">
+                                                        <a href="/assets/excel/template-sme-health.xls"><i class="fa fa-download"></i> Template SmeHealth</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="list-group">
+                                        <li class="list-group-item-disc">Rincian data rekening bank harus dilengkapi untuk seluruh karyawan/wati.</li>
+                                        <li class="list-group-item-disc">Untuk pasangan/anak data rekening harus sama dengan
+                                        data rekening karyawan/wati yang bersangkutan.</li>
+                                        <li class="list-group-item-disc">Negara yang dilarang.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="spacer-all"></div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group clearfix">
+                                        <div class="form-select">
+                                            <label class="control-label mandatory">Lihat informasi manfaat</label>
+                                            <div class="wrap-select">
+                                                <select name="BenefitChoice" class="form-control" onchange="changeTableBenefit()" id="BenefitChoiceSelect" data-msg-required="Informasi manfaat harus di pilih">
+                                                    <option value="">Lihat informasi manfaat</option>
+                                                    <option value="IP">Rawat Inap</option>
+                                                    <option value="OP">Rawat Jalan</option>
+                                                    <option value="D">Rawat Gigi</option>
+                                                    <option value="M">Persalinan</option>
+                                                    <option value="O">Optik</option>
+                                                </select>
+                                                <div class="icon">
+                                                    <i class="fa fa-angle-down"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="spacer-all"></div>
+
+                            <h3 class="typo24"><strong>Manfaat</strong></h3>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!-- TABLE IP -->
+
+                                        <!-- DESKTOP -->
+                                        <table class="custom-table benefit sme-table hide table-ip hidden-xs hidden-sm" border="1">
+                                            <thead>
+                                                <tr>
+                                                    <td colspan="2">Deskripsi</td>
+                                                    <td width="15%">IP300</td>
+                                                    <td width="15%">IP400</td>
+                                                    <td width="15%">IP500</td>
+                                                    <td width="15%">IP750</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Biaya Kamar & Makan per hari</td>
+                                                    <td>Maksimum 60 hari per ketidakmampuan</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>300.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>400.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>500.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>750.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Perawatan Intensif per hari</td>
+                                                    <td>Maksimum 30 hari per ketidakmampuan</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>600.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>800.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.500.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Biaya kunjungan dokter umum per kunjungan</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>150.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>200.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>250.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>375.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Biaya konsultasi dokter spesialis per kunjungan</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>150.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>200.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>250.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>375.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Biaya obat, X-ray, Laboratorium dan Biaya Medis Lainnya</td>
+                                                    <td>Maksimum per ketidakmampuan</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>6.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>8.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>10.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>15.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Biaya operasi termasuk dokter bedah, anastesi, dan ruang operasi: </strong></td>
+                                                    <td>Maksimum per ketidakmampuan</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tipe A </td>
+                                                    <td rowspan="4"></td>
+                                                    <td>
+                                                        <strong>IDR <br><text>36.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>48.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>60.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>90.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tipe B </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>22.500.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>30.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>37.500.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>56.250.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tipe C </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>13.500.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>18.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>22.500.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>33.750.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tipe D </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>7.500.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>10.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>12.500.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>18.750.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Rawat Jalan dan Gigi Darurat Karena Kecelakaan</strong></td>
+                                                    <td>Maksimum per ketidakmampuan<</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Rawat Jalan</td>
+                                                    <td rowspan="2"></td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.200.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.600.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>2.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>3.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Rawat Gigi</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.200.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.600.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>2.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>3.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Biaya test diagnostik, obat dan konsultasi (30 hari sebelum dan 30 sesudah rawat inap)</strong></td>
+                                                    <td>Maksimum per ketidakmampuan</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sebelum Rawat Inap</td>
+                                                    <td rowspan="2"></td>
+                                                    <td>
+                                                        <strong>IDR <br><text>600.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>800.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.500.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sesudah Rawat inap</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>600.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>800.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.500.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Biaya Ambulans Lokal</td>
+                                                    <td>Maksimum per trip</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>300.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>400.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>500.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>750.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Perawat pribadi per kunjungan</td>
+                                                    <td>Maksimum 60 hari per ketidakmampuan di Rumah Sakit</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>150.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>200.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>250.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>375.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Santunan Duka Kecelakaan atau Sakit</td>
+                                                    <td>Untuk seluruh peserta maksimum 65 tahun</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>5.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>5.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>5.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>5.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Manfaat harian tunai</td>
+                                                    <td>Maks 14 hari per rawat inap</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>300.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>400.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>500.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>750.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="table-grey"><strong>Limit Tahunan</strong></td>
+                                                    <td class="table-grey"><strong>Tidak Terbatas</strong></td>
+                                                    <td class="table-grey"><strong>Tidak Terbatas</strong></td>
+                                                    <td class="table-grey"><strong>Tidak Terbatas</strong></td>
+                                                    <td class="table-grey"><strong>Tidak Terbatas</strong></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- DESKTOP -->
+
+                                        <!-- MOBILE  -->
+                                        <table class="custom-table benefit sme-table sme-table-mobile hide table-ip hidden-lg hidden-md" border="1">
+                                            <thead>
+                                                <tr>
+                                                    <td colspan="2" width="70%">Deskripsi</td>
+                                                    <td width="35%">
+                                                        <select id="mobile-table-ip" class="option-sme-table">
+                                                            <option value="1" selected>IP300</option>
+                                                            <option value="2">IP400</option>
+                                                            <option value="3">IP500</option>
+                                                            <option value="4">IP750</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td width="30%">Biaya Kamar & Makan per hari</td>
+                                                    <td>Maksimum 60 hari per ketidakmampuan</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>300.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>400.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>750.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Perawatan Intensif per hari</td>
+                                                    <td>Maksimum 30 hari per ketidakmampuan</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>600.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>800.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>1.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>1.500.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Biaya kunjungan dokter umum per kunjungan</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>150.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>200.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>250.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>375.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Biaya konsultasi dokter spesialis per kunjungan</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>150.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>200.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>250.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>375.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Biaya obat, X-ray, Laboratorium dan Biaya Medis Lainnya</td>
+                                                    <td>Maksimum per ketidakmampuan</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>6.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>8.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>10.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>15.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Biaya operasi termasuk dokter bedah, anastesi, dan ruang operasi: </strong></td>
+                                                    <td>Maksimum per ketidakmampuan</td>
+                                                    <td class="column-1"></td>
+                                                    <td class="column-2 hide"></td>
+                                                    <td class="column-3 hide"></td>
+                                                    <td class="column-4 hide"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tipe A </td>
+                                                    <td rowspan="4"></td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>36.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>48.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>60.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>90.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tipe B </td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>22.500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>30.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>37.500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>56.250.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tipe C </td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>13.500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>18.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>22.500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>33.750.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tipe D </td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>7.500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>10.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>12.500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>18.750.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Rawat Jalan dan Gigi Darurat Karena Kecelakaan</strong></td>
+                                                    <td>Maksimum per ketidakmampuan<</td>
+                                                    <td class="column-1"></td>
+                                                    <td class="column-2 hide"></td>
+                                                    <td class="column-3 hide"></td>
+                                                    <td class="column-4 hide"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Rawat Jalan</td>
+                                                    <td rowspan="2"></td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>1.200.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>1.600.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>2.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>3.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Rawat Gigi</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>1.200.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>1.600.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>2.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>3.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Biaya test diagnostik, obat dan konsultasi (30 hari sebelum dan 30 sesudah rawat inap)</strong></td>
+                                                    <td>Maksimum per ketidakmampuan</td>
+                                                    <td class="column-1"></td>
+                                                    <td class="column-2 hide"></td>
+                                                    <td class="column-3 hide"></td>
+                                                    <td class="column-4 hide"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sebelum Rawat Inap</td>
+                                                    <td rowspan="2"></td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>600.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>800.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>1.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>1.500.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sesudah Rawat inap</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>600.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>800.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>1.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>1.500.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Biaya Ambulans Lokal</td>
+                                                    <td>Maksimum per trip</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>300.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>400.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>750.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Perawat pribadi per kunjungan</td>
+                                                    <td>Maksimum 60 hari per ketidakmampuan di Rumah Sakit</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>150.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>200.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>250.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>375.000</text></strong>
+                                                    </td>
+                                                </tr>                                               
+                                                <tr>
+                                                    <td>Santunan Duka Kecelakaan atau Sakit</td>
+                                                    <td>Untuk seluruh peserta maksimum 65 tahun</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>5.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>5.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>5.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>5.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Manfaat harian tunai</td>
+                                                    <td>Maks 14 hari per rawat inap</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>300.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>400.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>750.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="table-grey"><strong>Limit Tahunan<strong></td>
+                                                    <td class="column-1 table-grey">
+                                                        <strong>Tidak Terbatas</strong>
+                                                    </td>
+                                                    <td class="column-2 hide table-grey">
+                                                        <strong>Tidak Terbatas</strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>Tidak Terbatas</strong>
+                                                    </td>
+                                                    <td class="column-4 hide table-grey">
+                                                        <strong>Tidak Terbatas</strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- MOBILE  -->
+
+                                    <!-- TABLE IP -->
+
+                                    <!-- TABLE OP -->
+
+                                        <!-- DESKTOP -->
+                                        <table class="custom-table benefit sme-table hide table-op hidden-xs hidden-sm" border="1">
+                                            <thead>
+                                                <tr>
+                                                    <td colspan="2">Rawat Jalan</td>
+                                                    <td width="15%">OP150</td>
+                                                    <td width="15%">OP200</td>
+                                                    <td width="15%">OP250</td>
+                                                    <td width="15%">OP350</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Konsultasi Dokter Umum</td>
+                                                    <td>Maksimum 1 kali kunjungan per hari</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>150.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>200.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>250.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>350.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Konsultasi Dokter Spesialis</td>
+                                                    <td>Maksimum 1 kali kunjungan per hari</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>300.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>400.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>500.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>700.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Resep Obat</td>
+                                                    <td>Maksimum per tahun</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>3.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>4.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>5.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>7.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Biaya Lab dan Test Diagnostic</td>
+                                                    <td>Maksimum per tahun</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.500.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>2.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>2.500.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>3.500.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Fisioterapi</td>
+                                                    <td>Maksimum 1 kali kunjungan per hari</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>300.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>400.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>500.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>700.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="table-grey"><strong>Limit Tahunan<strong></td>
+                                                    <td class="table-grey"><strong>IDR <br><text>7.500.000</text></strong></td>
+                                                    <td class="table-grey"><strong>IDR <br><text>10.000.000</text></strong></td>
+                                                    <td class="table-grey"><strong>IDR <br><text>12.500.000</text></strong></td>
+                                                    <td class="table-grey"><strong>IDR <br><text>14.000.000</text></strong></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- DESKTOP  -->
+
+                                        <!-- MOBILE -->
+                                        <table class="custom-table benefit sme-table sme-table-mobile hide table-op hidden-lg hidden-md" border="1">
+                                            <thead>
+                                                <tr>
+                                                    <td colspan="2" width="70%">Rawat Jalan</td>
+                                                    <td>
+                                                        <select id="mobile-table-op" class="option-sme-table">
+                                                            <option value="1" selected>OP150</option>
+                                                            <option value="2">OP200</option>
+                                                            <option value="3">OP250</option>
+                                                            <option value="4">OP350</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Konsultasi Dokter Umum</td>
+                                                    <td>Maksimum 1 kali kunjungan per hari</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>150.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>200.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>250.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>350.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Konsultasi Dokter Spesialis</td>
+                                                    <td>Maksimum 1 kali kunjungan per hari</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>300.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>400.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>700.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Resep Obat</td>
+                                                    <td>Maksimum per tahun</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>3.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>4.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>5.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>7.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Biaya Lab dan Test Diagnostic</td>
+                                                    <td>Maksimum per tahun</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>1.500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>2.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>2.500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>3.500.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Fisioterapi</td>
+                                                    <td>Maksimum 1 kali kunjungan per hari</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>300.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>400.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>700.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="table-grey"><strong>Limit Tahunan</strong></td>
+                                                    <td class="column-1 table-grey">
+                                                        <strong>IDR <br><text>7.500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide table-grey">
+                                                        <strong>IDR <br><text>10.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide table-grey">
+                                                        <strong>IDR <br><text>12.500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide table-grey">
+                                                        <strong>IDR <br><text>14.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- MOBILE -->
+
+                                    <!-- TABLE OP -->
+
+                                    <!-- TABLE D -->
+
+                                        <!-- DESKTOP -->
+                                        <table class="custom-table benefit sme-table hide table-d hidden-xs hidden-sm" border="1">
+                                            <thead>
+                                                <tr>
+                                                    <td colspan="2">Manfaat</td>
+                                                    <td width="15%" rowspan="2">D3000</td>
+                                                    <td width="15%" rowspan="2">D4000</td>
+                                                    <td width="15%" rowspan="2">D5000</td>
+                                                    <td width="15%" rowspan="2">D6000</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">Perawatan Gigi Dasar dan Perawatan Gigi Kompleks</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td width="20%">Pemeriksaan mulut dan konsultasi</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                    <td rowspan="8">
+                                                        <strong>Sesuai Tagihan</strong>
+                                                    </td>
+                                                    <td rowspan="8">
+                                                        <strong>Sesuai Tagihan</strong>
+                                                    </td>
+                                                    <td rowspan="8">
+                                                        <strong>Sesuai Tagihan</strong>
+                                                    </td>
+                                                    <td rowspan="8">
+                                                        <strong>Sesuai Tagihan</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pembersihan karang gigi</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Penggunaan X-Ray sebelum melakukan pengobatan gigi</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pemulihan, pengembalian warna gigi, pencabutan termasuk bius lokal dan perawatan abses</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pulp capping dan pengobatan saluran akar gigi (termasuk penambalan gigi sementara) & root planning</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bedah mulut, bius lokal untuk bedah lokal akar gigi atau geraham bungsu & mahkota gigi dan jembatan gigi</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pengobatan Gusi</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gigi palsu & Prothesis</td>
+                                                    <td>Maksimum per tahun</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="table-grey"><strong>Limit Tahunan</strong></td>
+                                                    <td class="table-grey"><strong>IDR <br><text>3.000.000</text></strong></td>
+                                                    <td class="table-grey"><strong>IDR <br><text>4.000.000</text></strong></td>
+                                                    <td class="table-grey"><strong>IDR <br><text>5.000.000</text></strong></td>
+                                                    <td class="table-grey"><strong>IDR <br><text>6.000.000</text></strong></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- DESKTOP -->
+
+                                        <!-- MOBILE -->
+                                        <table class="custom-table benefit sme-table sme-table-mobile hide table-d hidden-md hidden-lg" border="1">
+                                            <thead>
+                                                <tr>
+                                                    <td colspan="2">Manfaat</td>
+                                                    <td rowspan="2">
+                                                        <select id="mobile-table-d" class="option-sme-table">
+                                                            <option value="1" selected>D3000</option>
+                                                            <option value="2">D4000</option>
+                                                            <option value="3">D5000</option>
+                                                            <option value="4">D6000</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" width="70%">Perawatan Gigi Dasar dan Perawatan Gigi Kompleks</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td width="35%">Pemeriksaan mulut dan konsultasi</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                    <td rowspan="8" class="column-1">
+                                                        <strong>Sesuai Tagihan</strong>
+                                                    </td>
+                                                    <td rowspan="8" class="column-2 hide">
+                                                        <strong>Sesuai Tagihan</strong>
+                                                    </td>
+                                                    <td rowspan="8" class="column-3 hide">
+                                                        <strong>Sesuai Tagihan</strong>
+                                                    </td>
+                                                    <td rowspan="8" class="column-4 hide">
+                                                        <strong>Sesuai Tagihan</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pembersihan karang gigi</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Penggunaan X-Ray sebelum melakukan pengobatan gigi</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pemulihan, pengembalian warna gigi, pencabutan termasuk bius lokal dan perawatan abses</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pulp capping dan pengobatan saluran akar gigi (termasuk penambalan gigi sementara) & root planning</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bedah mulut, bius lokal untuk bedah lokal akar gigi atau geraham bungsu & mahkota gigi dan jembatan gigi</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pengobatan Gusi</td>
+                                                    <td>Maksimum 1 kunjungan per hari</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gigi palsu & Prothesis</td>
+                                                    <td>Maksimum per tahun</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="table-grey"><strong>Limit Tahunan</strong></td>
+                                                    <td class="column-1 table-grey">
+                                                        <strong>IDR <br><text>3.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide table-grey">
+                                                        <strong>IDR <br><text>4.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide table-grey">
+                                                        <strong>IDR <br><text>5.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide table-grey">
+                                                        <strong>IDR <br><text>6.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- MOBILE -->
+
+                                    <!-- TABLE D -->
+
+                                    <!-- TABLE M -->
+
+                                        <!-- DESKTOP -->
+                                        <table class="custom-table benefit sme-table hide table-m hidden-xs hidden-sm" border="1">
+                                            <thead>
+                                                <tr>
+                                                    <td>MANFAAT</td>
+                                                    <td>DESKRIPSI</td>
+                                                    <td width="15%">M5000</td>
+                                                    <td width="15%">M6000</td>
+                                                    <td width="15%">M7000</td>
+                                                    <td width="15%">M8000</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td width="20%">Persalinan Normal</td>
+                                                    <td>Biaya sesungguhnya yang timbul karena proses yang normal dan alami</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>5.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>6.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>7.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>8.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Persalinan dengan Pembedahan</td>
+                                                    <td>Biaya yang sesungguhnya terjadi yang timbul akibat proses persalinan caesar</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>10.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>12.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>14.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>16.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Keguguran</td>
+                                                    <td>Biaya yang dikeluarkan akibat aborsi yang terjadi dengan sendirinya atau yang harus dilakukan karena diperlukan secara medis</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>3.500.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>4.200.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>4.900.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>5.600.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Konsultasi Sebelum dan Sesudah Persalinan</td>
+                                                    <td>Biaya konsultasi dan medis lainnya sesuai rujukan dokter ahli kebidanan yang terjadi selama kehamilan 280 hari sebelum dan 30 hari setelah Persalinan</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.500.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.900.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>2.100.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>2.400.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- DESKTOP -->
+
+                                        <!-- MOBILE -->
+                                        <table class="custom-table benefit sme-table sme-table-mobile hide table-m hidden-md hidden-lg" border="1">
+                                            <thead>
+                                                <tr>
+                                                    <td width="35%">MANFAAT</td>
+                                                    <td width="35%">DESKRIPSI</td>
+                                                    <td>
+                                                        <select id="mobile-table-m" class="option-sme-table">
+                                                            <option value="1" selected>M5000</option>
+                                                            <option value="2">M6000</option>
+                                                            <option value="3">M7000</option>
+                                                            <option value="4">M8000</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Persalinan Normal</td>
+                                                    <td>Biaya sesungguhnya yang timbul karena proses yang normal dan alami</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>5.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>6.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>7.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>8.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Persalinan dengan Pembedahan</td>
+                                                    <td>Biaya yang sesungguhnya terjadi yang timbul akibat proses persalinan caesar</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>10.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>12.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>14.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>16.000.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Keguguran</td>
+                                                    <td>Biaya yang dikeluarkan akibat aborsi yang terjadi dengan sendirinya atau yang harus dilakukan karena diperlukan secara medis</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>3.500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>4.200.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>4.900.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>5.600.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Konsultasi Sebelum dan Sesudah Persalinan</td>
+                                                    <td>Biaya konsultasi dan medis lainnya sesuai rujukan dokter ahli kebidanan yang terjadi selama kehamilan 280 hari sebelum dan 30 hari setelah Persalinan</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>1.500.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>1.900.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>2.100.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>2.400.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- MOBILE -->
+
+                                    <!-- TABLE M -->
+
+                                    <!-- TABLE O -->
+
+                                        <!-- DESKTOP -->
+                                        <table class="custom-table benefit sme-table hide table-o hidden-xs hidden-sm" border="1">
+                                            <thead>
+                                                <tr>
+                                                    <td>MANFAAT</td>
+                                                    <td>DESKRIPSI</td>
+                                                    <td width="15%">O800</td>
+                                                    <td width="15%">O1000</td>
+                                                    <td width="15%">O1200</td>
+                                                    <td width="15%">O1400</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td width="20%">Optik</td>
+                                                    <td>Lensa dan bingkai atau kotak lensa</td>
+                                                    <td>
+                                                        <strong>IDR <br><text>800.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.000.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.200.000</text></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong>IDR <br><text>1.400.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- DESKTOP -->
+
+                                        <!-- MOBILE -->
+                                        <table class="custom-table benefit sme-table sme-table-mobile hide table-o hidden-md hidden-lg" border="1">
+                                            <thead>
+                                                <tr>
+                                                    <td width="35%">MANFAAT</td>
+                                                    <td width="35%">DESKRIPSI</td>
+                                                    <td>
+                                                        <select id="mobile-table-o" class="option-sme-table">
+                                                            <option value="1" selected>O800</option>
+                                                            <option value="2">O1000</option>
+                                                            <option value="3">O1200</option>
+                                                            <option value="4">O1400</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Optik</td>
+                                                    <td>Lensa dan bingkai atau kotak lensa</td>
+                                                    <td class="column-1">
+                                                        <strong>IDR <br><text>800.000</text></strong>
+                                                    </td>
+                                                    <td class="column-2 hide">
+                                                        <strong>IDR <br><text>1.000.000</text></strong>
+                                                    </td>
+                                                    <td class="column-3 hide">
+                                                        <strong>IDR <br><text>1.200.000</text></strong>
+                                                    </td>
+                                                    <td class="column-4 hide">
+                                                        <strong>IDR <br><text>1.400.000</text></strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- MOBILE -->
+
+                                    <!-- TABLE O -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <div class="row hide">
+                        <div class="col-md-12">
+                            <div class="title-form">
+                                <h3>Kode Promo</h3>
+                                <span>Silakan lengkapi jika anda memiliki kode promo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form main shadow hidden-lg hidden-md">
+                        <div class="row hide">
+                            <div class="col-md-12">
+                                <div class="text-field form-group">
+                                    <div class="form-text">
+                                        <label class="control-label">Kode Promo</label>
+                                        <div class="form-row-controls">
+                                            <input maxlength="15" type="hidden" name="PromoCode" class="form-control children" placeholder="Kode Promo" data-msg-required="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="spacer-all"></div>
+
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <a href="/e-health/quote/step1" class="button medium ghost-blue btn-prev-step"><span>Sebelumnya</span></a>
+                            </div>
+                            <div class="col-xs-7">
+                                <div class="text-right">
+                                    <button id="btn_sljt_sce_step02" class="button arrow arrow-animated medium red btn-next-step" type="button" onclick="checkSubmit()">
+                                        <span>Selanjutnya</span>
+                                        <span class="icon">
+                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 32 32"><path d="M18.8 5.733c-0.8 0.8-0.8 2.067 0 2.8l5.467 5.467h-21.333c-2.6 0-2.6 4 0 4h21.333l-5.467 5.467c-1.8 1.8 1 4.667 2.8 2.8l8.867-8.867c0.8-0.733 0.8-2.067 0-2.8l-8.867-8.867c-0.733-0.8-2-0.8-2.8 0z"></path></svg>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form main">
+                        <p>Butuh bantuan? Customer Care kami siap mempermudah proses pembelian asuransi online Anda. Segera hubungi <a class="axa-arrow-link-red" href="tel:1500733">1 500 733</a> pada Senin – Jumat, 07-00 – 19.00 WIB</p>
+                        <!-- <div class="contact-callback">
+                            <a class="axa-arrow-link-red" href="tel:1500733">
+                                Hubungi Kami 1500 733
+                            </a>
+                        </div> -->
+                    </div>
+                    <div class="hidden-md hidden-lg">
+                        <?php include_once "include/how-to-claim-mobile.php"; ?>
+                   </div>
+                </div>
+
+                <div class="col-xs-12 col-md-4 hidden-xs hidden-sm fixed-summary" data-sticky_column>
+                    <?php include_once "include/summary-smehealth.php"; ?>
+                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="text-right">
+                                <button id="btn_sljt_sce_step02" class="button arrow arrow-animated large wfull red btn-next-step" type="button" onclick="checkSubmit()">
+                                    <span>Selanjutnya</span>
+                                    <span class="icon">
+                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 32 32"><path d="M18.8 5.733c-0.8 0.8-0.8 2.067 0 2.8l5.467 5.467h-21.333c-2.6 0-2.6 4 0 4h21.333l-5.467 5.467c-1.8 1.8 1 4.667 2.8 2.8l8.867-8.867c0.8-0.733 0.8-2.067 0-2.8l-8.867-8.867c-0.733-0.8-2-0.8-2.8 0z"></path></svg>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <?php include_once "include/how-to-claim.php"; ?>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- CONTENT -->
+
+<!-- POPUP -->
+<div class="modal fade custom-modal modal-blue" id="custom-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="wrap-popup-konf">
+                    <div class="row">                       
+                        <div class="col-md-12 col-xs-12">
+                            <div class="content">
+                                <div class="text-center highlight-summary">
+                                    <span>Hasil Kalkulasi</span>
+                                    <h3 class="summary-premi promoPrice"></h3>
+                                    <h3 class="summary-netpremi"></h3>
+                                </div>
+                                <div class="text-center">
+                                    <p>Dapatkan kemudahan proses pembayaran dari Branch kami <br>atau anda dapat melakukan pembayaran langsung</p>
+                                </div>
+                                <br>
+                                <div class="wrap-btn-konf">
+                                    <a href="javascript:void(0);" onclick="checkSubmit()" class="button medium ghost-white bayar-langsung"><span>Bayar Langsung</span></a>
+                                    <a href="javascript:void(0);" onclick="" class="button arrow arrow-animated medium red help-buy-btn">
+                                        <span class="help-buy-text"></span>
+                                        <span class="icon">
+                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 32 32"><path d="M18.8 5.733c-0.8 0.8-0.8 2.067 0 2.8l5.467 5.467h-21.333c-2.6 0-2.6 4 0 4h21.333l-5.467 5.467c-1.8 1.8 1 4.667 2.8 2.8l8.867-8.867c0.8-0.733 0.8-2.067 0-2.8l-8.867-8.867c-0.733-0.8-2-0.8-2.8 0z"></path></svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- POPUP -->
+
+<?php include_once "include/javascript.php"; ?>
+
+<!-- SCRIPT -->
+    <script>
+        var temp_file = '';
+        (function() {
+            getScript('/assets/js/compact.js',function(){
+                // init loading screen from /assets/js/custom/helper.js
+                showLoading();
+                headerMenu();
+                footerMenu();
+                updateSummarySme();
+
+                // custom rule validate
+                $.validator.addMethod("excelvalidate", function(value, element) {
+                    return this.optional(element) || temp_file != '';
+                }, "Upload file data member");
+
+                $('.data-form').validate({
+                    rules : {
+                        excel : { 
+                            excelvalidate : true 
+                        }
+                    },
+                    highlight: function(element) {
+                        $(element).parents('.form-group').addClass('has-error');
+                    },
+                    unhighlight: function(element) {
+                        if (! $(element).hasClass('unrequired')) {
+                            $(element).parents('.form-group').removeClass('has-error');
+                        }
+                    },
+                    errorElement: 'span',
+                    errorClass: 'text__error-sm help-block',
+                    errorPlacement: function(error, element) {
+                        if(element.parent('.form-group').length) {
+                            error.insertAfter(element.parent());
+                        } else {
+                            error.insertAfter(element.parent());
+                        }
+                    }
+                });
+
+                $(document).ready(function(){
+                    hideLoading();
+
+                    // Main js
+                    validateStep(2);
+
+                    $('.breadcrumb.flat_travel [data-step=1]').attr('class', 'completed');
+                    $('.breadcrumb.flat_travel [data-step=2]').attr('class', 'active');
+
+                    $('.list.interactive.dataPlanTerpilih').removeClass('hide');
+                    $('.list.interactive.dataTotalPremi').removeClass('hide');
+
+                    // updateSummary();
+
+
+                    setTimeout(function(){ 
+                      detachStickyKit();
+                      activeStickyKit();
+                    }, 1000);
+
+                    // from include js
+                    $('.text-currency, .clause-suminsured').autoNumeric("init",{
+                        aSep: '.',
+                        aDec: ',', 
+                        aSign: 'Rp. '
+                    });
+
+                    $('body').on('keypress', '[name=AccountBankName]', function(e) {
+                        return regexWord(e);
+                    });
+                    $('body').on('keypress', '[name=BankName]', function(e) {
+                        return regexWord(e, false);
+                    });
+                    $('body').on('keypress', '.only-word', function(e) {
+                       return regexWord(e); 
+                    });
+                    // $('.item-benefit').on('click', function(){
+                    //     if($(this).find('.icon-dropdown i').hasClass('fa-angle-down')){
+                    //         $(this).find('.icon-dropdown i').removeClass('fa-angle-down').addClass('fa-angle-up');
+                    //     }else{
+                    //         $(this).find('.icon-dropdown i').removeClass('fa-angle-up').addClass('fa-angle-down');
+                    //     }
+                    // });   
+                    validationForm();
+
+                    $("[data-toggle=popover]").each(function(){
+                        $(this).popover({
+                            html: true,
+                            container: 'body',
+                            placement: function() { 
+                                return $(window).width() < 975 ? 'bottom' : 'right'; 
+                            },
+                            content: function(){
+                                return $(this).parent().siblings('.tooltip-text').html();
+                            }
+                        });
+                    });
+
+                    // upload excel
+                    $('body').on('change', '.upload-member', function() {
+                        temp_file = '';
+                        var file_data = $('.upload-member').prop('files')[0];   
+                        var form_data = new FormData();                  
+                        form_data.append('File', file_data);
+                        form_data.append('Type', 'excel');
+
+                        $.ajax({
+                            url: '/e-health/api/premi/upload-smehealth',
+                            dataType: 'json',
+                            data: form_data,  
+                            processData: false,
+                            contentType: false,                       
+                            type: 'post',
+                            beforeSend: function() {
+                                $('#custom-notif').remove();
+                                showLoading();
+                            },
+                            success: function(response_upload){
+                                if (response_upload.Status) {
+                                    var memberPremi = calculateMember(response_upload.Data['filename']);
+                                    if (memberPremi.Status) {
+                                        temp_file = response_upload.Data['filename'];
+                                        
+                                        // update
+                                        SessionStorage.set("EHealth", 'StampDuty', memberPremi.Data.StampDuty);
+                                        SessionStorage.set("EHealth", 'PolicyCost', memberPremi.Data.PolicyCost);
+                                        SessionStorage.set("EHealth", 'Premium', memberPremi.Data.Premium);
+                                        SessionStorage.set("EHealth", 'NetPremium', memberPremi.Data.NetPremium);
+                                        SessionStorage.set("EHealth", 'Commission', memberPremi.Data.Commission);
+                                        SessionStorage.set("EHealth", 'Discount', memberPremi.Data.Discount);
+                                        SessionStorage.set("EHealth", 'Details', memberPremi.Data.Details);
+
+                                        updateSummarySme(memberPremi.Data);
+                                        hideLoading();
+                                    }
+                                    else {
+                                        hideLoading();
+                                        showNotif('Informasi', memberPremi.Message, 'error', 1);
+                                    }
+                                }
+                                else {
+                                    hideLoading();
+                                    showNotif('Informasi', response_upload.Message, 'error', 1);
+                                }
+                            }
+                         });
+                    });
+
+                    //Fungsi untuk ganti baris kalau di mobie
+
+                    //table-ip
+                    $('#mobile-table-ip').change(function(){
+                        var column_no = $(this).val();
+                        for(var i= 1; i<=4; i++){
+                            $('.sme-table-mobile.table-ip .column-'+i).addClass('hide');
+                        }
+                        $('.sme-table-mobile.table-ip .column-'+column_no).removeClass('hide');
+                    });
+                    $('#mobile-table-op').change(function(){
+                        var column_no = $(this).val();
+                        for(var i= 1; i<=4; i++){
+                            $('.sme-table-mobile.table-op .column-'+i).addClass('hide');
+                        }
+                        $('.sme-table-mobile.table-op .column-'+column_no).removeClass('hide');
+                    });
+                    $('#mobile-table-m').change(function(){
+                        var column_no = $(this).val();
+                        for(var i= 1; i<=4; i++){
+                            $('.sme-table-mobile.table-m .column-'+i).addClass('hide');
+                        }
+                        $('.sme-table-mobile.table-m .column-'+column_no).removeClass('hide');
+                    });
+                    $('#mobile-table-o').change(function(){
+                        var column_no = $(this).val();
+                        for(var i= 1; i<=4; i++){
+                            $('.sme-table-mobile.table-o .column-'+i).addClass('hide');
+                        }
+                        $('.sme-table-mobile.table-o .column-'+column_no).removeClass('hide');
+                    });
+                });
+
+            });
+        })();
+
+        function updateSummarySme(params = '') {
+            var datasme = getData();
+            $('.corporate-name .jumlah').html(datasme['Leads']['CorporateName']);
+            $('.periode-polis .jumlah').html(datasme['Leads']['StartDate'] +' - '+ datasme['Leads']['ExpiredDate']);
+
+            if(params) {
+                $('.summary-premi').html(toRupiah(params['NetPremium']));
+                $('.member-employee .jumlah').html(params['Details']['CountEmployee']+' Orang<br>'+toRupiah(params['Details']['TotalEmployee']));
+                $('.member-spouse .jumlah').html(params['Details']['CountSpouse']+' Orang<br>'+toRupiah(params['Details']['TotalSpouse']));
+                $('.member-child .jumlah').html(params['Details']['CountChild']+' Anak<br>'+toRupiah(params['Details']['TotalChild']));
+                var benefitutama = '';
+                $.each(params['Details']['Benefit'], function(k, v){
+                    benefitutama += v + '<br>';
+                });
+                $('.benefit-utama').removeClass('hide').find('.jumlah').html(benefitutama);
+            }
+        }
+
+        function calculateMember(file) {
+            var data_return = [];
+            $.ajax({
+                url: '/e-health/api/premi/calculate-smehealth',
+                dataType: 'json',
+                data: {File: file},
+                type: 'post',
+                async: false,
+                beforeSend: function() {
+                    
+                },
+                success: function(response) {
+                    data_return = response;
+                }
+            });
+
+            return data_return;
+        }
+
+        function nextStep(destination){
+            updateData();
+
+            // validation all form
+            var valid = true;
+            $('form').each(function(){
+                if(!$(this).valid()){
+                    var eleError = $('.text__error-sm:visible');
+                    if(eleError.length){                
+                        $('html, body').animate({
+                            scrollTop: eleError.first().offset().top -200
+                        }, 1000);
+                    }
+
+                    valid = false;
+                }
+
+            });
+            // check valid
+            if(!valid) return false;
+
+            window.location.assign(destination);
+
+        }
+
+        // function calculatePremi(){
+        //     var url = "/e-health/api/premi/calculate";
+        //     $.ajax({            
+        //         type : 'post',
+        //         url  : url,
+        //         data : getData(),
+        //         timeout: 10000,
+        //         success:function(response){
+        //             if (response.Status) {
+        //                 if (response.Data) {
+        //                     SessionStorage.set("EHealth", "TotalPremi", response.Data['TotalPremi']);
+        //                     SessionStorage.set("EHealth", "Premium", response.Data['Premium']);
+        //                     SessionStorage.set("EHealth", "NetPremium", response.Data['NetPremium']);
+        //                     SessionStorage.set("EHealth", "Discount", response.Data['Discount']);
+        //                     SessionStorage.set("EHealth", "Commission", response.Data['Commission']);
+
+        //                     SessionStorage.set("EHealth", "PolicyCost", response.Data['PolicyCost']);
+        //                     SessionStorage.set("EHealth", "PremiPh", response.Data['PremiPh']);
+        //                     SessionStorage.set("EHealth", "PremiSpouse", response.Data['PremiSpouse']);
+        //                     SessionStorage.set("EHealth", "PremiChild1", response.Data['PremiChild1']);
+        //                     SessionStorage.set("EHealth", "PremiChild2", response.Data['PremiChild2']);
+        //                     SessionStorage.set("EHealth", "PremiChild3", response.Data['PremiChild3']);
+        //                     SessionStorage.set("EHealth", "PremiChild4", response.Data['PremiChild4']);
+        //                     SessionStorage.set("EHealth", "PremiChild5", response.Data['PremiChild5']);
+        //                     SessionStorage.set("EHealth", "PremiChild6", response.Data['PremiChild6']);
+        //                     SessionStorage.set("EHealth", "PremiChild7", response.Data['PremiChild7']);
+        //                     SessionStorage.set("EHealth", "PremiChild8", response.Data['PremiChild8']);
+        //                     SessionStorage.set("EHealth", "PremiChild9", response.Data['PremiChild9']);
+        //                     SessionStorage.set("EHealth", "PremiChild10", response.Data['PremiChild10']);
+
+        //                 } else {
+        //                     SessionStorage.set("EHealth", "TotalPremi", 0);
+
+        //                     SessionStorage.set("EHealth", "PolicyCost", 0);
+        //                     SessionStorage.set("EHealth", "PremiPh", 0);
+        //                     SessionStorage.set("EHealth", "PremiSpouse", 0);
+        //                     SessionStorage.set("EHealth", "PremiChild1", 0);
+        //                     SessionStorage.set("EHealth", "PremiChild2", 0);
+        //                     SessionStorage.set("EHealth", "PremiChild3", 0);
+        //                     SessionStorage.set("EHealth", "PremiChild4", 0);
+        //                     SessionStorage.set("EHealth", "PremiChild5", 0);
+        //                     SessionStorage.set("EHealth", "PremiChild6", 0);
+        //                     SessionStorage.set("EHealth", "PremiChild7", 0);
+        //                     SessionStorage.set("EHealth", "PremiChild8", 0);
+        //                     SessionStorage.set("EHealth", "PremiChild9", 0);
+        //                     SessionStorage.set("EHealth", "PremiChild10", 0);
+        //                 }
+                        
+        //                 updateSummary();
+        //             }
+        //             else {
+        //                 // console.log(response);
+        //                 alert('Data not valid! Please try again');
+        //                 // window.location = "/e-health/quote/step1";
+        //             }
+        //         },
+        //         error: function(response){
+        //             calculatePremi();
+        //         }
+        //     }); 
+
+        //     // showNotif('Informasi', 'Fungsi kalkulasi masih tahap itegrai', 'info', 1);
+        //     updateSummary();
+        // }        
+
+        function updateData(){
+            var dataArray = getData(); 
+            var temp = {};
+
+            dataArray.Leads['FileExcel'] = temp_file;
+            SessionStorage.set("EHealth", dataArray);
+        }
+
+        // function viewBenefit(ele, key){
+        //     if(key === undefined)
+        //         key = $(ele).find('[type=radio]').val();            
+
+        //     var selectedPlan = plans[key];
+
+        //     // $.each(selectedPlan, function (k, v){
+        //     //     $('.benefit-' + k.toLowerCase()).html(toRupiah(v, ' '));
+        //     // });            
+
+        //     SessionStorage.set("EHealth", "PlanKey", key);                
+        //     SessionStorage.set("EHealth", "Plan", selectedPlan);                
+        //     SessionStorage.set("EHealth", "PlanName", selectedPlan['Name']);                
+        //     SessionStorage.set("EHealth", "PlanId", selectedPlan['o_id']);                
+
+        //     calculatePremi();
+
+        // }
+
+        function changeTableBenefit(){
+            var choice = $('#BenefitChoiceSelect').val();
+            switch(choice){
+                case 'IP':
+                    $('.table-ip').removeClass('hide');
+                    $('.table-op').addClass('hide');
+                    $('.table-d').addClass('hide');
+                    $('.table-m').addClass('hide');
+                    $('.table-o').addClass('hide');
+                break;
+                case 'OP':
+                    $('.table-ip').addClass('hide');
+                    $('.table-op').removeClass('hide');
+                    $('.table-d').addClass('hide');
+                    $('.table-m').addClass('hide');
+                    $('.table-o').addClass('hide');
+                break;
+                case 'D':
+                    $('.table-ip').addClass('hide');
+                    $('.table-op').addClass('hide');
+                    $('.table-d').removeClass('hide');
+                    $('.table-m').addClass('hide');
+                    $('.table-o').addClass('hide');
+                break;
+                case 'M':
+                    $('.table-ip').addClass('hide');
+                    $('.table-op').addClass('hide');
+                    $('.table-d').addClass('hide');
+                    $('.table-m').removeClass('hide');
+                    $('.table-o').addClass('hide');
+                break;
+                case 'O':
+                    $('.table-ip').addClass('hide');
+                    $('.table-op').addClass('hide');
+                    $('.table-d').addClass('hide');
+                    $('.table-m').addClass('hide');
+                    $('.table-o').removeClass('hide');
+                break;
+                default:
+                    $('.table-ip').addClass('hide');
+                    $('.table-op').addClass('hide');
+                    $('.table-d').addClass('hide');
+                    $('.table-m').addClass('hide');
+                    $('.table-o').addClass('hide');
+                break;
+            }
+            detachStickyKit();
+            activeStickyKit();
+
+        }
+
+        function checkSubmit(){
+            if($('form').valid()){   // test for validity
+                nextStep('/e-health/quote/sme/step3');
+            } else {
+                var eleError = $('.text__error-sm,.error:visible');
+                if(eleError.length){                
+                    $('html, body').animate({
+                        scrollTop: eleError.first().offset().top -200
+                    }, 1000);
+                }
+
+            }
+
+        }
+
+    </script>
+<!-- SCRIPT -->

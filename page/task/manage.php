@@ -2,7 +2,7 @@
 date_default_timezone_set('Asia/Jakarta');
 $current_date = (date('Y-m-d'));
 // $unit = query("SELECT * FROM unit_kerja");
-$event = query("SELECT * from task WHERE due_date>='$current_date' ORDER BY due_date ASC");
+$event = query("SELECT * from task WHERE create_by='$user[id]'  ORDER BY due_date ASC");
 ?>
 <!-- MAIN CONTENT -->
 <div id="main-content">
@@ -41,21 +41,25 @@ $event = query("SELECT * from task WHERE due_date>='$current_date' ORDER BY due_
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($event as $value) : 
-                                        $due_date=date('d F Y',strtotime($value['due_date']));
-                                        $date_create=date('d F Y',strtotime($value['date_create']));
-                                        if($value['status']=='To Do')
-                                            $status_color='info';
-                                        elseif($value['status']=='In Progress')
-                                            $status_color='primary';
-                                        elseif($value['status']=='Pending')
-                                            $status_color='warning';
-                                        elseif($value['status']=='Done')
-                                            $status_color='success';
+                                    <?php foreach ($event as $value) :
+                                        $due_date = date('d F Y', strtotime($value['due_date']));
+                                        $date_create = date('d F Y', strtotime($value['date_create']));
+                                        if ($value['status'] == 'To Do')
+                                            $status_color = 'info';
+                                        elseif ($value['status'] == 'In Progress')
+                                            $status_color = 'primary';
+                                        elseif ($value['status'] == 'Pending')
+                                            $status_color = 'warning';
+                                        elseif ($value['status'] == 'Done')
+                                            $status_color = 'success';
                                         else
-                                            $status_color='default';
-                                        $team_lead=get_where("SELECT * FROM pegawai WHERE id='$value[id_leader]'");
+                                            $status_color = 'default';
+                                        $due_status = ($current_date > $value['due_date']) ? '<span class="badge badge-danger">Due</span>' : ''; //cek due status
 
+                                        $team_lead = get_where("SELECT * FROM pegawai WHERE id='$value[id_leader]'");
+
+                                        $task_team = query("SELECT * FROM task_team JOIN pegawai on task_team.id_pegawai=pegawai.id
+                                        WHERE id_task='$value[id]'");
                                         ?>
                                         <tr>
                                             <td class="project-title">
@@ -72,16 +76,16 @@ $event = query("SELECT * from task WHERE due_date>='$current_date' ORDER BY due_
                                             <td><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="<?= $team_lead['nama_p'] ?>" alt="Avatar" class="width35 rounded"></td>
                                             <td>
                                                 <ul class="list-unstyled team-info">
-                                                    <li><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="Avatar" alt="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar2.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
-                                                    <li><img src="../assets/images/xs/avatar3.jpg" data-toggle="tooltip" data-placement="top" title="Avatar"></li>
+                                                    <?php foreach ($task_team as $team) : ?>
+                                                        <li><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="<?= $team['nama_p'] ?>" alt="<?= $team['nama_p'] ?>"></li>
+                                                    <?php endforeach; ?>
                                                 </ul>
                                             </td>
-                                            <td><span class="badge badge-<?= $status_color ?>"><?= $value['status'] ?></span></td>
+                                            <td><span class="badge badge-<?= $status_color ?>"><?= $value['status'] ?></span> <?= $due_status ?></td>
                                             <td class="project-actions">
-                                                <a href="project-detail.html" class="btn btn-sm btn-outline-primary"><i class="icon-eye"></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-sm btn-outline-success"><i class="icon-pencil"></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="icon-trash"></i></a>
+                                                <a href="<?= $site_url ?>/task/view/<?= $value['id'] ?>" class="btn btn-sm btn-outline-primary"><i class="icon-eye"></i></a>
+                                                <a href="<?= $site_url ?>/task/edit/<?= $value['id'] ?>" class="btn btn-sm btn-outline-success"><i class="icon-pencil"></i></a>
+                                                <a href="<?= $site_url ?>/proses/model_task.php?id=<?php echo $value["id"]; ?>&delete=true" onclick='return confirm("Yakin ingin menghapus data?")'  class="btn btn-sm btn-outline-danger" title="Delete" ><i class="icon-trash"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

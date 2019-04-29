@@ -1,4 +1,14 @@
-<!-- Overlay For Sidebars -->
+<?php
+date_default_timezone_set('Asia/Jakarta');
+$current_date = (date('Y-m-d'));
+$toDo = query("SELECT *, task.id as id from task JOIN task_team ON task.id=task_team.id_task
+WHERE task_team.id_pegawai ='$user[id]' AND status='To Do'");
+$inProgress = query("SELECT *, task.id as id from task JOIN task_team ON task.id=task_team.id_task
+WHERE task_team.id_pegawai ='$user[id]' AND status='In Progress'");
+$done = query("SELECT *, task.id as id from task JOIN task_team ON task.id=task_team.id_task
+WHERE task_team.id_pegawai ='$user[id]' AND status='Done'");
+print_r($toDo);
+?>
 
 <div id="main-content">
     <div class="container-fluid">
@@ -34,40 +44,32 @@
             <div class="col-lg-4 col-md-12">
                 <div class="card l-coral text-white planned_task">
                     <div class="header">
-                        <!-- <h2>Planned</h2> -->
+                        <h2>To Do</h2>
                         <ul class="header-dropdown">
                             <li><a href="javascript:void(0);" data-toggle="modal" data-target="#addcontact"><i class="icon-plus"></i></a></li>
                         </ul>
                     </div>
                     <div class="body">
-                        <div class="dd" data-plugin="nestable">
-                            <ol class="dd-list">
-                                <li class="dd-item" data-id="1">
-                                    <div class="dd-handle">
-                                        <h6>Dashbaord</h6>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                            industry.</p>
-                                        <ul class="list-unstyled team-info m-t-20">
-                                            <li><img src="<?= $site_url ?>/assets/images/xs/avatar1.jpg" title="Avatar" alt="Avatar"></li>
-                                            <li><img src="<?= $site_url ?>/assets/images/xs/avatar2.jpg" title="Avatar" alt="Avatar"></li>
-                                            <li><img src="<?= $site_url ?>/assets/images/xs/avatar5.jpg" title="Avatar" alt="Avatar"></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="dd-item" data-id="2">
-                                    <div class="dd-handle">
-                                        <h6>New project</h6>
-                                        <p>It is a long established fact that a reader will be distracted.</p>
-                                    </div>
-                                </li>
-                                <li class="dd-item" data-id="3">
-                                    <div class="dd-handle">
-                                        <h6>Feed Details</h6>
-                                        <p>here are many variations of passages of Lorem Ipsum available, but
-                                            the majority have suffered.</p>
-                                    </div>
-                                </li>
-                            </ol>
+                        <div class="dd" data-plugin="nestable" data-area="To Do">
+                            <?php if ($toDo) { ?>
+                                <ol class="dd-list">
+                                    <?php foreach ($toDo as $value) :
+                                        $due_date = date('d F Y', strtotime($value['due_date']));
+                                        $comment = query("SELECT count(id) as jmlcom FROM task_comments where id_task='$value[id]'");
+                                        // print_r($comment);
+                                        ?>
+                                        <li class="dd-item" data-id="<?= $value['id'] ?>" >
+                                            <div class="dd-handle">
+                                                <h6><?= $value['task_name'] ?></h6>
+                                                <span class="badge badge-success" style="margin:0px!important"><i class=" icon-clock m-r-5"></i><?= $due_date ?></span>
+                                                <span class="badge badge-default" style="margin:0px!important;    border-color: transparent;"><i class="fa fa-comment-o m-r-5"></i><?= $comment[0]['jmlcom'] ?></span>
+                                            </div>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ol>
+                            <?php } else {
+                            echo '<div class="dd-empty"></div>';
+                        } ?>
                         </div>
                     </div>
                 </div>
@@ -82,28 +84,26 @@
                         </ul>
                     </div>
                     <div class="body">
-                        <div class="dd" data-plugin="nestable">
-                            <ol class="dd-list">
-                                <li class="dd-item" data-id="1">
-                                    <div class="dd-handle">
-                                        <h6>New Code Update</h6>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                            industry.</p>
-                                    </div>
-                                </li>
-                                <li class="dd-item" data-id="2">
-                                    <div class="dd-handle">
-                                        <h6>Meeting</h6>
-                                        <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced
-                                            below for those interested. Sections 1.10.32 and 1.10.33 from "de
-                                            Finibus Bonorum et Malorum" by Cicero</p>
-                                        <ul class="list-unstyled team-info m-t-20">
-                                            <li><img src="<?= $site_url ?>/assets/images/xs/avatar7.jpg" title="Avatar" alt="Avatar"></li>
-                                            <li><img src="<?= $site_url ?>/assets/images/xs/avatar9.jpg" title="Avatar" alt="Avatar"></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ol>
+                        <div class="dd" data-plugin="nestable" data-area="In Progress">
+                            <?php if ($inProgress) { ?>
+                                <ol class="dd-list">
+                                    <?php foreach ($inProgress as $value) :
+                                        $due_date = date('d F Y', strtotime($value['due_date']));
+                                        $comment = query("SELECT count(id) as jmlcom FROM task_comments where id_task='$value[id]'");
+                                        // print_r($comment);
+                                        ?>
+                                        <li class="dd-item" data-id="<?= $value['id'] ?>">
+                                            <div class="dd-handle">
+                                                <h6><?= $value['task_name'] ?></h6>
+                                                <span class="badge badge-success" style="margin:0px!important"><i class=" icon-clock m-r-5"></i><?= $due_date ?></span>
+                                                <span class="badge badge-default" style="margin:0px!important;    border-color: transparent;"><i class="fa fa-comment-o m-r-5"></i><?= $comment[0]['jmlcom'] ?></span>
+                                            </div>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ol>
+                            <?php } else {
+                            echo '<div class="dd-empty"></div>';
+                        } ?>
                         </div>
                     </div>
                 </div>
@@ -118,30 +118,26 @@
                         </ul>
                     </div>
                     <div class="body">
-                        <div class="dd" data-plugin="nestable">
-                            <ol class="dd-list">
-                                <li class="dd-item" data-id="1">
-                                    <div class="dd-handle">
-                                        <h6>Job title</h6>
-                                        <p>If you are going to use a passage of Lorem Ipsum, you need to be
-                                            sure there isn't anything embarrassing hidden in the middle of
-                                            text.</p>
-                                        <ul class="list-unstyled team-info m-t-20">
-                                            <li><img src="<?= $site_url ?>/assets/images/xs/avatar4.jpg" title="Avatar" alt="Avatar"></li>
-                                            <li><img src="<?= $site_url ?>/assets/images/xs/avatar5.jpg" title="Avatar" alt="Avatar"></li>
-                                            <li><img src="<?= $site_url ?>/assets/images/xs/avatar6.jpg" title="Avatar" alt="Avatar"></li>
-                                            <li><img src="<?= $site_url ?>/assets/images/xs/avatar8.jpg" title="Avatar" alt="Avatar"></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="dd-item" data-id="2">
-                                    <div class="dd-handle">
-                                        <h6>Event Done</h6>
-                                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text.
-                                            It has roots in a piece of classical</p>
-                                    </div>
-                                </li>
-                            </ol>
+                        <div class="dd" data-plugin="nestable" data-area="Done">
+                            <?php if ($done) { ?>
+                                <ol class="dd-list">
+                                    <?php foreach ($done as $value) :
+                                        $due_date = date('d F Y', strtotime($value['due_date']));
+                                        $comment = query("SELECT count(id) as jmlcom FROM task_comments where id_task='$value[id]'");
+                                        // print_r($comment);
+                                        ?>
+                                        <li class="dd-item" data-id="<?= $value['id'] ?>">
+                                            <div class="dd-handle">
+                                                <h6><?= $value['task_name'] ?></h6>
+                                                <span class="badge badge-success" style="margin:0px!important"><i class=" icon-clock m-r-5"></i><?= $due_date ?></span>
+                                                <span class="badge badge-default" style="margin:0px!important;    border-color: transparent;"><i class="fa fa-comment-o m-r-5"></i><?= $comment[0]['jmlcom'] ?></span>
+                                            </div>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ol>
+                            <?php } else {
+                            echo '<div class="dd-empty"></div>';
+                        } ?>
                         </div>
                     </div>
                 </div>
@@ -421,103 +417,3 @@
         </div>
     </div>
 </div>
-
-
-<!-- Javascript -->
-<script src="assets/bundles/libscripts.bundle.js"></script>
-<script src="assets/bundles/vendorscripts.bundle.js"></script>
-
-<script src="assets/bundles/mainscripts.bundle.js"></script>
-<!-- TASK BOARD -->
-<script src="<?= $site_url ?>/assets/vendor/nestable/jquery.nestable.js"></script> <!-- Jquery Nestable -->
-<script src="<?= $site_url ?>/assets/vendor/sweetalert/sweetalert.min.js"></script> <!-- SweetAlert Plugin Js -->
-<script src="<?= $site_url ?>/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script><!-- bootstrap datepicker Plugin Js -->
-<script src="assets/js/pages/ui/sortable-nestable.js"></script>
-<script src="assets/js/pages/ui/dialogs.js"></script>
-<!-- PERCENTAGE -->
-<script src="assets/bundles/knob.bundle.js"></script> <!-- Jquery Knob-->
-<script src="assets/js/widgets/infobox/infobox-1.js"></script>
-<script>
-    $('.knob').knob({
-        draw: function() {
-            // "tron" case
-            if (this.$.data('skin') == 'tron') {
-
-                var a = this.angle(this.cv) // Angle
-                    ,
-                    sa = this.startAngle // Previous start angle
-                    ,
-                    sat = this.startAngle // Start angle
-                    ,
-                    ea // Previous end angle
-                    , eat = sat + a // End angle
-                    ,
-                    r = true;
-
-                this.g.lineWidth = this.lineWidth;
-
-                this.o.cursor &&
-                    (sat = eat - 0.3) &&
-                    (eat = eat + 0.3);
-
-                if (this.o.displayPrevious) {
-                    ea = this.startAngle + this.angle(this.value);
-                    this.o.cursor &&
-                        (sa = ea - 0.3) &&
-                        (ea = ea + 0.3);
-                    this.g.beginPath();
-                    this.g.strokeStyle = this.previousColor;
-                    this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false);
-                    this.g.stroke();
-                }
-
-                this.g.beginPath();
-                this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
-                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false);
-                this.g.stroke();
-
-                this.g.lineWidth = 2;
-                this.g.beginPath();
-                this.g.strokeStyle = this.o.fgColor;
-                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3,
-                    0, 2 * Math.PI, false);
-                this.g.stroke();
-
-                return false;
-            }
-        }
-    });
-
-    $('#linecustom1').sparkline('html', {
-        height: '55px',
-        width: '100%',
-        lineColor: '#a095e5',
-        fillColor: '#a095e5',
-        minSpotColor: true,
-        maxSpotColor: true,
-        spotColor: '#e2a8df',
-        spotRadius: 0
-    });
-
-    $('#linecustom2').sparkline('html', {
-        height: '55px',
-        width: '100%',
-        lineColor: '#75c3f2',
-        fillColor: '#75c3f2',
-        minSpotColor: true,
-        maxSpotColor: true,
-        spotColor: '#8dbfe0',
-        spotRadius: 0
-    });
-
-    $('#linecustom3').sparkline('html', {
-        height: '55px',
-        width: '100%',
-        lineColor: '#fc7b92',
-        fillColor: '#fc7b92',
-        minSpotColor: true,
-        maxSpotColor: true,
-        spotColor: '#e0b89d',
-        spotRadius: 0
-    });
-</script>
