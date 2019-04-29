@@ -73,11 +73,11 @@ $event = query("SELECT * from task WHERE create_by='$user[id]'  ORDER BY due_dat
                                                 </div>
                                                 <small>Completion with: <?= $value['progress'] ?>%</small>
                                             </td>
-                                            <td><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="<?= $team_lead['nama_p'] ?>" alt="Avatar" class="width35 rounded"></td>
+                                            <td><img src="<?= $site_url ?>/assets/avatar/<?= $team_lead['avatar'] ?>" data-toggle="tooltip" data-placement="top" title="<?= $team_lead['nama_p'] ?>" alt="Avatar" class="width35 rounded"></td>
                                             <td>
                                                 <ul class="list-unstyled team-info">
                                                     <?php foreach ($task_team as $team) : ?>
-                                                        <li><img src="../assets/images/xs/avatar1.jpg" data-toggle="tooltip" data-placement="top" title="<?= $team['nama_p'] ?>" alt="<?= $team['nama_p'] ?>"></li>
+                                                        <li><img src="<?= $site_url ?>/assets/avatar/<?= $team['avatar'] ?>" data-toggle="tooltip" data-placement="top" title="<?= $team['nama_p'] ?>" alt="<?= $team['nama_p'] ?>"></li>
                                                     <?php endforeach; ?>
                                                 </ul>
                                             </td>

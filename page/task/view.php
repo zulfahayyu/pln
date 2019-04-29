@@ -224,7 +224,7 @@ else
                                 <li class="online">
                                     <a href="javascript:void(0);">
                                         <div class="media">
-                                            <img class="media-object " src="<?= $site_url ?>/assets/images/xs/avatar4.jpg" alt="">
+                                            <img class="media-object " src="<?= $site_url ?>/assets/avatar/<?= $value['avatar'] ?>" alt="">
                                             <div class="media-body">
                                                 <span class="name"><?= $value['nama_p'] ?></span>
                                                 <span class="message"><?= $value['keterangan'] ?></span>

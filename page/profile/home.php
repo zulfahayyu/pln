@@ -1,211 +1,160 @@
+<!-- TAB MAIN -->
+<div id="main-content" class="profilepage_2 blog-page">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-11 col-md-8 col-sm-12">
+                    <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="icon-user"></i></a> Profile</h2>
+                </div>
+                <div class="col-lg-1 col-md-8 col-sm-12">
+                    <ul class="nav nav-tabs-new">
+                        <!-- <li><button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#Settings">Setting</button></li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-    <!-- TAB MAIN -->
-    <div id="main-content" class="profilepage_2 blog-page">
-        <div class="container-fluid">
-            <div class="block-header">
-                <div class="row">
-                    <div class="col-lg-11 col-md-8 col-sm-12">
-                        <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="icon-user"></i></a> Profile</h2>
+        <div class="row clearfix">
+
+            <div class="col-lg-12 col-md-12">
+                <div class="card profile-header">
+                    <div class="body">
+                        <div class="profile-image"> <img src="<?= $site_url ?>/assets/avatar/<?= $user['avatar'] ?>" class="rounded-circle" alt="" style="max-width:150px"> </div>
+                        <div>
+                            <h4 class="m-b-0"><strong><?= $user['nama_p'] ?></strong></h4>
+                            <span><?= $user['status'] ?></span>
+                        </div>
                     </div>
-                    <div class="col-lg-1 col-md-8 col-sm-12">
-                        <ul class="nav nav-tabs-new">
-                        <li><button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#Settings">Setting</button></li>
+                </div>
+
+                <div class="card">
+                    <div class="header">
+                        <h2>Info</h2>
+                        <ul class="header-dropdown">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                                <ul class="dropdown-menu dropdown-menu-right animated bounceIn">
+                                    <li><a href="javascript:void(0);" onclick="editProfile('<?= $user['id'] ?>')">Edit Profile Info</a></li>
+                                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#changeAvatar">Change Avatar</a></li>
+                                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#changePass">Change Password</a></li>
+                                </ul>
+                            </li>
                         </ul>
+                    </div>
+                    <div class="body">
+                        <small class="text-muted">NIP: </small>
+                        <p><?= $user['nip'] ?></p>
+                        <hr>
+                        <small class="text-muted">Nomor SAP</small>
+                        <p><?= $user['no_sap'] ?></p>
+                        <hr>
+                        <small class="text-muted">Tempat, Tanggal Lahir</small>
+                        <p><?= $user['t_lahir'] . ', ' . $user['tgl_lahir'] ?></p>
+                        <hr>
+                        <small class="text-muted">Alamat</small>
+                        <p><?= $user['alamat'] ?></p>
+                        <hr>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+</div>
 
-            <div class="row clearfix">
+<!-- Modal Update data-->
+<div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="addUserLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUserLabel">Edit Profile Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="contentUpdate">
+            </div>
 
-                <div class="col-lg-12 col-md-12">
-                    <div class="card profile-header">
-                        <div class="body">
-                            <div class="profile-image"> <img src="<?= $site_url ?>/assets/images/user.png" class="rounded-circle" alt=""> </div>
-                            <div>
-                                <h4 class="m-b-0"><strong><?= $user['nama'] ?></strong></h4>
-                                <span><?= $user['status'] ?></span>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Change Password data-->
+<div class="modal fade" id="changePass" tabindex="-1" role="dialog" aria-labelledby="changePassLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUserLabel">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="">
+                <form action="<?= $site_url ?>/proses/model_profile.php?password=true&id=<?= $user['id'] ?>" method="POST">
+                    <div class="modal-body">
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Password Sekarang</label>
+                                    <input type="password" name="currentpass" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Password Baru</label>
+                                    <input type="password" name="password" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Ulangi Password</label>
+                                    <input type="password" name="rpassword" class="form-control" required>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="card">
-                        <div class="header">
-                            <h2>Info</h2>
-                            <ul class="header-dropdown">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                                    <ul class="dropdown-menu dropdown-menu-right animated bounceIn">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another Action</a></li>
-                                        <li><a href="javascript:void(0);">Something else</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <small class="text-muted">Address: </small>
-                            <p>795 Folsom Ave, Suite 600 San Francisco, 94107</p>
-                            <hr>
-                            <small class="text-muted">Email address: </small>
-                            <p>michael@gmail.com</p>
-                            <hr>
-                            <small class="text-muted">Mobile: </small>
-                            <p>+ 202-555-2828</p>
-                            <hr>
-                            <small class="text-muted">Birth Date: </small>
-                            <p class="m-b-0">October 22th, 1990</p>
-                            <hr>
-                            <small class="text-muted">Social: </small>
-                            <p><i class="fa fa-twitter m-r-5"></i> twitter.com/example</p>
-                            <p><i class="fa fa-facebook  m-r-5"></i> facebook.com/example</p>
-                            <p><i class="fa fa-github m-r-5"></i> github.com/example</p>
-                            <p><i class="fa fa-instagram m-r-5"></i> instagram.com/example</p>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" name="submit" value="save">Submit</button>
                     </div>
-                </div>
+                </form>
             </div>
+
         </div>
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="Settings" tabindex="-1" role="dialog" aria-labelledby="SettingsLabel" aria-hidden="true">
+
+<!-- Modal Change avatar-->
+<div class="modal fade" id="changeAvatar" tabindex="-1" role="dialog" aria-labelledby="changeAvatarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="SettingsLabel">Settings</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-        <div class="row clearfix">
-            <div class="col-lg-12 col-md-12">
-            <h6>Basic Information</h6>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="First Name">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Last Name">
-                </div>
-                <div class="form-group">
-                    <div>
-                        <label class="fancy-radio">
-                            <input name="gender2" value="male" type="radio" checked>
-                            <span><i></i>Male</span>
-                        </label>
-                        <label class="fancy-radio">
-                            <input name="gender2" value="female" type="radio">
-                            <span><i></i>Female</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="icon-calendar"></i></span>
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUserLabel">Change Avatar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="">
+                <form action="<?= $site_url ?>/proses/model_profile.php?avatar=true&id=<?= $user['id'] ?>" enctype="multipart/form-data" method="POST">
+                    <div class="modal-body">
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Pilih Foto</label>
+                                    <input type="file" name="document" class="form-control" accept="image/*" required>
+                                </div>
+                            </div>
+                            
                         </div>
-                        <input data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Birthdate">
                     </div>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="http://">
-                </div>
-            </div>
-            <div class="col-lg-12 col-md-12">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Address Line 1">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Address Line 2">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="City">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="State/Province">
-                </div>
-            </div>
-        </div>
-        <div class="row clearfix">
-            <div class="col-lg-12 col-md-12">
-                <h6>Account Data</h6>
-                <div class="form-group">
-                    <input type="text" class="form-control" value="JessicaDoe" disabled placeholder="Username">
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-control" value="Jessica.info@yourdomain.com" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Phone Number">
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" name="submit" value="save">Submit</button>
+                    </div>
+                </form>
             </div>
 
-            <div class="col-lg-12 col-md-12">
-                <h6>Change Password</h6>
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Current Password">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="New Password">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Confirm New Password">
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
         </div>
     </div>
 </div>
-
-<script>
-$(function () {
-    $('.knob').knob({
-        draw: function () {
-            // "tron" case
-            if (this.$.data('skin') == 'tron') {
-
-                var a = this.angle(this.cv)  // Angle
-                    , sa = this.startAngle          // Previous start angle
-                    , sat = this.startAngle         // Start angle
-                    , ea                            // Previous end angle
-                    , eat = sat + a                 // End angle
-                    , r = true;
-
-                this.g.lineWidth = this.lineWidth;
-
-                this.o.cursor
-                    && (sat = eat - 0.3)
-                    && (eat = eat + 0.3);
-
-                if (this.o.displayPrevious) {
-                    ea = this.startAngle + this.angle(this.value);
-                    this.o.cursor
-                        && (sa = ea - 0.3)
-                        && (ea = ea + 0.3);
-                    this.g.beginPath();
-                    this.g.strokeStyle = this.previousColor;
-                    this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false);
-                    this.g.stroke();
-                }
-
-                this.g.beginPath();
-                this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
-                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false);
-                this.g.stroke();
-
-                this.g.lineWidth = 2;
-                this.g.beginPath();
-                this.g.strokeStyle = this.o.fgColor;
-                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
-                this.g.stroke();
-
-                return false;
-            }
-        }
-    });
-});

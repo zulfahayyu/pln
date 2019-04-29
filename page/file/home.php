@@ -9,7 +9,7 @@ $files = query("SELECT *,document.id as id from document JOIN pegawai ON documen
                 <div class="col-lg-5 col-md-8 col-sm-12">
                     <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> File Documents</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index-2.html"><i class="icon-home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i></a></li>
                         <li class="breadcrumb-item">File Manager</li>
                         <li class="breadcrumb-item active">File Documents</li>
                     </ul>

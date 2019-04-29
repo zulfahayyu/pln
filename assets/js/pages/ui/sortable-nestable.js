@@ -10,10 +10,21 @@ $(function () {
         // 
         data.forEach(function (key) {
             $.ajax({
-                url: base_url + '/proses/model_task.php?method=ajax_change_satus&id=' + key['id'] +'&value='+area,
+                url: base_url + '/proses/model_task.php?method=ajax_change_satus&id=' + key['id'] + '&value=' + area,
                 type: 'GET',
                 success: function (result) {
-                    console.log(result);
+                    if (result == 'success') {
+                        // $('#taskprogress').val();
+                        toastr.options.timeOut = "5000";
+                        toastr.options.closeButton = true;
+                        toastr.options.positionClass = 'toast-top-right';
+                        toastr['success']('Status berhasil diupdate');
+                    }else{
+                        toastr.options.timeOut = "5000";
+                        toastr.options.closeButton = true;
+                        toastr.options.positionClass = 'toast-top-right';
+                        toastr['error']('Status gagal diupdate');
+                    }
                 }
             });
 

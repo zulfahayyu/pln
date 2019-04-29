@@ -104,6 +104,17 @@ function editPegawai(id) {
     });
 }
 
+function editProfile(id) {
+    $.ajax({
+        url: base_url+'/page/profile/update.php?id=' + id,
+        type: 'GET',
+        success: function (result) {
+            $('#contentUpdate').html(result);
+            $('#editUser').modal('show');
+        }
+    });
+}
+
 function editEvent(id) {
     $.ajax({
         url: base_url+'/page/event/update.php?id=' + id,

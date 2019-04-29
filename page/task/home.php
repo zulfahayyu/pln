@@ -7,7 +7,8 @@ $inProgress = query("SELECT *, task.id as id from task JOIN task_team ON task.id
 WHERE task_team.id_pegawai ='$user[id]' AND status='In Progress'");
 $done = query("SELECT *, task.id as id from task JOIN task_team ON task.id=task_team.id_task
 WHERE task_team.id_pegawai ='$user[id]' AND status='Done'");
-print_r($toDo);
+
+$clear=count($done)/(count($toDo)+count($inProgress)+count($done))*100;
 ?>
 
 <div id="main-content">
@@ -31,9 +32,9 @@ print_r($toDo);
                     <div class="col-lg-12 col-md-12 col-sm-12 text-center">
                         <div class="card tasks_report">
                             <div class="body">
-                                <input type="text" class="knob" value="66" data-width="90" data-height="90" data-thickness="0.1" data-fgColor="#26dad2" readonly>
-                                <h6 class="m-t-20">Projects Clear</h6>
-                                <p class="displayblock m-b-0">47% Average <i class="zmdi zmdi-trending-up"></i></p>
+                                <input type="text" class="knob" id="taskprogress" value="<?= $clear ?>" data-width="90" data-height="90" data-thickness="0.1" data-fgColor="#26dad2" readonly>
+                                <h6 class="m-t-20">Task Clear</h6>
+                                <!-- <p class="displayblock m-b-0"><?= $clear ?>% Average <i class="zmdi zmdi-trending-up"></i></p> -->
                             </div>
                         </div>
                     </div>

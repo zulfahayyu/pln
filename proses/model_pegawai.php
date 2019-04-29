@@ -74,7 +74,7 @@ if ($_GET['id']) {
         $password = $_POST['pass'];
 
         $result = mysqli_query($conn, "INSERT INTO pegawai VALUES ('','$nip', '$nama' ,'$no_sap','$t_lahir',
-            '$tgl_lahir', '$jkelamin' , '$agama' , '$kawin' , '$jml_kel', '$alamat' , '' ,'$id_unit', 
+            '$tgl_lahir', '$jkelamin' , '$agama' , '$kawin' , '$jml_kel', '$alamat' , 'default.jpg' ,'$id_unit', 
             '$id_jabatan', '$id_atasan')");
         $lastid = mysqli_insert_id($conn);
         if ($result) {
