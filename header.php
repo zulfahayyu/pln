@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <title>:: PLN :: Home</title>
     <meta charset="utf-8">
@@ -29,7 +30,7 @@
     <link rel="stylesheet" href="<?= $site_url ?>/assets/vendor/fullcalendar/fullcalendar.min.css">
     <link rel="stylesheet" href="<?= $site_url ?>/assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css">
 
-    <link rel="stylesheet" href="<?= $site_url ?>/assets/vendor/summernote/dist/summernote.css"/>
+    <link rel="stylesheet" href="<?= $site_url ?>/assets/vendor/summernote/dist/summernote.css" />
     <link rel="stylesheet" href="<?= $site_url ?>/assets/css/inbox.css">
 
 
@@ -37,7 +38,7 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="<?= $site_url ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?= $site_url ?>/assets/css/color_skins.css">
-    
+
 </head>
 
 <body class="theme-orange">
@@ -48,9 +49,9 @@
     <div id="wrapper">
         <?php
         require_once 'navbar.php';
-        if ($user['status'] == 'admin')
-            require_once 'sidebar_admin.php';
-        else
-          
-        
+
+        require_once 'sidebar_admin.php';
+
+
+
         ?>

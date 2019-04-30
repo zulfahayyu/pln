@@ -135,7 +135,7 @@ $(document).ready(function () {
             success: function (result) {
                 $('.modal-content #data-atasan')
                     .empty()
-                    .append('<option selected="" disabled="">Pilih Data Pegawai</option>');
+                    .append('<option selected="" disabled="">Pilih Atasan Pegawai</option>');
                 var opts = $.parseJSON(result);
                 $.each(opts, function (i, d) {
 

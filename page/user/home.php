@@ -171,7 +171,7 @@ join unit_kerja uk on p.id_unit=uk.id ");
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <select class="form-control show-tick ms select2" name="id_atasan" id="data-atasan" data-placeholder="Select" required>
-                                    <option selected disabled>Pilih Atasan Karyawan</option>
+                                    <option selected disabled>Pilih Atasan Pegawai</option>
                                 </select>
                             </div>
                         </div>

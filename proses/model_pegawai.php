@@ -1,7 +1,7 @@
 <?php
 include_once 'connection.php';
 if($_GET['method']=='get_data_pegawai'){
-    $unit = query("SELECT * FROM pegawai where id_unit='$_GET[id_unit]'");
+    $unit = query("SELECT * FROM pegawai where id_unit='$_GET[id_unit]' OR id_unit='0'");
     echo json_encode($unit);
     return 0;
 }

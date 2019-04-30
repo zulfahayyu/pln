@@ -1,5 +1,6 @@
 <?php
 include_once '../../proses/connection.php';
+include_once '../../proses/ceklogin.php';
 $unit = query("SELECT * FROM unit_kerja");
 $event = get_where("SELECT *,event.id as id FROM event left join unit_kerja on event.id_unit=unit_kerja.id  
 where event.id='$_GET[id]'");
@@ -14,9 +15,9 @@ where event.id='$_GET[id]'");
         <div class="form-group">
             <select class="form-control show-tick" name="priority">
                 <option selected disabled>Priority</option>
-                <option value="bg-danger" <?= ($event['priority']=='bg-danger')?'Selected' :'' ?>>High</option>
-                <option value="bg-warning" <?= ($event['priority']=='bg-warning')?'Selected' :'' ?>>Medium</option>
-                <option value="bg-success" <?= ($event['priority']=='bg-success')?'Selected' :'' ?>>Low</option>
+                <option value="bg-danger" <?= ($event['priority'] == 'bg-danger') ? 'Selected' : '' ?>>High</option>
+                <option value="bg-warning" <?= ($event['priority'] == 'bg-warning') ? 'Selected' : '' ?>>Medium</option>
+                <option value="bg-success" <?= ($event['priority'] == 'bg-success') ? 'Selected' : '' ?>>Low</option>
             </select>
         </div>
         <div class="form-group">
@@ -28,11 +29,24 @@ where event.id='$_GET[id]'");
                 </div>
             </div>
         </div>
+        <?php
+        if ($user['status'] == 'admin') {
+            $disabled = '';
+            $selected = 'selected';
+            $unitselected = '';
+        } else {
+            $unituser = get_where("SELECT * FROM unit_kerja WHERE id='$user[id_unit]'");
+            $unitselected = $unituser['id'];
+            $disabled = 'disabled';
+            $selected = '';
+            echo "<input type='hidden' name='unit' value='" . $unitselected . "'>";
+        }
+        ?>
         <div class="form-group">
-            <select class="form-control show-tick" name="unit">
-                <option selected>All Unit</option>
+            <select class="form-control show-tick" name="unit" <?= $disabled ?>>
+                <option <?= $selected ?>>All Unit</option>
                 <?php foreach ($unit as $row) : ?>
-                    <option value="<?= $row['id'] ?>" <?= ($event['id_unit']==$row['id'])?'Selected' :'' ?>><?= $row['nama_unit'] ?></option>
+                    <option value="<?= $row['id'] ?>" <?= ($row['id'] == $unitselected) ? 'selected' : '' ?>><?= $row['nama_unit'] ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -43,7 +57,7 @@ where event.id='$_GET[id]'");
         </div>
         <div class="form-group">
             <div class="form-line">
-                <textarea class="form-control no-resize" rows="4" name="description"  placeholder="Event Description..."><?= $event['description'] ?></textarea>
+                <textarea class="form-control no-resize" rows="4" name="description" placeholder="Event Description..."><?= $event['description'] ?></textarea>
             </div>
         </div>
     </div>

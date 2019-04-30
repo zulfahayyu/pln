@@ -1,4 +1,4 @@
 <?php 
 session_start();
-unset($_SESSION["nip"]);  
+unset($_SESSION["id"]);  
 header("Location: ../login.php");

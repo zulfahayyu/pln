@@ -56,7 +56,7 @@ if ($_GET['id']) {
         $location = $_POST['location'];
         $description = $_POST['description'];
 
-        $result = mysqli_query($conn, "INSERT INTO event VALUES('','$nama','$priority','$start_date','$end_date','$id_unit','$location','$description')");
+        $result = mysqli_query($conn, "INSERT INTO event VALUES('','$nama','$priority','$start_date','$end_date','$id_unit','$location','$description','$_SESSION[id]')");
         if ($result) {
             $_SESSION['message'] = 'Data Event berhasil ditambahkan';
             $_SESSION['type'] = 'success';

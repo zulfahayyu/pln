@@ -2,8 +2,14 @@
 date_default_timezone_set('Asia/Jakarta');
 $current_date = (date('Y-m-d'));
 $unit = query("SELECT * FROM unit_kerja");
+if ($user['status'] == 'admin') {
+    $where = '';
+} else {
+    $where = "AND create_by='$user[id]'";
+}
+
 $event = query("SELECT *,event.id as id FROM event left join unit_kerja on event.id_unit=unit_kerja.id  
-where date_start>='$current_date' ORDER BY date_start ASC");
+where date_start>='$current_date'  $where ORDER BY date_start ASC");
 ?>
 <!-- MAIN CONTENT -->
 <div id="main-content">
@@ -123,11 +129,24 @@ where date_start>='$current_date' ORDER BY date_start ASC");
                             </div>
                         </div>
                     </div>
+                    <?php
+                    if ($user['status'] == 'admin') {
+                        $disabled = '';
+                        $selected = 'selected';
+                        $unitselected = '';
+                    } else {
+                        $unituser = get_where("SELECT * FROM unit_kerja WHERE id='$user[id_unit]'");
+                        $unitselected = $unituser['id'];
+                        $disabled = 'disabled';
+                        $selected = '';
+                        echo "<input type='hidden' name='unit' value='" . $unitselected . "'>";
+                    }
+                    ?>
                     <div class="form-group">
-                        <select class="form-control show-tick" name="unit">
-                            <option selected>All Unit</option>
+                        <select class="form-control show-tick" name="unit" <?= $disabled ?>>
+                            <option <?= $selected ?>>All Unit</option>
                             <?php foreach ($unit as $row) : ?>
-                                <option value="<?= $row['id'] ?>"><?= $row['nama_unit'] ?></option>
+                                <option value="<?= $row['id'] ?>" <?= ($row['id'] == $unitselected) ? 'selected' : '' ?>><?= $row['nama_unit'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
