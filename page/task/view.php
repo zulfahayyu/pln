@@ -8,7 +8,13 @@ $current_date = (date('Y-m-d')); // get current date
 $task = get_where("SELECT *,task.id AS id FROM task JOIN unit_kerja ON task.id_unit=unit_kerja.id 
 WHERE task.id='$id'"); // get task detail
 
-$staff = query("SELECT * FROM pegawai WHERE id_unit='$task[id_unit]' 
+if($user['status']=='admin'){
+    $where='';
+}else{
+    $where="AND id_atasan='$_SESSION[id]'";
+}
+
+$staff = query("SELECT * FROM pegawai WHERE id_unit='$task[id_unit]' $where
 AND id NOT IN(SELECT id_pegawai FROM task_team WHERE id_task='$task[id]')"); // get data pegawai berdasarkan id_unit
 
 $listStaff = query("SELECT *,task_team.id AS id FROM task_team JOIN pegawai ON task_team.id_pegawai=pegawai.id

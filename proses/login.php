@@ -8,22 +8,10 @@
     
     if($query){
         $row = mysqli_fetch_assoc($query);
-        
-        if($row['status']=='admin'){
-            echo "<script>window.location.href = '$site_url'</script>";
-            $_SESSION['id']=$row['id']; 
-            $_SESSION['nama']=$row['nama']; 
-        }
-        elseif($row['status']=='user'){
-            echo "<script>window.location.href = '$site_url'</script>";
-            $_SESSION['id']=$row['id']; 
-            $_SESSION['nama']=$row['nama']; 
-        }
-        else{
-            echo "<script>window.location.href = '$site_url/login.php'</script>";
-        }
-
+        $_SESSION['id']=$row['id']; 
+        $_SESSION['nama']=$row['nama_p'];
+        echo "<script>window.location.href = '$site_url'</script>";
+      
     }else{
         echo "<script>window.location.href = '$site_url/login.php'</script>";
     }
-?>

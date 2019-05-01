@@ -12,7 +12,7 @@
         <div class="navbar-right">
             <div id="navbar-menu">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
+                    <!-- <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">
                             <i class="icon-bell"></i>
                             <span class="notification-dot"></span>
@@ -76,7 +76,7 @@
                             </li>
                             <li class="footer"><a href="javascript:void(0);" class="more">See all notifications</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                     
                     <li><a href="<?= $site_url ?>/proses/logout.php" class="icon-menu"><i class="icon-login"></i></a></li>
                 </ul>

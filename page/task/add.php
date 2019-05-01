@@ -48,22 +48,44 @@ $unit = query("SELECT * FROM unit_kerja"); // query get all unit kerja data
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-12">
+                                    <?php
+                                    if ($user['status'] == 'admin') {
+                                        $disabled = '';
+                                        $selected = 'selected';
+                                        $unitselected = '';
+                                    } else {
+                                        $unituser = get_where("SELECT * FROM unit_kerja WHERE id='$user[id_unit]'");
+                                        $unitselected = $unituser['id'];
+                                        $disabled = 'disabled';
+                                        $selected = '';
+                                        echo "<input type='hidden' name='unit_kerja' value='" . $unitselected . "'>";
+                                    }
+                                    ?>
                                     <div class="form-group">
+                                        <label>Select Unit</label>
+                                        <select class="form-control show-tick" name="unit_kerja" id="unit_kerja" <?= $disabled ?>>
+                                            <option <?= $selected ?> disabled>Pilih Unit</option>
+                                            <?php foreach ($unit as $row) : ?>
+                                                <option value="<?= $row['id'] ?>" <?= ($row['id'] == $unitselected) ? 'selected' : '' ?>><?= $row['nama_unit'] ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <!-- <div class="form-group">
                                         <label>Select Unit</label>
                                         <select class="form-control show-tick" name="unit_kerja" id="unit_kerja" required>
                                             <option selected disabled>Pilih Unit</option>
                                             <?php foreach ($unit as $row) : ?>
-                                                <option value="<?= $row['id'] ?>"><?= $row['nama_unit'] ?></option>
+                                                    <option value="<?= $row['id'] ?>"><?= $row['nama_unit'] ?></option>
                                             <?php endforeach; ?>
                                         </select>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="col-md-3 col-sm-12">
                                     <label>Select Team Lead</label>
                                     <div class="form-group">
                                         <select class="form-control show-tick" name="team_lead" id="data-atasan" required>
                                             <option selected disabled>Pilih Team Lead</option>
-                                            
+
                                         </select>
                                     </div>
                                 </div>

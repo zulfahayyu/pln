@@ -2,7 +2,14 @@
 date_default_timezone_set('Asia/Jakarta');
 $current_date = (date('Y-m-d'));
 // $unit = query("SELECT * FROM unit_kerja");
-$event = query("SELECT * from task WHERE create_by='$user[id]'  ORDER BY due_date ASC");
+
+if($user['status']=='admin'){
+    $where='';
+}else{
+    $where="WHERE create_by='$user[id]'";
+}
+
+$event = query("SELECT * from task  $where ORDER BY due_date ASC");
 ?>
 <!-- MAIN CONTENT -->
 <div id="main-content">

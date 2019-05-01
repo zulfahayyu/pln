@@ -134,7 +134,8 @@ if ($_GET['method'] == 'assign_staff') { //assign new staff
             //insert data task
             $result = mysqli_query($conn, "INSERT task  VALUES('','$nama','$priority','$current_date','$due_date',
         '$id_unit','$team_lead','$_SESSION[id]','$description','To Do','0')");
-            if ($result) {
+           $id_task = mysqli_insert_id($conn);
+           if ($result) {
                 if ($_FILES) {
                     //upload file to directory assets/document
                     $target_dir = "../assets/document/";
@@ -145,6 +146,9 @@ if ($_GET['method'] == 'assign_staff') { //assign new staff
                         //insert data document to database
                         $result = mysqli_query($conn, "INSERT document  VALUES('','$filename','$filename','$current_date',
                 '$_SESSION[id]')");
+                        $doc_id = mysqli_insert_id($conn); // get last insert id
+
+                        $result = mysqli_query($conn, "INSERT task_document  VALUES('','$id_task','$doc_id')"); // add file to task doc
                     } else {
                         //notif sukses
                         $_SESSION['message'] = 'Data Task berhasil ditambahkan, namun document gagal ditambahkan';

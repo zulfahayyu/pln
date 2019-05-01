@@ -1,4 +1,3 @@
-
 // function inserttmb() {
 //     var nama = $("#nama").val();
 //     $.ajax({
@@ -73,7 +72,7 @@
 
 function editJabatan(id) {
     $.ajax({
-        url: base_url+'/page/jabatan/update.php?id=' + id,
+        url: base_url + '/page/jabatan/update.php?id=' + id,
         type: 'GET',
         success: function (result) {
             $('#contentUpdate').html(result);
@@ -84,7 +83,7 @@ function editJabatan(id) {
 
 function editUnit(id) {
     $.ajax({
-        url: base_url+'/page/unit/update.php?id=' + id,
+        url: base_url + '/page/unit/update.php?id=' + id,
         type: 'GET',
         success: function (result) {
             $('#contentUpdate').html(result);
@@ -95,7 +94,7 @@ function editUnit(id) {
 
 function editPegawai(id) {
     $.ajax({
-        url: base_url+'/page/user/update.php?id=' + id,
+        url: base_url + '/page/user/update.php?id=' + id,
         type: 'GET',
         success: function (result) {
             $('#contentUpdate').html(result);
@@ -106,7 +105,7 @@ function editPegawai(id) {
 
 function editProfile(id) {
     $.ajax({
-        url: base_url+'/page/profile/update.php?id=' + id,
+        url: base_url + '/page/profile/update.php?id=' + id,
         type: 'GET',
         success: function (result) {
             $('#contentUpdate').html(result);
@@ -117,7 +116,7 @@ function editProfile(id) {
 
 function editEvent(id) {
     $.ajax({
-        url: base_url+'/page/event/update.php?id=' + id,
+        url: base_url + '/page/event/update.php?id=' + id,
         type: 'GET',
         success: function (result) {
             $('#contentUpdate').html(result);
@@ -126,11 +125,29 @@ function editEvent(id) {
     });
 }
 
+function get_pegawai() {
+    $.ajax({
+        url: base_url + '/proses/model_pegawai.php?method=get_data_pegawai&id_unit=' + $("#unit_kerja").val(),
+        type: 'GET',
+        success: function (result) {
+            $('.modal-content #data-atasan')
+                .empty()
+                .append('<option selected="" disabled="">Pilih Atasan Pegawai</option>');
+            var opts = $.parseJSON(result);
+            $.each(opts, function (i, d) {
+
+                $('.modal-content #data-atasan').append('<option value="' + d.id + '">' + d.nama_p + '</option>');
+            });
+        }
+    });
+}
+
 $(document).ready(function () {
-    $('.modal-content').on('change','#unit_kerja', function () {
+    get_pegawai();
+    $('.modal-content').on('change', '#unit_kerja', function () {
         // alert($(this).find(":selected").val());
         $.ajax({
-            url: base_url+'/proses/model_pegawai.php?method=get_data_pegawai&id_unit=' + $(this).find(":selected").val(),
+            url: base_url + '/proses/model_pegawai.php?method=get_data_pegawai&id_unit=' + $(this).find(":selected").val(),
             type: 'GET',
             success: function (result) {
                 $('.modal-content #data-atasan')
@@ -145,4 +162,3 @@ $(document).ready(function () {
         });
     })
 });
-
