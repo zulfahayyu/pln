@@ -13,4 +13,30 @@ if(empty($_SESSION['id'])){
     }
 }
 
+function permission($id){
+    global $user;
+    if($id==1){
+        if($user['status']!='admin'){
+            $_SESSION['message'] = 'Anda tidak memiliki akses';
+            $_SESSION['type'] = 'error';
+            echo "<script>window.location.href = 'index.php'</script>";
+            return 0;
+        }
+    }elseif($id==2){
+        if($user['status']!='admin' && $user['status']!='hrd'){
+            $_SESSION['message'] = 'Anda tidak memiliki akses';
+            $_SESSION['type'] = 'error';
+            echo "<script>window.location.href = 'index.php'</script>";
+            return 0;
+        }
+    }elseif($id==3){
+        if($user['status']!='hrd'){
+            $_SESSION['message'] = 'Anda tidak memiliki akses';
+            $_SESSION['type'] = 'error';
+            echo "<script>window.location.href = 'index.php'</script>";
+            return 0;
+        }
+    }
+}
+
 ?>

@@ -1,4 +1,5 @@
 <?php
+permission(1);
 $unitkerja = query("SELECT * FROM unit_kerja");
 ?>
 <!-- MAIN CONTENT -->

@@ -1,11 +1,12 @@
 <?php
+permission(2);
 $jabatan = query("SELECT * FROM jabatan"); // query get all jabatan kerja data
 $unit = query("SELECT * FROM unit_kerja"); // query get all unit kerja data
 
 //query select data pegawai
 $pegawai = query("SELECT p.*, uk.nama_unit, j.nama_jabatan  FROM pegawai p 
-join jabatan j on p.id_jabatan=j.id 
-join unit_kerja uk on p.id_unit=uk.id ");
+LEFT join jabatan j on p.id_jabatan=j.id 
+LEFT join unit_kerja uk on p.id_unit=uk.id ");
 
 ?>
 
@@ -17,7 +18,7 @@ join unit_kerja uk on p.id_unit=uk.id ");
             <div class="row">
                 <div class="col-lg-6 col-md-8 col-sm-12">
                     <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="icon-list"></i></a>
-                        Admin</h2>
+                        Manage User</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php"><i class="icon-home"></i></a></li>
                         <li class="breadcrumb-item">Manage User</li>

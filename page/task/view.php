@@ -91,7 +91,9 @@ else
                                         <div class="btn-group">
                                             <a href="javascript:void(0);" class="btn btn-default btn-sm hidden-sm" data-toggle="modal" data-target="#addComment"><i class="fa fa-comment"></i> New Comment</a>
                                             <a href="javascript:void(0);" class="btn btn-default btn-sm hidden-sm" data-toggle="modal" data-target="#uploadFile"><i class="fa fa-upload"></i> Upload File</a>
+                                            <?php if($task['id_leader']==$user['id'] || $task['create_by']==$user['id']){ ?>
                                             <a href="javascript:void(0);" class="btn btn-default btn-sm" data-toggle="modal" data-target="#assignStaff"><i class="fa fa-user"></i> Assign Staff</a>
+                                            <?php } ?>
                                         </div>
 
 
@@ -269,7 +271,7 @@ else
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Jabatan</label>
+                        <label>Status Dalam Tim</label>
                         <input type="text" class="form-control" name="jabatan" required>
                     </div>
                 </div>

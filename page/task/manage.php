@@ -4,12 +4,13 @@ $current_date = (date('Y-m-d'));
 // $unit = query("SELECT * FROM unit_kerja");
 
 if($user['status']=='admin'){
-    $where='';
+    $where='OR 1=1';
 }else{
-    $where="WHERE create_by='$user[id]'";
+    $where="OR (create_by='$user[id]' OR id_leader='$user[id]')";
 }
 
-$event = query("SELECT * from task  $where ORDER BY due_date ASC");
+$event = query("SELECT *,task.id as id from task LEFT JOIN task_team ON task.id=task_team.id_task 
+WHERE task_team.id_pegawai ='$user[id]' $where ORDER BY due_date ASC");
 ?>
 <!-- MAIN CONTENT -->
 <div id="main-content">
@@ -24,9 +25,11 @@ $event = query("SELECT * from task  $where ORDER BY due_date ASC");
                         <li class="breadcrumb-item active">Task List</li>
                     </ul>
                 </div>
+                <?php if($jml_bawahan>0 || $user['status']=='admin') { ?>
                 <div class="col-lg-6 col-md-4 col-sm-12 text-right">
                     <a href="<?= $site_url ?>/task/add" class="btn btn-primary">Add New Task</a>
                 </div>
+                <?php } ?>
             </div>
         </div>
 
@@ -91,8 +94,10 @@ $event = query("SELECT * from task  $where ORDER BY due_date ASC");
                                             <td><span class="badge badge-<?= $status_color ?>"><?= $value['status'] ?></span> <?= $due_status ?></td>
                                             <td class="project-actions">
                                                 <a href="<?= $site_url ?>/task/view/<?= $value['id'] ?>" class="btn btn-sm btn-outline-primary"><i class="icon-eye"></i></a>
+                                                <?php if($value['id_leader']==$user['id'] || $value['create_by']==$user['id']){ ?>
                                                 <a href="<?= $site_url ?>/task/edit/<?= $value['id'] ?>" class="btn btn-sm btn-outline-success"><i class="icon-pencil"></i></a>
                                                 <a href="<?= $site_url ?>/proses/model_task.php?id=<?php echo $value["id"]; ?>&delete=true" onclick='return confirm("Yakin ingin menghapus data?")'  class="btn btn-sm btn-outline-danger" title="Delete" ><i class="icon-trash"></i></a>
+                                                <?php } ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

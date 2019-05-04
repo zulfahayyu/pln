@@ -49,6 +49,17 @@ $(function () {
                 return false;
             }
         },
+        format : function (value) {
+            var id=$('.knob').attr( "task-id" );
+            $.ajax({
+                url: base_url + '/proses/model_task.php?method=ajax_change_progress&id='+id+'&value=' + value,
+                type: 'GET',
+                success: function (result) {
+                   console.log(result);
+                }
+            });
+            return value + '%';
+        },
         change: function (value) {
             var id=$('.knob').attr( "task-id" );
             // alert(id);

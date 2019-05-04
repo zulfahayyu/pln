@@ -1,4 +1,5 @@
 <?php
+permission(1);
 $jabatan = query("SELECT * FROM jabatan");
 ?>
 <!-- MAIN CONTENT -->

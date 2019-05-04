@@ -1,12 +1,12 @@
 <?php
 date_default_timezone_set('Asia/Jakarta');
 $current_date = (date('Y-m-d'));
-$toDo = query("SELECT *, task.id as id from task JOIN task_team ON task.id=task_team.id_task
-WHERE task_team.id_pegawai ='$user[id]' AND status='To Do'");
-$inProgress = query("SELECT *, task.id as id from task JOIN task_team ON task.id=task_team.id_task
-WHERE task_team.id_pegawai ='$user[id]' AND status='In Progress'");
-$done = query("SELECT *, task.id as id from task JOIN task_team ON task.id=task_team.id_task
-WHERE task_team.id_pegawai ='$user[id]' AND status='Done'");
+$toDo = query("SELECT *, task.id as id from task LEFT JOIN task_team ON task.id=task_team.id_task
+WHERE (task_team.id_pegawai ='$user[id]' OR task.id_leader='$user[id]') AND status='To Do'");
+$inProgress = query("SELECT *, task.id as id from task LEFT JOIN task_team ON task.id=task_team.id_task
+WHERE (task_team.id_pegawai ='$user[id]' OR task.id_leader='$user[id]') AND status='In Progress'");
+$done = query("SELECT *, task.id as id from task LEFT JOIN task_team ON task.id=task_team.id_task
+WHERE (task_team.id_pegawai ='$user[id]' OR task.id_leader='$user[id]') AND status='Done'");
 
 $clear=count($done)/(count($toDo)+count($inProgress)+count($done))*100;
 ?>
@@ -148,6 +148,6 @@ $clear=count($done)/(count($toDo)+count($inProgress)+count($done))*100;
         
     </div>
 </div>
-<?php if($jml_bawahan>0 || $user['status']=='admin') { 
+<?php 
     include 'manage.php'; 
-} ?>
+?>
