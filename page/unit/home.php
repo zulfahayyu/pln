@@ -38,7 +38,7 @@ $unitkerja = query("SELECT * FROM unit_kerja");
                                             </label>
                                         </th>
                                         <th width="15%">Kode</th>
-                                        <th>Name Jabatan</th>
+                                        <th>Name Unit</th>
                                         <th width="10%">Action</th>
                                     </tr>
                                 </thead>

@@ -1,3 +1,9 @@
+<?php 
+// print_r($user); 
+$jabatan=get_where("SELECT * FROM jabatan where id='$user[id_jabatan]'");
+$unit=get_where("SELECT * FROM unit_kerja where id='$user[id_unit]'");
+// print_r($unit);
+?>
 <!-- TAB MAIN -->
 <div id="main-content" class="profilepage_2 blog-page">
     <div class="container-fluid">
@@ -48,6 +54,22 @@
                         <small class="text-muted">Nomor SAP</small>
                         <p><?= $user['no_sap'] ?></p>
                         <hr>
+                        <?php if($user['id_unit']){ ?>
+                        <small class="text-muted">Unit Kerja</small>
+
+                        <p><?= $unit['nama_unit'] ?></p>
+
+                        <hr>
+                        <?php } ?>
+
+                        <?php if($user['id_jabatan']){ ?>
+                        <small class="text-muted">Jabatan</small>
+
+                        <p><?= $jabatan['nama_jabatan'] ?></p>
+
+                        <hr>
+                        <?php } ?>
+
                         <small class="text-muted">Tempat, Tanggal Lahir</small>
                         <p><?= $user['t_lahir'] . ', ' . $user['tgl_lahir'] ?></p>
                         <hr>

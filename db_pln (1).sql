@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 29 Apr 2019 pada 19.44
--- Versi server: 10.1.38-MariaDB
--- Versi PHP: 7.1.27
+-- Host: localhost:3306
+-- Generation Time: May 17, 2019 at 09:18 PM
+-- Server version: 5.7.26
+-- PHP Version: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,39 +19,40 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_pln`
+-- Database: `kangarie_pln`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `document`
+-- Table structure for table `document`
 --
 
 CREATE TABLE `document` (
   `id` int(11) NOT NULL,
   `doc_name` varchar(255) NOT NULL,
-  `doc_file` varchar(255) NOT NULL,
+  `doc_file` varchar(255) DEFAULT NULL,
   `date_upload` varchar(20) NOT NULL,
   `user_upload` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `document`
+-- Dumping data for table `document`
 --
 
 INSERT INTO `document` (`id`, `doc_name`, `doc_file`, `date_upload`, `user_upload`) VALUES
-(1, 'template-sme-health  all benefit - Copy 1 (2).xlsx', 'template-sme-health  all benefit - Copy 1 (2).xlsx', '2019-04-26', 1),
-(2, 'template-sme-health  all benefit - Copy 1 (2).xlsx', 'template-sme-health  all benefit - Copy 1 (2).xlsx', '2019-04-26', 1),
-(4, 'New Text Document.php', 'New Text Document.php', '2019-04-28', 1),
-(5, 'Dokument 1', 'New Rich Text Document.rtf', '2019-04-28', 1),
-(6, 'Dokument 1', 'New Rich Text Document.rtf', '2019-04-28', 1),
-(7, 'Dokument 1', 'template.xlsx', '2019-04-29', 1);
+(11, 'IMG_20190506_231625.jpg', 'IMG_20190506_231625.jpg', '2019-05-12', 1),
+(12, 'Dokument 1', 'export (3).csv', '2019-05-12', 1),
+(13, 'Form Ijin Setengah Hari. Dig.xlsx', 'Form Ijin Setengah Hari. Dig.xlsx', '2019-05-12', 1),
+(14, 'Dokument 1', 'export (3).csv', '2019-05-12', 1),
+(15, 'Dokument 1', 'Form Ijin Setengah Hari. Dig.xlsx', '2019-05-12', 1),
+(18, 'test', 'export (3).csv', '2019-05-12', 19),
+(20, 'file.html', 'file.html', '2019-05-12', 19);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `event`
+-- Table structure for table `event`
 --
 
 CREATE TABLE `event` (
@@ -60,24 +61,25 @@ CREATE TABLE `event` (
   `priority` varchar(15) NOT NULL,
   `date_start` varchar(20) NOT NULL,
   `date_end` varchar(20) NOT NULL,
-  `id_unit` int(11) NOT NULL,
+  `id_unit` int(11) DEFAULT NULL,
   `location` varchar(255) NOT NULL,
-  `description` text
+  `description` text,
+  `create_by` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `event`
+-- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`id`, `event_name`, `priority`, `date_start`, `date_end`, `id_unit`, `location`, `description`) VALUES
-(4, 'Evaluasi', 'bg-danger', '2019-05-02', '2019-05-04', 0, 'ruang rapat', 'test'),
-(5, 'Maintenance Gardu', 'bg-danger', '2019-04-26', '2019-04-26', 0, 'Gardu Induk', 'harap membawa tools maintenace'),
-(6, 'Rapat Bulanan', 'bg-success', '2019-04-11', '2019-04-25', 6, 'ruang rapt ', 'test');
+INSERT INTO `event` (`id`, `event_name`, `priority`, `date_start`, `date_end`, `id_unit`, `location`, `description`, `create_by`) VALUES
+(18, 'eqwe', 'bg-danger', '2019-05-10', '2019-05-10', 5, 'Aula1', 'ewe', 19),
+(19, 'asdasd', 'bg-warning', '2019-05-17', '2019-05-17', 5, 'Gardu Induk', 'ttt', 19),
+(21, 'arief', 'bg-success', '2019-05-18', '2019-05-20', NULL, 'ruang rapt ', 'csc', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jabatan`
+-- Table structure for table `jabatan`
 --
 
 CREATE TABLE `jabatan` (
@@ -87,7 +89,7 @@ CREATE TABLE `jabatan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `jabatan`
+-- Dumping data for table `jabatan`
 --
 
 INSERT INTO `jabatan` (`id`, `kode_jabatan`, `nama_jabatan`) VALUES
@@ -98,12 +100,12 @@ INSERT INTO `jabatan` (`id`, `kode_jabatan`, `nama_jabatan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pegawai`
+-- Table structure for table `pegawai`
 --
 
 CREATE TABLE `pegawai` (
   `id` int(11) NOT NULL,
-  `nip` char(8) NOT NULL,
+  `nip` char(11) NOT NULL,
   `nama_p` varchar(50) NOT NULL,
   `no_sap` char(8) NOT NULL,
   `t_lahir` char(50) NOT NULL,
@@ -114,24 +116,25 @@ CREATE TABLE `pegawai` (
   `jml_kel` int(2) DEFAULT NULL,
   `alamat` text,
   `avatar` varchar(255) NOT NULL,
-  `id_unit` int(11) NOT NULL,
-  `id_jabatan` int(11) NOT NULL,
-  `id_atasan` int(11) NOT NULL
+  `id_unit` int(11) DEFAULT NULL,
+  `id_jabatan` int(11) DEFAULT NULL,
+  `id_atasan` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pegawai`
+-- Dumping data for table `pegawai`
 --
 
 INSERT INTO `pegawai` (`id`, `nip`, `nama_p`, `no_sap`, `t_lahir`, `tgl_lahir`, `jkelamin`, `agama`, `status_kawin`, `jml_kel`, `alamat`, `avatar`, `id_unit`, `id_jabatan`, `id_atasan`) VALUES
-(1, '0000', 'admin', '0000', 'mataram', '08/14/2018', 'L', 'islam', 'Belum Kawin', 2, 'jakarta barat raya', 'Helicopters_-_1.jpg', 1, 1, 1),
-(10, '11111', 'arief c', '311', 'matara', '04/16/2019', 'P', '111', 'Kawin', 111, '111', '', 2, 2, 1),
-(12, '1111', 'Arief c', '1111', '04/18/2019', '04/30/2019', 'L', 'islam', 'Belum Kawin', 4, 'jl haji midi', '', 1, 1, 1);
+(1, '0000', 'Admin', '0000', 'Jakarta', '05/01/2019', 'L', 'islam', 'Belum Kawin', 1, 'jakarta', 'avatar2.jpg', NULL, NULL, NULL),
+(2, '1111', 'HRD', '1111', '', '', '', NULL, '', NULL, NULL, '', NULL, NULL, 1),
+(19, '2222', 'pegawai Enginer 1', '2222', 'mataram', '05/11/2019', 'L', 'islam', 'Belum Kawin', 1, 'jakarta', 'default.jpg', 5, 1, 1),
+(20, '3333', 'pegawai Enginer 2', '3333', 'Jakarta', '05/15/2019', 'L', 'islam', 'Belum Kawin', 1, 'test', 'default.jpg', 5, 1, 19);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `task`
+-- Table structure for table `task`
 --
 
 CREATE TABLE `task` (
@@ -149,17 +152,17 @@ CREATE TABLE `task` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `task`
+-- Dumping data for table `task`
 --
 
 INSERT INTO `task` (`id`, `task_name`, `priority`, `date_create`, `due_date`, `id_unit`, `id_leader`, `create_by`, `description`, `status`, `progress`) VALUES
-(16, 'Maintenance 2', 'High', '2019-04-29', '2019-05-01', 1, 2, 1, '                                        test                                    ', 'To Do', 38),
-(17, 'Pengadaan Komputer', 'Medium', '2019-04-29', '2019-05-11', 1, 1, 1, 'test', 'Done', 0);
+(21, 'maintenace', 'High', '2019-05-12', '2019-05-08', 5, 1, 1, 'test', 'Done', 29),
+(22, 'task engginer', 'Low', '2019-05-12', '2019-05-16', 5, 19, 19, 'tesst', 'To Do', 26);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `task_comments`
+-- Table structure for table `task_comments`
 --
 
 CREATE TABLE `task_comments` (
@@ -172,16 +175,25 @@ CREATE TABLE `task_comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `task_comments`
+-- Dumping data for table `task_comments`
 --
 
 INSERT INTO `task_comments` (`id`, `id_task`, `id_user`, `description`, `id_doc`, `create_data`) VALUES
-(4, 2, 1, 'asdasdsad', 4, '2019-04-28 12:50:56');
+(9, 21, 1, 'test', NULL, '2019-05-12 03:55:07'),
+(10, 21, 1, 'test file', 13, '2019-05-12 03:55:31'),
+(11, 21, 1, 'est', NULL, '2019-05-12 04:04:53'),
+(13, 21, 19, 'wew', NULL, '2019-05-12 04:39:28'),
+(14, 22, 19, 'test', NULL, '2019-05-12 10:56:07'),
+(15, 22, 19, 'e test', NULL, '2019-05-12 10:56:32'),
+(16, 22, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\r\n                        ', NULL, '2019-05-14 12:24:12'),
+(17, 21, 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\r\n                        ', NULL, '2019-05-14 12:25:06'),
+(18, 21, 1, 'assign staff apaan ya -alwi', NULL, '2019-05-14 04:11:35'),
+(19, 21, 1, '<p>loh tibatiba lorem ipsum&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>', NULL, '2019-05-14 04:18:39');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `task_document`
+-- Table structure for table `task_document`
 --
 
 CREATE TABLE `task_document` (
@@ -190,10 +202,18 @@ CREATE TABLE `task_document` (
   `id_doc` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `task_document`
+--
+
+INSERT INTO `task_document` (`id`, `id_task`, `id_doc`) VALUES
+(8, 21, 18),
+(10, 22, 20);
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `task_team`
+-- Table structure for table `task_team`
 --
 
 CREATE TABLE `task_team` (
@@ -204,17 +224,18 @@ CREATE TABLE `task_team` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `task_team`
+-- Dumping data for table `task_team`
 --
 
 INSERT INTO `task_team` (`id`, `id_task`, `id_pegawai`, `keterangan`) VALUES
-(8, 16, 1, 'analis'),
-(9, 17, 1, 'pm');
+(12, 21, 19, 'dev'),
+(13, 21, 20, 'dev '),
+(14, 22, 20, 'dev');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `unit_kerja`
+-- Table structure for table `unit_kerja`
 --
 
 CREATE TABLE `unit_kerja` (
@@ -224,18 +245,18 @@ CREATE TABLE `unit_kerja` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `unit_kerja`
+-- Dumping data for table `unit_kerja`
 --
 
 INSERT INTO `unit_kerja` (`id`, `kode_unit`, `nama_unit`) VALUES
 (1, 'AU', 'Audit'),
-(5, 'AU', 'Audit'),
-(6, 'CC', 'Audit');
+(5, 'EN', 'Engginer'),
+(6, 'HR', 'HRD');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -246,144 +267,214 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `id_pegawai`, `password`, `status`) VALUES
-(5, 1, '0000', 'admin'),
-(10, 10, '1111', 'user'),
-(12, 12, '2222', 'user');
+(1, 1, '0000', 'admin'),
+(2, 2, '1111', 'hrd'),
+(19, 19, '2222', 'user'),
+(20, 20, '3333', 'user');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `document`
+-- Indexes for table `document`
 --
 ALTER TABLE `document`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `event`
+-- Indexes for table `event`
 --
 ALTER TABLE `event`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_unit` (`id_unit`),
+  ADD KEY `create_by` (`create_by`);
 
 --
--- Indeks untuk tabel `jabatan`
+-- Indexes for table `jabatan`
 --
 ALTER TABLE `jabatan`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indeks untuk tabel `pegawai`
+-- Indexes for table `pegawai`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD KEY `nip` (`nip`),
   ADD KEY `id_unit` (`id_unit`),
-  ADD KEY `id_jabatan` (`id_jabatan`);
+  ADD KEY `id_jabatan` (`id_jabatan`),
+  ADD KEY `id_atasan` (`id_atasan`);
 
 --
--- Indeks untuk tabel `task`
+-- Indexes for table `task`
 --
 ALTER TABLE `task`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_unit` (`id_unit`),
+  ADD KEY `id_leader` (`id_leader`),
+  ADD KEY `create_by` (`create_by`);
 
 --
--- Indeks untuk tabel `task_comments`
+-- Indexes for table `task_comments`
 --
 ALTER TABLE `task_comments`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_task` (`id_task`),
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_doc` (`id_doc`);
 
 --
--- Indeks untuk tabel `task_document`
+-- Indexes for table `task_document`
 --
 ALTER TABLE `task_document`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_task` (`id_task`),
+  ADD KEY `id_doc` (`id_doc`);
 
 --
--- Indeks untuk tabel `task_team`
+-- Indexes for table `task_team`
 --
 ALTER TABLE `task_team`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_task` (`id_task`),
+  ADD KEY `id_pegawai` (`id_pegawai`);
 
 --
--- Indeks untuk tabel `unit_kerja`
+-- Indexes for table `unit_kerja`
 --
 ALTER TABLE `unit_kerja`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`) USING BTREE;
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `id_pegawai` (`id_pegawai`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `document`
+-- AUTO_INCREMENT for table `document`
 --
 ALTER TABLE `document`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT untuk tabel `event`
+-- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT untuk tabel `jabatan`
+-- AUTO_INCREMENT for table `jabatan`
 --
 ALTER TABLE `jabatan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `pegawai`
+-- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT untuk tabel `task`
+-- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT untuk tabel `task_comments`
+-- AUTO_INCREMENT for table `task_comments`
 --
 ALTER TABLE `task_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT untuk tabel `task_document`
+-- AUTO_INCREMENT for table `task_document`
 --
 ALTER TABLE `task_document`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `task_team`
+-- AUTO_INCREMENT for table `task_team`
 --
 ALTER TABLE `task_team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT untuk tabel `unit_kerja`
+-- AUTO_INCREMENT for table `unit_kerja`
 --
 ALTER TABLE `unit_kerja`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `event`
+--
+ALTER TABLE `event`
+  ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`id_unit`) REFERENCES `unit_kerja` (`id`),
+  ADD CONSTRAINT `event_ibfk_2` FOREIGN KEY (`create_by`) REFERENCES `pegawai` (`id`);
+
+--
+-- Constraints for table `pegawai`
+--
+ALTER TABLE `pegawai`
+  ADD CONSTRAINT `pegawai_ibfk_1` FOREIGN KEY (`id_unit`) REFERENCES `unit_kerja` (`id`),
+  ADD CONSTRAINT `pegawai_ibfk_2` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan` (`id`),
+  ADD CONSTRAINT `pegawai_ibfk_3` FOREIGN KEY (`id_atasan`) REFERENCES `pegawai` (`id`);
+
+--
+-- Constraints for table `task`
+--
+ALTER TABLE `task`
+  ADD CONSTRAINT `task_ibfk_1` FOREIGN KEY (`id_unit`) REFERENCES `unit_kerja` (`id`),
+  ADD CONSTRAINT `task_ibfk_2` FOREIGN KEY (`id_leader`) REFERENCES `pegawai` (`id`),
+  ADD CONSTRAINT `task_ibfk_3` FOREIGN KEY (`create_by`) REFERENCES `pegawai` (`id`);
+
+--
+-- Constraints for table `task_comments`
+--
+ALTER TABLE `task_comments`
+  ADD CONSTRAINT `task_comments_ibfk_1` FOREIGN KEY (`id_task`) REFERENCES `task` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `task_comments_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `pegawai` (`id`),
+  ADD CONSTRAINT `task_comments_ibfk_3` FOREIGN KEY (`id_doc`) REFERENCES `document` (`id`);
+
+--
+-- Constraints for table `task_document`
+--
+ALTER TABLE `task_document`
+  ADD CONSTRAINT `task_document_ibfk_1` FOREIGN KEY (`id_task`) REFERENCES `task` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `task_document_ibfk_2` FOREIGN KEY (`id_doc`) REFERENCES `document` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `task_team`
+--
+ALTER TABLE `task_team`
+  ADD CONSTRAINT `task_team_ibfk_1` FOREIGN KEY (`id_task`) REFERENCES `task` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `task_team_ibfk_2` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id`);
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

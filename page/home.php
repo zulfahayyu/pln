@@ -2,8 +2,23 @@
 date_default_timezone_set('Asia/Jakarta');
 $current_date = (date('Y-m-d'));
 $unit = query("SELECT * FROM unit_kerja");
-print_r($unit);
-$event = query("SELECT * FROM event left join unit_kerja on event.id_unit = unit_kerja.id where date_start>='$current_date' order by date_start ASC");
+if ($user['status'] == 'admin') {
+    $where = '';
+} else {
+    $where = 'AND (event.id_unit=' . $user['id_unit'] . ' OR event.id_unit IS NULL)';
+}
+$event = query("SELECT * FROM event left join unit_kerja on event.id_unit = unit_kerja.id 
+where date_start>='$current_date' $where order by date_start ASC");
+
+$getcomment=query("SELECT t.id as id_task,t.task_name as task_name,tc.id_user,tc.description,tc.create_data,p.nama_p,p.avatar from task t 
+left join task_comments tc on t.id=tc.id_task 
+left join task_team tt on t.id=tt.id_task 
+left join pegawai p on tc.id_user=p.id  
+WHERE tt.id_pegawai='$user[id]' OR t.id_leader='$user[id]'
+GROUP BY tc.id
+ORDER BY tc.create_data DESC LIMIT 5");
+
+// print_r($getcomment);
 ?>
 <!-- MAIN CONTENT -->
 <div id="main-content">
@@ -23,10 +38,34 @@ $event = query("SELECT * FROM event left join unit_kerja on event.id_unit = unit
 
         <!-- ACTIVITY -->
         <div class="row clearfix">
-
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="header">
+                        <h2>Last Comments</h2>
+                    </div>
+                    <div class="body">
+                        <ul class="right_chat list-unstyled">
+                            <?php foreach($getcomment as $value){ ?>
+                                <li class="">
+                                    <a href="<?= $site_url ?>/task/view/<?= $value['id_task'] ?>">
+                                        <div class="media">
+                                            <img class="media-object " src="<?= $site_url ?>/assets/avatar/<?= $value['avatar'] ?>" alt="">
+                                            <div class="media-body">
+                                                <span class="name"><?= $value['nama_p'] ?><small class="float-right"><?= $value['create_data'] ?></small></span>
+                                                <span class="message">"<?= $value['description'] ?>"</span> in task <?= $value['task_name'] ?>
+                                                <span class="badge badge-outline status"></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <!-- CALENDAR -->
-            <div class="col-lg-7">
-                <?php if ($user['status'] == 'admin' || $user['id_atasan']==1) { ?>
+            <div class="col-lg-5">
+                <?php if ($user['status'] == 'admin' || $user['id_atasan'] == 1) { ?>
                     <div class="card">
                         <div class="body">
                             <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addevent">Add New Event</button>
@@ -64,24 +103,24 @@ $event = query("SELECT * FROM event left join unit_kerja on event.id_unit = unit
                                             </div>
                                         </div>
                                     </div>
-                                    <?php 
-                                    if($user['status']=='admin'){
-                                        $disabled='';
-                                        $selected= 'selected';
-                                        $unitselected='';
-                                    }else{
-                                        $unituser=get_where("SELECT * FROM unit_kerja WHERE id='$user[id_unit]'");
-                                        $unitselected=$unituser['id'];
-                                        $disabled='disabled';
-                                        $selected= '';
-                                        echo "<input type='hidden' name='unit' value='".$unitselected."'>";
+                                    <?php
+                                    if ($user['status'] == 'admin') {
+                                        $disabled = '';
+                                        $selected = 'selected';
+                                        $unitselected = '';
+                                    } else {
+                                        $unituser = get_where("SELECT * FROM unit_kerja WHERE id='$user[id_unit]'");
+                                        $unitselected = $unituser['id'];
+                                        $disabled = 'disabled';
+                                        $selected = '';
+                                        echo "<input type='hidden' name='unit' value='" . $unitselected . "'>";
                                     }
                                     ?>
                                     <div class="form-group">
                                         <select class="form-control show-tick" name="unit" <?= $disabled ?>>
-                                            <option <?= $selected ?>>All Unit</option>
+                                            <option value="0" <?= $selected ?>>All Unit</option>
                                             <?php foreach ($unit as $row) : ?>
-                                                <option value="<?= $row['id'] ?>" <?= ($row['id']==$unitselected) ? 'selected' :'' ?> ><?= $row['nama_unit'] ?></option>
+                                                <option value="<?= $row['id'] ?>" <?= ($row['id'] == $unitselected) ? 'selected' : '' ?>><?= $row['nama_unit'] ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -110,6 +149,11 @@ $event = query("SELECT * FROM event left join unit_kerja on event.id_unit = unit
                     </div>
                 </div>
             </div>
+            
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-7">
+            </div>
             <div class="col-lg-5">
                 <div class="card">
                     <div class="body">
@@ -133,6 +177,5 @@ $event = query("SELECT * FROM event left join unit_kerja on event.id_unit = unit
                 </div>
             </div>
         </div>
-
     </div>
 </div>

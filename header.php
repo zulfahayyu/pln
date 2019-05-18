@@ -39,6 +39,10 @@
     <link rel="stylesheet" href="<?= $site_url ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?= $site_url ?>/assets/css/color_skins.css">
 
+    <script src="<?= $site_url ?>/assets/bundles/libscripts.bundle.js"></script>
+
+
+
 </head>
 
 <body class="theme-orange">

@@ -50,7 +50,8 @@ LEFT join unit_kerja uk on p.id_unit=uk.id ");
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($pegawai as $pgw) : ?>
+                                    <?php foreach ($pegawai as $pgw) : 
+                                    if($user['status']=='admin' || ($user['status']=='hrd' && $pgw['id_unit']!=null)){ ?>
                                         <tr>
                                             <td>
                                                 <h6 class="mb-0"><?php echo $pgw["nip"]; ?></h6>
@@ -64,7 +65,7 @@ LEFT join unit_kerja uk on p.id_unit=uk.id ");
                                                 <a href="<?= $site_url ?>/proses/model_pegawai.php?id=<?php echo $pgw["id"]; ?>&delete=true" onclick='return confirm("Yakin ingin menghapus data?")' class="btn btn-sm btn-outline-danger">del</a>
                                             </td>
                                         </tr>
-                                    <?php endforeach; ?>
+                                    <?php } endforeach; ?>
                                 </tbody>
                             </table>
                         </div>

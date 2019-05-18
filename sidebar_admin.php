@@ -1,3 +1,29 @@
+<?php
+
+$toDo = query("SELECT *, task.id as id from task LEFT JOIN task_team ON task.id=task_team.id_task
+
+
+
+WHERE (task_team.id_pegawai ='$user[id]' OR task.id_leader='$user[id]') AND status='To Do'");
+
+
+
+$inProgress = query("SELECT *, task.id as id from task LEFT JOIN task_team ON task.id=task_team.id_task
+
+
+
+WHERE (task_team.id_pegawai ='$user[id]' OR task.id_leader='$user[id]') AND status='In Progress'");
+
+
+
+$done = query("SELECT *, task.id as id from task LEFT JOIN task_team ON task.id=task_team.id_task
+
+
+
+WHERE (task_team.id_pegawai ='$user[id]' OR task.id_leader='$user[id]') AND status='Done'");
+
+?>
+
 <div id="left-sidebar" class="sidebar">
     <div class="sidebar-scroll">
         <div class="user-account">
@@ -15,16 +41,43 @@
             <?php if ($user['status'] == 'user') { ?>
                 <div class="row">
                     <div class="col-4">
-                        <h6>5</h6>
-                        <small>Project</small>
+
+
+
+                        <h6><?= count($toDo) ?></h6>
+
+
+
+                        <small>To DO</small>
+
+
+
                     </div>
                     <div class="col-4">
-                        <h6>3</h6>
-                        <small>Available</small>
+
+
+
+                        <h6><?= count($inProgress) ?></h6>
+
+
+
+                        <small>In Progress</small>
+
+
+
                     </div>
                     <div class="col-4">
-                        <h6>1</h6>
-                        <small>Finish</small>
+
+
+
+                        <h6><?= count($done) ?></h6>
+
+
+
+                        <small>Complate</small>
+
+
+
                     </div>
                 </div>
                 <hr>

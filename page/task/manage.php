@@ -10,7 +10,7 @@ if($user['status']=='admin'){
 }
 
 $event = query("SELECT *,task.id as id from task LEFT JOIN task_team ON task.id=task_team.id_task 
-WHERE task_team.id_pegawai ='$user[id]' $where ORDER BY due_date ASC");
+WHERE task_team.id_pegawai ='$user[id]' $where GROUP BY task.id ORDER BY due_date ASC ");
 ?>
 <!-- MAIN CONTENT -->
 <div id="main-content">

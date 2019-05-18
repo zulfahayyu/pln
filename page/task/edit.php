@@ -93,3 +93,9 @@ $team_lead = get_where("SELECT * FROM pegawai WHERE id='$task[id_leader]'");
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#data-atasan').val("<?= $task['id_leader'] ?>");
+        alert($('#data-atasan').val());
+    });
+</script>

@@ -1,12 +1,17 @@
 <?php
 include_once 'connection.php';
+include_once 'ceklogin.php';
 
 if ($_GET['method'] == 'get_all_event') {
     date_default_timezone_set('Asia/Jakarta');
     $current_date = (date('Y-m-d'));
-
+    if($user['status']=='admin'){
+    $where='';
+    }else{
+        $where='AND (event.id_unit='.$user['id_unit'].' OR event.id_unit IS NULL)';
+    }
     $event = query("SELECT id, event_name as title, date_start as start, date_end as end, priority as className
-    FROM event where date_start>='$current_date'");
+    FROM event where date_start>='$current_date' $where");
     echo json_encode($event);
     return 0;
 }
@@ -52,11 +57,16 @@ if ($_GET['id']) {
         $priority = $_POST['priority'];
         $start_date = ($_POST['start']);
         $end_date = ($_POST['end']);
-        $id_unit = $_POST['unit'];
+        // $id_unit = $_POST['unit'];
         $location = $_POST['location'];
         $description = $_POST['description'];
+        $id_unit = !empty($_POST['unit']) ? "'$_POST[unit]'" : "NULL";
+        
 
-        $result = mysqli_query($conn, "INSERT INTO event VALUES('','$nama','$priority','$start_date','$end_date','$id_unit','$location','$description','$_SESSION[id]')");
+        $result = mysqli_query($conn, "INSERT INTO event VALUES('','$nama','$priority','$start_date','$end_date',$id_unit,'$location','$description','$_SESSION[id]')");
+        // echo $id_unit;
+        // print_r($_POST);
+        return 0;
         if ($result) {
             $_SESSION['message'] = 'Data Event berhasil ditambahkan';
             $_SESSION['type'] = 'success';

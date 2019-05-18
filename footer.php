@@ -2,7 +2,6 @@
 <script>
 var base_url='<?= $site_url ?>';
 </script>
-<script src="<?= $site_url ?>/assets/bundles/libscripts.bundle.js"></script>
 <script src="<?= $site_url ?>/assets/bundles/vendorscripts.bundle.js"></script>
 
 <!-- <script src="<?= $site_url ?>/assets/vendor/toastr/toastr.js"></script> -->

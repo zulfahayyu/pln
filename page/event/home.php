@@ -144,7 +144,7 @@ where date_start>='$current_date'  $where ORDER BY date_start ASC");
                     ?>
                     <div class="form-group">
                         <select class="form-control show-tick" name="unit" <?= $disabled ?>>
-                            <option <?= $selected ?>>All Unit</option>
+                            <option <?= $selected ?> value="0">All Unit</option>
                             <?php foreach ($unit as $row) : ?>
                                 <option value="<?= $row['id'] ?>" <?= ($row['id'] == $unitselected) ? 'selected' : '' ?>><?= $row['nama_unit'] ?></option>
                             <?php endforeach; ?>

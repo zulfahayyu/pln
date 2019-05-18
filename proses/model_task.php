@@ -5,6 +5,10 @@ date_default_timezone_set('Asia/Jakarta');
 $current_date = (date('Y-m-d'));
 $current_date_time = date('Y-m-d h:i:s');
 
+// echo $_GET['method'];
+// return 0;
+
+
 if ($_GET['method'] == 'assign_staff') { //assign new staff
     if ($_POST['submit']) {
         $id_task = $_POST['id_task'];
@@ -61,6 +65,47 @@ if ($_GET['method'] == 'assign_staff') { //assign new staff
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
     }
+
+} elseif ($_GET['method'] == 'deletefile') { // delete file
+
+    if ($_GET['id']) {
+            $result=mysqli_query($conn,"DELETE FROM document where id='$_GET[id]'");
+            if ($result) {
+
+                $_SESSION['message'] = 'Data file berhasil dihapus';
+    
+                $_SESSION['type'] = 'success';
+    
+            } else {
+    
+                $_SESSION['message'] = 'Data file gagal dihapus';
+    
+                $_SESSION['type'] = 'error';
+    
+            }
+        }
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+
+} elseif ($_GET['method'] == 'deletecomment') { // delete komentar
+
+    if ($_GET['id']) {
+            $result=mysqli_query($conn,"DELETE FROM task_comments where id='$_GET[id]'");
+            if ($result) {
+
+                $_SESSION['message'] = 'Komentar berhasil dihapus';
+    
+                $_SESSION['type'] = 'success';
+    
+            } else {
+    
+                $_SESSION['message'] = 'Komentar gagal dihapus';
+    
+                $_SESSION['type'] = 'error';
+    
+            }
+        }
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+
 } elseif ($_GET['method'] == 'add_comment') { // add comment
     if ($_POST['submit']) {
         if (empty($_FILES)) {
@@ -76,9 +121,13 @@ if ($_GET['method'] == 'assign_staff') { //assign new staff
                 $doc_id = mysqli_insert_id($conn);
             }
         }
+        $doc_id = !empty($doc_id) ? "'$doc_id'" : "NULL";
+
         $id_task = $_POST['id_task'];
         $comment = $_POST['description'];
-        $result = mysqli_query($conn, "INSERT INTO task_comments VALUES('','$id_task','$user[id]','$comment','$doc_id','$current_date_time')");
+
+        $result = mysqli_query($conn, "INSERT INTO task_comments VALUES('','$id_task','$user[id]','$comment',$doc_id,'$current_date_time')");
+
         if ($result) {
             $_SESSION['message'] = 'Data comment berhasil ditambahkan';
             $_SESSION['type'] = 'success';

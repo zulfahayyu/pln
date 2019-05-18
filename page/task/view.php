@@ -8,10 +8,10 @@ $current_date = (date('Y-m-d')); // get current date
 $task = get_where("SELECT *,task.id AS id FROM task JOIN unit_kerja ON task.id_unit=unit_kerja.id 
 WHERE task.id='$id'"); // get task detail
 
-if($user['status']=='admin'){
-    $where='';
-}else{
-    $where="AND id_atasan='$_SESSION[id]'";
+if ($user['status'] == 'admin') {
+    $where = '';
+} else {
+    $where = "AND id_atasan='$_SESSION[id]'";
 }
 
 $staff = query("SELECT * FROM pegawai WHERE id_unit='$task[id_unit]' $where
@@ -58,6 +58,17 @@ else
 
 // print_r($listFile);
 ?>
+
+<style>
+    .icons-list i:hover {
+        font-size: 18px;
+    }
+
+    .icons-list i {
+        color: red;
+        padding-left: 5px;
+    }
+</style>
 <div id="main-content">
     <div class="container-fluid">
         <div class="block-header">
@@ -91,8 +102,8 @@ else
                                         <div class="btn-group">
                                             <a href="javascript:void(0);" class="btn btn-default btn-sm hidden-sm" data-toggle="modal" data-target="#addComment"><i class="fa fa-comment"></i> New Comment</a>
                                             <a href="javascript:void(0);" class="btn btn-default btn-sm hidden-sm" data-toggle="modal" data-target="#uploadFile"><i class="fa fa-upload"></i> Upload File</a>
-                                            <?php if($task['id_leader']==$user['id'] || $task['create_by']==$user['id']){ ?>
-                                            <a href="javascript:void(0);" class="btn btn-default btn-sm" data-toggle="modal" data-target="#assignStaff"><i class="fa fa-user"></i> Assign Staff</a>
+                                            <?php if ($task['id_leader'] == $user['id'] || $task['create_by'] == $user['id']) { ?>
+                                                <a href="javascript:void(0);" class="btn btn-default btn-sm" data-toggle="modal" data-target="#assignStaff"><i class="fa fa-user"></i> Assign Staff</a>
                                             <?php } ?>
                                         </div>
 
@@ -155,7 +166,17 @@ else
                                                 ?>
                                                 <div class="timeline-item green">
 
-                                                    <span class="date"><?= $date ?> | <span>By: <a href="javascript:void(0);" title="<?= $value['nama_p'] ?>"><?= $value['nama_p'] ?></a></span></span>
+                                                    <span class="date"><?= $date ?> |
+                                                        <span>
+                                                            By: <a href="javascript:void(0);" title="<?= $value['nama_p'] ?>"><?= $value['nama_p'] ?></a>
+                                                        </span>
+                                                        <?php if ($value['id_user'] == $user['id'] || $user['id'] == $task['id_leader'] || $user['status'] == 'admin') { ?>
+                                                        <a href="<?= $site_url ?>/proses/model_task.php?id=<?= $value['id'] ?>&method=deletecomment" onclick='return confirm("Yakin ingin menghapus komentar?")' class="icons-list" title="Hapus komentar">
+                                                            <i class="fa fa-trash-o"></i>
+                                                        </a>
+                                                        <?php } ?>
+                                                    </span>
+
 
                                                     <div class="msg">
                                                         <p><?= $value['description'] ?></p>
@@ -205,7 +226,7 @@ else
                                                             <td><?= $date ?></td>
                                                             <td><?= $value['nama_p'] ?></td>
                                                             <td> <a href="<?= $file_loc ?>" class="btn btn-primary" download><i class="fa fa-download"></i> </a>
-                                                                <a href="" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                                                                <?php if ($value['user_upload'] == $user['id'] || $user['id'] == $task['id_leader'] || $user['status'] == 'admin') { ?><a href="<?= $site_url ?>/proses/model_task.php?id=<?= $value['id_doc'] ?>&method=deletefile" onclick='return confirm("Yakin ingin menghapus file?")' class="btn btn-danger"><i class="fa fa-trash-o"></i></a> <?php } ?>
                                                             </td>
                                                         </tr>
                                                     <?php endforeach; ?>
