@@ -248,9 +248,9 @@ else
                     </div>
                     <div class="body">
 
-                        <ul class="right_chat list-unstyled mb-0">
+                        <ul class="right_chat list-unstyled mb-0" style="display:flex">
                             <?php foreach ($listStaff as $value) : ?>
-                                <li class="online">
+                                <li class="online" style="padding-right:15px">
                                     <a href="javascript:void(0);">
                                         <div class="media">
                                             <img class="media-object " src="<?= $site_url ?>/assets/avatar/<?= $value['avatar'] ?>" alt="">

@@ -11,6 +11,8 @@ if ($_GET['update']) {
     if ($_POST['submit']) {
         $nip = $_POST['nip'];
         $nama = $_POST['nama'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
         $no_sap = $_POST['sap'];
         $t_lahir = $_POST['t_lahir'];
         $tgl_lahir = $_POST['tgl_lahir'];
@@ -22,8 +24,8 @@ if ($_GET['update']) {
 
 
         $result = mysqli_query($conn, "UPDATE pegawai SET 
-            nip='$nip', nama_p='$nama' , no_sap='$no_sap', t_lahir='$t_lahir', tgl_lahir='$tgl_lahir', 
-            jkelamin='$jkelamin' , agama='$agama' , status_kawin='$kawin' , 
+            nip='$nip', email='$email', nama_p='$nama' , no_sap='$no_sap', t_lahir='$t_lahir', tgl_lahir='$tgl_lahir', 
+            jkelamin='$jkelamin' ,phone='$phone', agama='$agama' , status_kawin='$kawin' , 
             jml_kel='$jml_kel', alamat='$alamat'
             where id='$_GET[id]'");
         if ($result) {

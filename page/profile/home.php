@@ -54,6 +54,12 @@ $unit=get_where("SELECT * FROM unit_kerja where id='$user[id_unit]'");
                         <small class="text-muted">Nomor SAP</small>
                         <p><?= $user['no_sap'] ?></p>
                         <hr>
+                        <small class="text-muted">Alamat Email</small>
+                        <p><?= $user['email'] ?></p>
+                        <hr>
+                        <small class="text-muted">Phone</small>
+                        <p><?= $user['phone'] ?></p>
+                        <hr>
                         <?php if($user['id_unit']){ ?>
                         <small class="text-muted">Unit Kerja</small>
 

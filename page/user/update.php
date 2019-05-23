@@ -25,6 +25,16 @@ $atasan = get_where("SELECT * FROM pegawai where id='$pegawai[id_atasan]'");
                     <input type="text" name="nama" class="form-control" placeholder="Nama Pegawai *" value="<?= $pegawai['nama_p'] ?>" required>
                 </div>
             </div>
+            <div class="col-sm-7">
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control" placeholder="Email Pegawai *" value="<?= $pegawai['email'] ?>" required>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input type="text" name="phone" class="form-control" placeholder="Nomor Telp Pegawai *" value="<?= $pegawai['phone'] ?>" required>
+                </div>
+            </div>
 
             <div class="col-sm-7">
                 <div class="form-group">

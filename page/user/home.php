@@ -107,6 +107,16 @@ LEFT join unit_kerja uk on p.id_unit=uk.id ");
                                 <input type="text" name="nama" class="form-control" placeholder="Nama Pegawai *" required>
                             </div>
                         </div>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-control" placeholder="Email Pegawai *" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <input type="text" name="phone" class="form-control" placeholder="Nomor Telp Pegawai *" required>
+                            </div>
+                        </div>
 
                         <div class="col-sm-7">
                             <div class="form-group">

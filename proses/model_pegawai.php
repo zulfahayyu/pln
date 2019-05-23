@@ -22,6 +22,8 @@ if ($_GET['id']) {
         if ($_POST['submit']) {
             $nip = $_POST['nip'];
             $nama = $_POST['nama'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
             $no_sap = $_POST['sap'];
             $t_lahir = $_POST['t_lahir'];
             $tgl_lahir = $_POST['tgl_lahir'];
@@ -36,8 +38,8 @@ if ($_GET['id']) {
             $password = $_POST['pass'];
 
             $result = mysqli_query($conn, "UPDATE pegawai SET 
-            nip='$nip', nama_p='$nama' , no_sap='$no_sap', t_lahir='$t_lahir', tgl_lahir='$tgl_lahir', 
-            jkelamin='$jkelamin' , agama='$agama' , status_kawin='$kawin' , 
+            nip='$nip',email='$email' ,nama_p='$nama' , no_sap='$no_sap', t_lahir='$t_lahir', tgl_lahir='$tgl_lahir', 
+            jkelamin='$jkelamin' ,phone='$phone' ,agama='$agama' , status_kawin='$kawin' , 
             jml_kel='$jml_kel', alamat='$alamat' , id_unit='$id_unit', id_jabatan='$id_jabatan', 
             id_atasan='$id_atasan'
             where id='$_GET[id]'");
@@ -60,6 +62,8 @@ if ($_GET['id']) {
     if ($_POST['submit']) {
         $nip = $_POST['nip'];
         $nama = $_POST['nama'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
         $no_sap = $_POST['sap'];
         $t_lahir = $_POST['t_lahir'];
         $tgl_lahir = $_POST['tgl_lahir'];
@@ -73,8 +77,8 @@ if ($_GET['id']) {
         $id_atasan = $_POST['id_atasan'];
         $password = $_POST['pass'];
 
-        $result = mysqli_query($conn, "INSERT INTO pegawai VALUES ('','$nip', '$nama' ,'$no_sap','$t_lahir',
-            '$tgl_lahir', '$jkelamin' , '$agama' , '$kawin' , '$jml_kel', '$alamat' , 'default.jpg' ,'$id_unit', 
+        $result = mysqli_query($conn, "INSERT INTO pegawai VALUES ('','$nip','$email', '$nama' ,'$no_sap','$t_lahir',
+            '$tgl_lahir', '$jkelamin' , '$agama' , '$kawin' , '$jml_kel',$phone, '$alamat' , 'default.jpg' ,'$id_unit', 
             '$id_jabatan', '$id_atasan')");
         $lastid = mysqli_insert_id($conn);
         if ($result) {

@@ -1,6 +1,7 @@
 <?php
 include_once 'connection.php';
 include_once 'ceklogin.php';
+require 'send_mail.php';
 date_default_timezone_set('Asia/Jakarta');
 $current_date = (date('Y-m-d'));
 $current_date_time = date('Y-m-d h:i:s');
@@ -16,6 +17,18 @@ if ($_GET['method'] == 'assign_staff') { //assign new staff
         $jabatan = $_POST['jabatan'];
         $result = mysqli_query($conn, "INSERT task_team  VALUES('','$id_task','$id_pegawai','$jabatan')");
         if ($result) {
+            $data_email = get_where("SELECT * FROM pegawai where id='$id_pegawai'");
+            // Send Mail Module
+            $receiverMail = $data_email['email'];
+            $receiverName = $data_email['nama_p'];
+            $mailSubject = 'New Task';
+            $mailLink = $site_url . '/task/view/' . $id_task;
+            ob_start();
+            include '../mailtemplate/new_task.php';
+            $mailMessage = ob_get_clean();
+
+            SendMail($receiverMail, $receiverName, $mailSubject, $mailMessage);
+            $mailMessage = ob_get_clean();
             $_SESSION['message'] = 'Pegawai berhasil ditambahkan';
             $_SESSION['type'] = 'success';
         } else {
@@ -65,47 +78,40 @@ if ($_GET['method'] == 'assign_staff') { //assign new staff
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
     }
-
 } elseif ($_GET['method'] == 'deletefile') { // delete file
 
     if ($_GET['id']) {
-            $result=mysqli_query($conn,"DELETE FROM document where id='$_GET[id]'");
-            if ($result) {
+        $result = mysqli_query($conn, "DELETE FROM document where id='$_GET[id]'");
+        if ($result) {
 
-                $_SESSION['message'] = 'Data file berhasil dihapus';
-    
-                $_SESSION['type'] = 'success';
-    
-            } else {
-    
-                $_SESSION['message'] = 'Data file gagal dihapus';
-    
-                $_SESSION['type'] = 'error';
-    
-            }
+            $_SESSION['message'] = 'Data file berhasil dihapus';
+
+            $_SESSION['type'] = 'success';
+        } else {
+
+            $_SESSION['message'] = 'Data file gagal dihapus';
+
+            $_SESSION['type'] = 'error';
         }
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-
+    }
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 } elseif ($_GET['method'] == 'deletecomment') { // delete komentar
 
     if ($_GET['id']) {
-            $result=mysqli_query($conn,"DELETE FROM task_comments where id='$_GET[id]'");
-            if ($result) {
+        $result = mysqli_query($conn, "DELETE FROM task_comments where id='$_GET[id]'");
+        if ($result) {
 
-                $_SESSION['message'] = 'Komentar berhasil dihapus';
-    
-                $_SESSION['type'] = 'success';
-    
-            } else {
-    
-                $_SESSION['message'] = 'Komentar gagal dihapus';
-    
-                $_SESSION['type'] = 'error';
-    
-            }
+            $_SESSION['message'] = 'Komentar berhasil dihapus';
+
+            $_SESSION['type'] = 'success';
+        } else {
+
+            $_SESSION['message'] = 'Komentar gagal dihapus';
+
+            $_SESSION['type'] = 'error';
         }
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-
+    }
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 } elseif ($_GET['method'] == 'add_comment') { // add comment
     if ($_POST['submit']) {
         if (empty($_FILES)) {
@@ -129,6 +135,22 @@ if ($_GET['method'] == 'assign_staff') { //assign new staff
         $result = mysqli_query($conn, "INSERT INTO task_comments VALUES('','$id_task','$user[id]','$comment',$doc_id,'$current_date_time')");
 
         if ($result) {
+            $staff_list = query("SELECT * FROM task_team where id_task='$id_task' and id_pegawai<>'$_SESSION[id]'");
+            // Send Mail Module
+            foreach ($staff_list as $value) {
+                $data_email = get_where("SELECT * FROM pegawai where id='$value[id_pegawai]'");
+                $receiverMail = $data_email['email'];
+                $receiverName = $data_email['nama_p'];
+                $commentName = $_SESSION['nama'];
+                $mailSubject = 'New Comment';
+                $mailLink = $site_url . '/task/view/' . $id_task.'#comment';
+                ob_start();
+                include '../mailtemplate/new_comment.php';
+                $mailMessage = ob_get_clean();
+
+                SendMail($receiverMail, $receiverName, $mailSubject, $mailMessage);
+                $mailMessage = ob_get_clean();
+            }
             $_SESSION['message'] = 'Data comment berhasil ditambahkan';
             $_SESSION['type'] = 'success';
         } else {
@@ -183,8 +205,8 @@ if ($_GET['method'] == 'assign_staff') { //assign new staff
             //insert data task
             $result = mysqli_query($conn, "INSERT task  VALUES('','$nama','$priority','$current_date','$due_date',
         '$id_unit','$team_lead','$_SESSION[id]','$description','To Do','0')");
-           $id_task = mysqli_insert_id($conn);
-           if ($result) {
+            $id_task = mysqli_insert_id($conn);
+            if ($result) {
                 if ($_FILES) {
                     //upload file to directory assets/document
                     $target_dir = "../assets/document/";
